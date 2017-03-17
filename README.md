@@ -41,6 +41,9 @@ export class User {
     @MarshalWith(ArrayOf(MarshalFrom(Stats)))
     stats: Stats[];
 
+    @MarshalWith(OptionalOf(string))
+    nickname: string|null;
+
     constructor(id: number, role: Role, name: string, pictureUri: string) {
 	this.id = id;
 	this.role = role;
@@ -55,7 +58,7 @@ export class User {
 }
 
 
-const userMarshaller = new (MarshalFrom(User))();
+const userMarshaller: Marshaller<User> = new (MarshalFrom(User))();
 
 try {
     const user = userMarshaller.extract({
@@ -76,6 +79,7 @@ try {
     assert user.stats.length == 1;
     assert user.stats[0].name == "Mission 1";
     assert user.stats[0].zerkKilled == 10;
+    assert user.nickname == null;
 
     console.log(JSON.stringify(userMarshaller.pack(user)));
 } catch (e) {
