@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import 'mocha'
 
-import { UriMarshaller, WebUriMarshaller } from './uri';
+import { SecureWebUriMarshaller, UriMarshaller, WebUriMarshaller } from './uri';
 
 
 describe('UriMarshaller', () => {
@@ -165,55 +165,181 @@ describe('WebUriMarshaller', () => {
     describe('extract', () => {
 	for (let uri of WebUris) {
 	    it(`should parse ${uri}`, () => {
-		const uriMarshaller = new WebUriMarshaller();
+		const webUriMarshaller = new WebUriMarshaller();
 
-		expect(uriMarshaller.extract(uri)).to.equal(uri);
+		expect(webUriMarshaller.extract(uri)).to.equal(uri);
 	    });
 	}
 
-	for (let nonString of NonStrings) {
-	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
-		const uriMarshaller = new WebUriMarshaller();
-
-		expect(() => uriMarshaller.extract(nonString)).to.throw('Expected a string');
-	    });
-	}
-	
 	for (let nonWebUri of NonWebUris) {
 	    it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
-		const uriMarshaller = new WebUriMarshaller();
+		const webUriMarshaller = new WebUriMarshaller();
 
-		expect(() => uriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
+		expect(() => webUriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
 	    });
 	}
 
 	for (let nonUri of NonUris) {
 	    it(`should throw for ${JSON.stringify(nonUri)}`, () => {
-		const uriMarshaller = new WebUriMarshaller();
+		const webUriMarshaller = new WebUriMarshaller();
 
-		expect(() => uriMarshaller.extract(nonUri)).to.throw('Expected an URI');
+		expect(() => webUriMarshaller.extract(nonUri)).to.throw('Expected an URI');
 	    });
 	}
+
+	for (let nonString of NonStrings) {
+	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		const webUriMarshaller = new WebUriMarshaller();
+
+		expect(() => webUriMarshaller.extract(nonString)).to.throw('Expected a string');
+	    });
+	}	
     });
 
     describe('pack', () => {
-        for (let webUri of WebUris) {
-            it(`should produce the same input for ${webUri}`, () => {
+        for (let uri of WebUris) {
+            it(`should produce the same input for ${uri}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
-                expect(webUriMarshaller.pack(webUri)).to.equal(webUri);
+                expect(webUriMarshaller.pack(uri)).to.equal(uri);
             });
         }
     });
 
     describe('extract and pack', () => {
-        for (let webUri of WebUris) {
-            it(`should be opposites for ${webUri}`, () => {
+        for (let uri of WebUris) {
+            it(`should be opposites for ${uri}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
-                const raw = webUri;
+                const raw = uri;
 		const extracted = webUriMarshaller.extract(raw);
 		const packed = webUriMarshaller.pack(extracted);
+
+		expect(packed).to.equal(raw);
+            });
+        }
+    });    
+});
+
+
+describe('SecureWebUriMarshaller', () => {
+    const SecureWebUris = [
+	'https://google.com',	
+	'https://stackoverflow.com',
+        'https://www.example.com/',
+        'https://www.example.com',
+        'https://www.example.com/foo/bar/test.html',
+        'https://www.example.com/?foo=bar',
+        'https://www.example.com:8080/test.html'
+    ];
+
+    const NonSecureWebUris = [
+	'http://google.com',
+	'http://stackoverflow.com',	
+	'http://example.com/test',
+        'http://www.example.com/',
+        'http://www.example.com',
+        'http://www.example.com/foo/bar/test.html',
+        'http://www.example.com/?foo=bar',
+        'http://www.example.com/?foo=bar&space=trucks',
+        'http://www.example.com?foo=bar',        
+        'http://www.example.com?foo=bar&space=trucks',
+        'http://www.example.com:8080/test.html',
+        'http://example.w3.org/path%20with%20spaces.html',
+        'http://192.168.0.1/'
+    ];
+
+    const NonWebUris = [
+        'ftp://ftp.example.com',
+        'https:www.example.com',
+        'http:www.example.com'
+    ];
+
+    const NonUris = [
+        '',
+        'foo',
+        'foo@bar',
+        'http://<foo>',
+        '://bob/',
+        '1http://bob',
+        '1http:////foo.html',
+        'http://example.w3.org/%illegal.html',
+        'http://example.w3.org/%a',
+        'http://example.w3.org/%a/foo',
+        'http://example.w3.org/%at'
+    ];
+
+    const NonStrings = [
+	null,
+	undefined,
+	100,
+	-20,
+	[],
+	['hello'],
+	{},
+	{hello: 'hello'}
+    ];
+
+    describe('extract', () => {
+	for (let uri of SecureWebUris) {
+	    it(`should parse ${uri}`, () => {
+		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+		expect(secureWebUriMarshaller.extract(uri)).to.equal(uri);
+	    });
+	}
+
+	for (let nonSecureWebUri of NonSecureWebUris) {
+	    it(`should throw for ${JSON.stringify(nonSecureWebUri)}`, () => {
+		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+		expect(() => secureWebUriMarshaller.extract(nonSecureWebUri)).to.throw('Expected an https URI');
+	    });
+	}
+
+	for (let nonWebUri of NonWebUris) {
+	    it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
+		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+		expect(() => secureWebUriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
+	    });
+	}	
+
+	for (let nonUri of NonUris) {
+	    it(`should throw for ${JSON.stringify(nonUri)}`, () => {
+		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+		expect(() => secureWebUriMarshaller.extract(nonUri)).to.throw('Expected an URI');
+	    });
+	}
+
+	for (let nonString of NonStrings) {
+	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+		expect(() => secureWebUriMarshaller.extract(nonString)).to.throw('Expected a string');
+	    });
+	}
+    });
+
+    describe('pack', () => {
+        for (let uri of SecureWebUris) {
+            it(`should produce the same input for ${uri}`, () => {
+                const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+                expect(secureWebUriMarshaller.pack(uri)).to.equal(uri);
+            });
+        }
+    });
+
+    describe('extract and pack', () => {
+        for (let uri of SecureWebUris) {
+            it(`should be opposites for ${uri}`, () => {
+                const secureWebUriMarshaller = new SecureWebUriMarshaller();
+
+                const raw = uri;
+		const extracted = secureWebUriMarshaller.extract(raw);
+		const packed = secureWebUriMarshaller.pack(extracted);
 
 		expect(packed).to.equal(raw);
             });

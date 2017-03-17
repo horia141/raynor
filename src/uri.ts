@@ -24,3 +24,14 @@ export class WebUriMarshaller extends UriMarshaller {
 	return uri;
     }
 }
+
+
+export class SecureWebUriMarshaller extends WebUriMarshaller {
+    filter(uri: string): string {
+	if (uri.indexOf('https:') != 0) {
+	    throw new ExtractError('Expected an https URI');
+	}
+
+	return uri;
+    }
+}
