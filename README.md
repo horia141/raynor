@@ -45,11 +45,11 @@ export class User {
     nickname: string|null;
 
     constructor(id: number, role: Role, name: string, pictureUri: string) {
-	this.id = id;
-	this.role = role;
-	this.name = name;
-	this.pictureUri = pictureUri;
-	this.stats = [];
+        this.id = id;
+        this.role = role;
+        this.name = name;
+        this.pictureUri = pictureUri;
+        this.stats = [];
     }
 
     isAdmin(): boolean {
@@ -68,7 +68,7 @@ try {
         "pictureUri": "https://example.com",
         "stats": [{
             "name": "Mission 1",
-    	"zergKilled": 10
+        "zergKilled": 10
         }]
     });
 
@@ -89,6 +89,4 @@ try {
 
     throw e;
 }
-
-
 ```

@@ -37,6 +37,7 @@ export class MaxLengthStringMarshaller extends StringMarshaller {
     
     filter(a: string): string {
 	if (a.length > this._maxLength) {
+	    console.log('Here');
 	    throw new ExtractError(`Expected at most ${this._maxLength} characters`);
 	}
 	

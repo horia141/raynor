@@ -104,25 +104,25 @@ describe('MaxLengthStringMarshaller', () => {
     describe('extract', () => {
         for (let string of Strings) {
             it(`should parse "${string}"`, () => {
-                const stringMarshaller = new MaxLengthStringMarshaller(24);
+                const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
-                expect(stringMarshaller.extract(string)).to.equal(string);
+                expect(maxLengthStringMarshaller.extract(string)).to.equal(string);
             });
         }
 
         for (let string of TooLargeStrings) {
             it(`should throw for large string "${string}"`, () => {
-                const stringMarshaller = new MaxLengthStringMarshaller(24);
+                const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
-                expect(stringMarshaller.extract(string)).to.equal(string);
+                expect(() => maxLengthStringMarshaller.extract(string)).to.throw('Expected at most 24 characters');
             });
         }	
 
         for (let nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
-                const stringMarshaller = new MaxLengthStringMarshaller(24);
+                const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
-                expect(() => stringMarshaller.extract(nonString)).to.throw('Expected a string');
+                expect(() => maxLengthStringMarshaller.extract(nonString)).to.throw('Expected a string');
             });
         }
     });
@@ -130,9 +130,9 @@ describe('MaxLengthStringMarshaller', () => {
     describe('pack', () => {
         for (let string of Strings) {
             it(`should produce the same input for ${string}`, () => {
-                const stringMarshaller = new MaxLengthStringMarshaller(24);
+                const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
-                expect(stringMarshaller.pack(string)).to.equal(string);
+                expect(maxLengthStringMarshaller.pack(string)).to.equal(string);
             });
         }
     });
@@ -140,11 +140,11 @@ describe('MaxLengthStringMarshaller', () => {
     describe('extract and pack', () => {
         for (let string of Strings) {
             it(`should be opposites for ${string}`, () => {
-                const stringMarshaller = new MaxLengthStringMarshaller(24);
+                const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
                 const raw = string;
-		const extracted = stringMarshaller.extract(raw);
-		const packed = stringMarshaller.pack(extracted);
+		const extracted = maxLengthStringMarshaller.extract(raw);
+		const packed = maxLengthStringMarshaller.pack(extracted);
 
 		expect(packed).to.equal(raw);
             });

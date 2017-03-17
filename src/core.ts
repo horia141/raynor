@@ -41,7 +41,7 @@ export abstract class RaiseBuildFilterMarshaller<A, B> implements Marshaller<B> 
         }
 
         for (let protoIdx = protoChainSize - 1; protoIdx >= 0; protoIdx--) {
-            b = RaiseBuildFilterMarshaller._ProtoChain[protoIdx].filter(b);
+            b = RaiseBuildFilterMarshaller._ProtoChain[protoIdx].filter.call(this, b);
             RaiseBuildFilterMarshaller._ProtoChain[protoIdx] = null;
         }
 
