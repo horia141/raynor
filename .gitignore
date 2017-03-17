@@ -1,0 +1,12 @@
+# Emacs backup files.
+*~
+
+# Build process output files.
+/build/
+/out/
+
+# NPM packages.
+/node_modules/
+
+# Anything containing .DS_Store
+.DS_Store

@@ -1,0 +1,5 @@
+instrumentation:
+  compact: true
+reporting:
+  dir: ./build/coverage
+  reports: [json]
