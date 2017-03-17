@@ -1,6 +1,6 @@
 {
     "name": "raynor",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "A TypeScript marshalling library",
     "author": "Horia Coman <horia141@gmail.com>",
     "scripts": {
@@ -40,7 +40,7 @@
 	"@types/valid-url": "=1.0.2",
 	"chai": "=3.5.0",
 	"codecov": "=1.0.1",
-	"coverage-filter": "=0.0.2",
+	"coverage-filter": "=0.1.0",
 	"istanbul": "=0.4.5",
 	"mocha": "=3.2.0",
 	"npm-prepack-publish": "=0.1.4",
