@@ -19,7 +19,6 @@
 	"type": "git",
 	"url": "git+https://github.com/horia141/raynor.git"
     },
-    "private": true,
     "homepage": "https://github.com/horia141/raynor#readme",
     "main": "./index.js",
     "types": "./index.d.ts",
