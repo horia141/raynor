@@ -293,4 +293,92 @@ describe('Annotations', () => {
             expect(colorMarshaller.extract({red: 10, green: 20, blue: 30})).to.eql(new Color());
         });
     });
+
+    class Point3D extends Point {
+	@MarshalWith(NumberMarshaller)
+	z: number;
+
+	constructor(x: number, y: number, z: number) {
+	    super(x, y);
+	    this.z = z;
+	}
+
+	coordsSum(): number {
+	    return this.x + this.y + this.z;
+	}
+    }
+
+    class Point4D extends Point3D {
+	@MarshalWith(NumberMarshaller)
+	w: number;
+
+	constructor(x: number, y: number, z: number, w: number) {
+	    super(x, y, z);
+	    this.w = w;
+	}
+
+	coordsSum(): number {
+	    return this.x + this.y + this.z + this.w;
+	}
+    }    
+
+    describe('Derived class', () => {
+	const Points = [
+	    [{x: 10, y: 20, z: 30}, new Point3D(10, 20, 30), 60],
+	    [{x: 100, y: 200, z: 1}, new Point3D(100, 200, 1), 301]
+	];
+
+	const Points4D = [
+	    [{x: 10, y: 20, z: 30, w: 40}, new Point4D(10, 20, 30, 40), 100]
+	];
+	
+	describe('extract', () => {
+            for (let [raw, point, coordsSum] of Points) {
+		it(`should extract ${JSON.stringify(raw)}`, () => {
+                    const pointMarshaller = new (MarshalFrom<Point3D>(Point3D))();
+                    const extracted: Point3D = pointMarshaller.extract(raw);
+
+                    expect(extracted).to.be.an.instanceof(Point3D);
+                    expect(extracted).to.eql(point);
+                    expect(extracted.coordsSum()).to.eql(coordsSum);
+		});
+            }
+
+	    for (let [raw, point, coordsSum] of Points4D) {
+		it(`should extract ${JSON.stringify(raw)}`, () => {
+                    const pointMarshaller = new (MarshalFrom<Point4D>(Point4D))();
+                    const extracted: Point4D = pointMarshaller.extract(raw);
+
+                    expect(extracted).to.be.an.instanceof(Point4D);
+                    expect(extracted).to.eql(point);
+                    expect(extracted.coordsSum()).to.eql(coordsSum);
+		});
+            }
+	});
+
+	describe('pack', () => {
+	    for (let [raw, point, _] of Points) {
+		it(`should pack ${JSON.stringify(point)}`, () => {
+		    const pointMarshaller = new (MarshalFrom<Point3D>(Point3D));
+		    const getAroundTypesRaw = raw as any;
+
+		    expect(pointMarshaller.pack(point as Point3D)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, z: getAroundTypesRaw.z});
+		});
+	    }
+	});
+
+	describe('extract and pack', () => {
+            for (let [raw, _, __] of Points) {
+		it(`should be opposites for ${JSON.stringify(raw)}`, () => {
+                    const pointMarshaller = new (MarshalFrom<Point3D>(Point3D))();
+                    const getAroundTypesRaw = raw as any;
+
+		    const extracted = pointMarshaller.extract(raw);
+		    const packed = pointMarshaller.pack(extracted);
+
+		    expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, z: getAroundTypesRaw.z});
+		});
+            }
+	});
+    });
 });

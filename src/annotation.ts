@@ -43,7 +43,7 @@ export function MarshalEnum<E>(constructor: any): MarshallerConstructor<E> {
 
 export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>) {
     return function(target: any, propertyKey: string) {
-	if (!target.hasOwnProperty('__schema')) {
+	if (!(target.hasOwnProperty('__schema'))) {
 	    target.__schema = {};
 	}
 	
@@ -53,7 +53,7 @@ export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>) {
 
 
 export function MarshalFrom<T>(constructor: Constructor<T>): MarshallerConstructor<T> {
-    let schema = constructor.prototype.__schema;
+    let schema = _extractSchema(constructor);
 
     if (schema === undefined) {
 	schema = {} as MarshalSchema<T>;
@@ -64,4 +64,36 @@ export function MarshalFrom<T>(constructor: Constructor<T>): MarshallerConstruct
 	    super(constructor, schema as MarshalSchema<T>);
 	}
     };
+}
+
+
+const _maxInheritenceDepth = 32;
+const _protoChain: any = new Array(_maxInheritenceDepth);
+
+
+function _extractSchema<T>(constructor: Constructor<T>): MarshalSchema<T> {
+    let proto = constructor.prototype;
+    let protoChainSize = 0;
+
+    while (proto != null) {
+	if (protoChainSize >= _maxInheritenceDepth) {
+	    throw new Error('Inheritence depth exceeded');
+	}
+
+	_protoChain[protoChainSize++] = proto;
+	proto = Object.getPrototypeOf(proto);
+    }
+
+    let schema = {} as MarshalSchema<T>;
+
+    for (let protoIdx = protoChainSize - 1; protoIdx >= 0; protoIdx--) {
+	if (_protoChain[protoIdx].__schema === undefined) {
+	    continue;
+	}
+	
+	schema = (Object as any).assign(schema, _protoChain[protoIdx].__schema);
+	_protoChain[protoIdx] = null;
+    }
+
+    return schema;
 }
