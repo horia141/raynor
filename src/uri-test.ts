@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import 'mocha'
 
-import { SecureWebUriMarshaller, UriMarshaller, WebUriMarshaller } from './uri';
+import { SecureWebUriMarshaller, SlugMarshaller, UriMarshaller, WebUriMarshaller } from './uri';
 
 
 describe('UriMarshaller', () => {
@@ -340,6 +340,94 @@ describe('SecureWebUriMarshaller', () => {
                 const raw = uri;
 		const extracted = secureWebUriMarshaller.extract(raw);
 		const packed = secureWebUriMarshaller.pack(extracted);
+
+		expect(packed).to.equal(raw);
+            });
+        }
+    });
+});
+
+
+describe('SlugMarshaller', () => {
+    const Slugs = [
+	'hello',
+	'is-it-me-youre-looking-for',
+	'a-special-slug'
+    ];
+
+    const NonSlugs = [
+        '',
+	'-hello',
+	'hello-',
+	'-',
+	'--',
+	'is--it--me--youre--looking--for',
+        'foo@bar',
+	'CApital-letters',
+        'http://<foo>',
+	'str\'ange',
+	'c"haracters',
+	'evén-some-unicode'
+    ];
+
+    const NonStrings = [
+	null,
+	undefined,
+	NaN,
+	Number.POSITIVE_INFINITY,
+	Number.NEGATIVE_INFINITY,
+	100,
+	-20,
+	[],
+	['hello'],
+	{},
+	{hello: 'hello'}        
+    ];
+
+    describe('extract', () => {
+	for (let slug of Slugs) {
+	    it(`should parse ${slug}`, () => {
+		const slugMarshaller = new SlugMarshaller();
+
+		expect(slugMarshaller.extract(slug)).to.equal(slug);
+	    });
+	}
+
+        for (let nonSlug of NonSlugs) {
+	    it(`should throw for invalid slug ${nonSlug}`, () => {
+		const slugMarshaller = new SlugMarshaller();
+
+		expect(() => slugMarshaller.extract(nonSlug)).to.throw('Expected a slug');
+	    });
+	}
+
+	for (let nonString of NonStrings) {
+	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		const slugMarshaller = new SlugMarshaller();
+
+		expect(() => slugMarshaller.extract(nonString)).to.throw('Expected a string');
+	    });
+	}
+    });
+
+    describe('pack', () => {
+        for (let slug of Slugs) {
+            it(`should produce the same input for ${slug}`, () => {
+                const slugMarshaller = new SlugMarshaller();
+
+                expect(slugMarshaller.pack(slug)).to.equal(slug);
+            });
+        }
+    });
+
+    describe('extract and pack', () => {
+        for (let slug of Slugs) {
+            it(`should be opposites for ${slug}`, () => {
+                const slugMarshaller = new SlugMarshaller();
+
+                const raw = slug;
+		const extracted = slugMarshaller.extract(raw);
+		const packed = slugMarshaller.pack(extracted);
 
 		expect(packed).to.equal(raw);
             });

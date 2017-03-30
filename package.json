@@ -1,50 +1,51 @@
 {
-    "name": "raynor",
-    "version": "0.2.0",
-    "description": "A TypeScript marshalling library",
-    "author": "Horia Coman <horia141@gmail.com>",
-    "scripts": {
-	"build": "tsc",
-	"pretest": "tsc",
-	"test-dev": "tsc --watch & mocha --watch $(find out -name '*-test.js')",
-	"test": "tsc && istanbul cover --config ./.istanbul.yml ./node_modules/mocha/bin/_mocha --  $(find out -name '*-test.js') && remap-istanbul -i ./build/coverage/coverage-final.json -o ./build/coverage/coverage-remapped.json && coverage-filter -i ./build/coverage/coverage-remapped.json -o ./build/coverage/coverage-filtered.json",
-	"push-coverage-to-codecov": "codecov -f ./build/coverage/coverage-filtered.json"
-    },
-    "keywords": [
-	"raynor",
-	"marshal",
-	"typescript"
-    ],
-    "respository": {
-	"type": "git",
-	"url": "git+https://github.com/horia141/raynor.git"
-    },
-    "homepage": "https://github.com/horia141/raynor#readme",
-    "main": "./index.js",
-    "types": "./index.d.ts",
-    "filesPack": {
-	"out": "e:.",
-	"README.md": "f:README.md",
-	"package.json": "f:package.json",
-	"tsconfig.json": "f:tsconfig.json"
-    },
-    "license": "MIT",
-    "dependencies": {
-	"valid-url": "=1.0.9"
-    },
-    "devDependencies": {
-	"@types/chai": "=3.4.34",
-	"@types/istanbul": "=0.4.29",
-	"@types/mocha": "=2.2.38",
-	"@types/node": "=7.0.0",
-	"@types/valid-url": "=1.0.2",
-	"chai": "=3.5.0",
-	"codecov": "=1.0.1",
-	"coverage-filter": "=0.1.0",
-	"istanbul": "=0.4.5",
-	"mocha": "=3.2.0",
-	"npm-prepack-publish": "=0.1.4",
-	"remap-istanbul": "=0.8.4",
-	"typescript": "=2.1.5"
-    }
+  "name": "raynor",
+  "version": "0.3.0",
+  "description": "A TypeScript marshalling library",
+  "author": "Horia Coman <horia141@gmail.com>",
+  "scripts": {
+    "build": "tsc",
+    "pretest": "tsc",
+    "test-dev": "tsc --watch & mocha --watch $(find out -name '*-test.js')",
+    "test": "tsc && istanbul cover --config ./.istanbul.yml ./node_modules/mocha/bin/_mocha --  $(find out -name '*-test.js') && remap-istanbul -i ./build/coverage/coverage-final.json -o ./build/coverage/coverage-remapped.json && coverage-filter -i ./build/coverage/coverage-remapped.json -o ./build/coverage/coverage-filtered.json",
+    "push-coverage-to-codecov": "codecov -f ./build/coverage/coverage-filtered.json"
+  },
+  "keywords": [
+    "raynor",
+    "marshal",
+    "typescript"
+  ],
+  "respository": {
+    "type": "git",
+    "url": "git+https://github.com/horia141/raynor.git"
+  },
+  "homepage": "https://github.com/horia141/raynor#readme",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "filesPack": {
+    "out": "e:.",
+    "README.md": "f:README.md",
+    "package.json": "f:package.json",
+    "tsconfig.json": "f:tsconfig.json"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "slug": "=0.9.1",
+    "valid-url": "=1.0.9"
+  },
+  "devDependencies": {
+    "@types/chai": "=3.4.34",
+    "@types/istanbul": "=0.4.29",
+    "@types/mocha": "=2.2.38",
+    "@types/node": "=7.0.0",
+    "@types/valid-url": "=1.0.2",
+    "chai": "=3.5.0",
+    "codecov": "=1.0.1",
+    "coverage-filter": "=0.1.0",
+    "istanbul": "=0.4.5",
+    "mocha": "=3.2.0",
+    "npm-prepack-publish": "=0.1.4",
+    "remap-istanbul": "=0.8.4",
+    "typescript": "=2.1.5"
+  }
 }
