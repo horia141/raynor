@@ -30,7 +30,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "slug": "=0.9.1",
+    "slugify": "=1.1.0",
     "valid-url": "=1.0.9"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ import { isUri, isWebUri } from 'valid-url'
 import { ExtractError } from './core'
 import { StringMarshaller } from './string'
 
-var slugify = require('slug');
+var slugify = require('slugify')
 
 
 export class UriMarshaller extends StringMarshaller {
@@ -40,20 +40,28 @@ export class SecureWebUriMarshaller extends WebUriMarshaller {
 
 
 export class SlugMarshaller extends StringMarshaller {
-    private static readonly _mode = (Object as any).assign({}, slugify.defaults.mode['pretty'], {lower: true});
-	
+    private static readonly _slugSimpleRegExp: RegExp = new RegExp('^[a-z0-9-]*$');
+    
     filter(inStr: string): string {
-	var slug = slugify(inStr, SlugMarshaller._mode);
-	
-	if (slug.length == 0) {
+	if (inStr.length == 0) {
 	    throw new ExtractError('Expected a slug');
 	}
+	
+	if (inStr != inStr.toLowerCase()) {
+	    throw new ExtractError('Expected a slug');
+	}
+	
+	var slug = slugify(inStr);
 	
 	if (inStr != slug) {
 	    throw new ExtractError('Expected a slug');
 	}
 
 	if (slug[0] == '-' || slug[slug.length-1] == '-') {
+	    throw new ExtractError('Expected a slug');
+	}
+
+	if (!SlugMarshaller._slugSimpleRegExp.test(inStr)) {
 	    throw new ExtractError('Expected a slug');
 	}
 

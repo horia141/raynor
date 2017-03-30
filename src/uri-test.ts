@@ -357,9 +357,11 @@ describe('SlugMarshaller', () => {
 
     const NonSlugs = [
         '',
+	'   ',
 	'-hello',
 	'hello-',
 	'-',
+	'  - ',
 	'--',
 	'is--it--me--youre--looking--for',
         'foo@bar',
