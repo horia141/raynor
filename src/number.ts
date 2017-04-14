@@ -1,4 +1,5 @@
-import { ExtractError, RaiseBuildFilterMarshaller } from './core';
+import { ExtractError, RaiseBuildFilterMarshaller } from './core'
+import { BaseStringMarshaller } from './string'
 
 
 export abstract class BaseNumberMarshaller<T> extends RaiseBuildFilterMarshaller<number, T> {
@@ -45,6 +46,46 @@ export class IntegerMarshaller extends NumberMarshaller {
 
 
 export class PositiveIntegerMarshaller extends IntegerMarshaller {
+    filter(b: number): number {
+	if (b <= 0) {
+	    throw new ExtractError('Expected a positive integer');
+	}
+
+        return b;
+    }
+}
+
+
+export class NumberFromStringMarshaller extends BaseStringMarshaller<number> {
+    build(a: string): number {
+	let parsed = parseFloat(a);
+
+	if ((Number as any).isNaN(parsed)) {
+	    throw new ExtractError('Expected a number coded as a string');
+	}
+
+	return parsed;
+    }
+
+    unbuild(b: number): string {
+	return b.toString();
+    }
+}
+
+
+export class IntegerFromStringMarshaller extends NumberFromStringMarshaller {
+    filter(b: number): number {
+        // isNumber exists in modern browser.
+        if (!(Number as any).isInteger(b)) {
+            throw new ExtractError('Expected an integer');
+        }
+
+        return b;
+    }
+}
+
+
+export class PositiveIntegerFromStringMarshaller extends IntegerFromStringMarshaller {
     filter(b: number): number {
 	if (b <= 0) {
 	    throw new ExtractError('Expected a positive integer');

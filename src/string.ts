@@ -1,4 +1,4 @@
-import { ExtractError, RaiseBuildFilterMarshaller } from './core';
+import { ExtractError, RaiseBuildFilterMarshaller } from './core'
 
 
 export abstract class BaseStringMarshaller<T> extends RaiseBuildFilterMarshaller<string, T> {
