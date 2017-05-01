@@ -40,6 +40,7 @@ export type MarshalSchema<T extends Object> = {
 
 export type Constructor<T> = new(...args: any[]) => T;
 export type MarshallerConstructor<T> = new () => Marshaller<T>;
+export type ObjectMarshallerConstructor<T> = new () => ObjectMarshaller<T>;
 
 
 export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> {
@@ -97,5 +98,9 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
 	}
 
 	return b;
+    }
+
+    getConstructor(): Constructor<T> {
+	return this._constructor;
     }
 }
