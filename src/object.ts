@@ -33,8 +33,14 @@ export class UntypedObjectMarshaller extends BaseObjectMarshaller<Object> {
 }
 
 
+export class MarshalSchemaItem<T> {
+    readonly marshaller: Marshaller<T>;
+    readonly sourceName?: string;
+}
+
+
 export type MarshalSchema<T extends Object> = {
-    readonly [key in keyof T]?: Marshaller<T[key]>
+    readonly [key in keyof T]?: MarshalSchemaItem<T[key]>
 }
 
 
@@ -64,13 +70,13 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
         const cooked = new this._constructor();
 
         for (let propName in this._schema) {
-	    const marshaller = this._schema[propName];
+	    const schemaItem = this._schema[propName];
 
-	    if (typeof marshaller == 'undefined') {
+	    if (typeof schemaItem == 'undefined') {
 		throw new Error('Should never happen');
 	    }
 	    
-	    if (marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(propName)) {
+	    if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(propName)) {
 		continue;
 	    }
 	    
@@ -78,7 +84,7 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
                 throw new ExtractError(`Field ${propName} is missing`);
             }
 
-	    cooked[propName] = marshaller.extract(raw[propName]);
+	    cooked[propName] = schemaItem.marshaller.extract(raw[propName]);
         }
 
         return cooked as T;
@@ -88,13 +94,13 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
 	const b: MarshalObject = {};
 
 	for (let propName in this._schema) {
-	    const marshaller = this._schema[propName];
+	    const schemaItem = this._schema[propName];
 
-	    if (typeof marshaller == 'undefined') {
+	    if (typeof schemaItem == 'undefined') {
 		throw new ExtractError('Should never happen');
 	    }
 
-	    b[propName] = marshaller.pack(cooked[propName]);
+	    b[propName] = schemaItem.marshaller.pack(cooked[propName]);
 	}
 
 	return b;

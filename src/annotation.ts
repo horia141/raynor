@@ -75,7 +75,7 @@ export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>) {
 	    target.__schema = {};
 	}
 	
-	target.__schema[propertyKey] = new marshallerCtor();
+	target.__schema[propertyKey] = {marshaller: new marshallerCtor()};
     }
 }
 

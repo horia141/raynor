@@ -107,8 +107,8 @@ describe('ObjectMarshaller', () => {
     }
 
     const PointSchema: MarshalSchema<Point> = {
-        x: new NumberMarshaller(),
-        y: new NumberMarshaller()
+        x: {marshaller: new NumberMarshaller()},
+        y: {marshaller: new NumberMarshaller()}
     };
 
     const Points = [
@@ -145,11 +145,11 @@ describe('ObjectMarshaller', () => {
     }
 
     const UserSchema: MarshalSchema<User> = {
-	id: new IdMarshaller(),
-	name: new StringMarshaller(),
-	age: new IntegerMarshaller(),
-	homePosition: new ObjectMarshaller<Point>(Point, PointSchema),
-	officePosition: new OptionalMarshaller<Point>(new ObjectMarshaller<Point>(Point, PointSchema))
+	id: {marshaller: new IdMarshaller()},
+	name: {marshaller: new StringMarshaller()},
+	age: {marshaller: new IntegerMarshaller()},
+	homePosition: {marshaller: new ObjectMarshaller<Point>(Point, PointSchema)},
+	officePosition: {marshaller: new OptionalMarshaller<Point>(new ObjectMarshaller<Point>(Point, PointSchema))}
     };
 
     const Users = [
