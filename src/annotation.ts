@@ -80,7 +80,7 @@ export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>) {
 }
 
 
-export function MarshalFrom<T>(constructor: Constructor<T>): MarshallerConstructor<T> {
+export function MarshalFrom<T>(constructor: Constructor<T>): ObjectMarshallerConstructor<T> {
     let schema = _extractSchema(constructor);
 
     if (schema === undefined) {
