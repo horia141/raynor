@@ -69,13 +69,17 @@ export function OneOf4<E1 extends Object, E2 extends Object, E3 extends Object, 
 }
 
 
-export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>) {
-    return function(target: any, propertyKey: string) {
+export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>, sourcePropName: string|null = null) {
+    return function(target: any, propName: string) {
 	if (!(target.hasOwnProperty('__schema'))) {
 	    target.__schema = {};
 	}
-	
-	target.__schema[propertyKey] = {marshaller: new marshallerCtor()};
+
+        if (sourcePropName != null) {
+            target.__schema[propName] = {marshaller: new marshallerCtor(), sourcePropName};
+        } else {
+	    target.__schema[propName] = {marshaller: new marshallerCtor()};
+        }
     }
 }
 

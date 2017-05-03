@@ -241,7 +241,7 @@ describe('ObjectMarshaller', () => {
                 expect(extracted).to.be.an.instanceof(Point3D);
                 expect(extracted).to.eql(point3D);
             });
-        }        
+        }
 
 	for (let [raw, user] of Users) {
 	    it(`should extract ${JSON.stringify(raw)}`, () => {
