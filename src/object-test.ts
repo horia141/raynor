@@ -123,6 +123,33 @@ describe('ObjectMarshaller', () => {
         [{x: 'hello'}, 'Expected a number']
     ];
 
+    class Point3D {
+        x: number;
+        y: number;
+        z: number;
+
+        constructor(x: number, y: number, z:number) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
+    const Point3DSchema: MarshalSchema<Point3D> = {
+        x: {marshaller: new NumberMarshaller()},
+        y: {marshaller: new NumberMarshaller()},
+        z: {marshaller: new NumberMarshaller(), sourcePropName: 'the_z'}
+    };
+
+    const Points3D = [
+        [{x: 10, y: 20, the_z: 30}, new Point3D(10, 20, 30)],
+        [{x: 11, y: 22, the_z: 33}, new Point3D(11, 22, 33)]
+    ];
+
+    const NonPoint3Ds = [
+        [{x: 10, y: 20, z: 30}, 'Field the_z is missing'],
+    ];
+
     class User {
 	id: number;
 	name: string;
@@ -206,6 +233,16 @@ describe('ObjectMarshaller', () => {
             });
         }
 
+        for (let [raw, point3D] of Points3D) {
+            it(`should extract ${JSON.stringify(raw)}`, () => {
+                const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
+                const extracted: Point3D = point3DMarshaller.extract(raw);
+
+                expect(extracted).to.be.an.instanceof(Point3D);
+                expect(extracted).to.eql(point3D);
+            });
+        }        
+
 	for (let [raw, user] of Users) {
 	    it(`should extract ${JSON.stringify(raw)}`, () => {
 		const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
@@ -223,6 +260,14 @@ describe('ObjectMarshaller', () => {
                 expect(() => pointMarshaller.extract(raw)).to.throw(message as string);
             });
         }
+
+        for (let [raw, message] of NonPoint3Ds) {
+            it(`should throw for non-point3D ${JSON.stringify(raw)}`, () => {
+                const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
+
+                expect(() => point3DMarshaller.extract(raw)).to.throw(message as string);
+            });
+        }        
 
         for (let [raw, message] of NonUsers) {
             it(`should throw for non-user ${JSON.stringify(raw)}`, () => {
@@ -261,6 +306,15 @@ describe('ObjectMarshaller', () => {
 		expect(pointMarshaller.pack(point as Point)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y});
 	    });
 	}
+
+	for (let [raw, point3D] of Points3D) {
+	    it(`should pack ${JSON.stringify(point3D)}`, () => {
+		const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
+		const getAroundTypesRaw = raw as any;
+
+		expect(point3DMarshaller.pack(point3D as Point3D)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, the_z: getAroundTypesRaw.the_z});
+	    });
+	}        
 
 	for (let [raw, user] of Users) {
 	    it(`should pack ${JSON.stringify(user)}`, () => {
@@ -302,6 +356,18 @@ describe('ObjectMarshaller', () => {
 		expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y});
             });
         }
+
+        for (let [raw, _] of Points3D) {
+            it(`should be opposites for ${JSON.stringify(raw)}`, () => {
+                const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
+                const getAroundTypesRaw = raw as any;
+
+		const extracted = point3DMarshaller.extract(raw);
+		const packed = point3DMarshaller.pack(extracted);
+
+		expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, the_z: getAroundTypesRaw.the_z});
+            });
+        }        
 
         for (let [raw, user] of Users) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {

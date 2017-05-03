@@ -35,7 +35,7 @@ export class UntypedObjectMarshaller extends BaseObjectMarshaller<Object> {
 
 export class MarshalSchemaItem<T> {
     readonly marshaller: Marshaller<T>;
-    readonly sourceName?: string;
+    readonly sourcePropName?: string;
 }
 
 
@@ -79,12 +79,20 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
 	    if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(propName)) {
 		continue;
 	    }
-	    
-            if (!raw.hasOwnProperty(propName)) {
-                throw new ExtractError(`Field ${propName} is missing`);
-            }
 
-	    cooked[propName] = schemaItem.marshaller.extract(raw[propName]);
+            if (schemaItem.hasOwnProperty('sourcePropName')) {
+                if (!raw.hasOwnProperty(schemaItem.sourcePropName as string)) {
+                    throw new ExtractError(`Field ${schemaItem.sourcePropName} is missing`);
+                }
+
+                cooked[propName] = schemaItem.marshaller.extract(raw[schemaItem.sourcePropName as string]);
+            } else {
+                if (!raw.hasOwnProperty(propName)) {
+                    throw new ExtractError(`Field ${propName} is missing`);
+                }
+
+	        cooked[propName] = schemaItem.marshaller.extract(raw[propName]);
+            }
         }
 
         return cooked as T;
@@ -100,7 +108,11 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
 		throw new ExtractError('Should never happen');
 	    }
 
-	    b[propName] = schemaItem.marshaller.pack(cooked[propName]);
+            if (schemaItem.hasOwnProperty('sourcePropName')) {
+                b[schemaItem.sourcePropName as string] = schemaItem.marshaller.pack(cooked[propName]);
+            } else {
+	        b[propName] = schemaItem.marshaller.pack(cooked[propName]);
+            }
 	}
 
 	return b;
