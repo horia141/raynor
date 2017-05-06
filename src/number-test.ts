@@ -3,6 +3,7 @@ import 'mocha'
 
 import { IntegerFromStringMarshaller,
 	 IntegerMarshaller,
+         NonNegativeIntegerMarshaller,
 	 NumberFromStringMarshaller,
 	 NumberMarshaller,
 	 PositiveIntegerFromStringMarshaller,
@@ -154,6 +155,97 @@ describe('IntegerMarshaller', () => {
 		expect(packed).to.equal(raw);
             });
         }
+    });
+});
+
+describe('NonNegativeIntegerMarshaller', () => {
+    const NonNegativeIntegers = [
+        0,
+	1,
+	103,
+	23213131
+    ];
+
+    const NegativeIntegers = [
+        -1,
+        -312
+    ];
+
+    const NonIntegers = [
+        1.41,
+        -3.12
+    ];
+
+    const NonNumerics = [
+	null,
+	undefined,
+	NaN,
+	Number.POSITIVE_INFINITY,
+	Number.NEGATIVE_INFINITY,
+	'hello',
+	'100',
+	[],
+	[100],
+	{},
+	{hello: 100}
+    ];
+    
+    describe('extract', () => {
+	for (let id of NonNegativeIntegers) {
+            it(`should parse ${id} `, () => {
+		const idMarshaller = new NonNegativeIntegerMarshaller();
+		
+		expect(idMarshaller.extract(id)).to.equal(id);
+            });
+	}
+
+	for (let negativeInteger of NegativeIntegers) {
+    	    it(`should throw for negative id ${negativeInteger}`, () => {
+    		const idMarshaller = new NonNegativeIntegerMarshaller();
+
+    		expect(() => idMarshaller.extract(negativeInteger)).to.throw('Expected a non-negative integer');
+    	    });
+	}
+
+	for (let nonInteger of NonIntegers) {
+    	    it(`should throw for float id ${nonInteger}`, () => {
+    		const idMarshaller = new NonNegativeIntegerMarshaller();
+
+    		expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
+    	    });
+	}        
+
+	for (let nonNumeric of NonNumerics) {
+    	    it(`should throw for ${JSON.stringify(nonNumeric)}`, () => {
+    		const idMarshaller = new NonNegativeIntegerMarshaller();
+
+    		expect(() => idMarshaller.extract(nonNumeric)).to.throw('Expected a number');
+    	    });
+	}
+    });
+
+    describe('pack', () => {
+	for (let id of NonNegativeIntegers) {
+	    it(`should produce the same input for ${id}`, () => {
+		const idMarshaller = new NonNegativeIntegerMarshaller();
+
+		expect(idMarshaller.pack(id)).to.equal(id);
+	    });
+	}
+    });
+
+    describe('extract and pack', () => {
+	for (let id of NonNegativeIntegers) {
+	    it(`should be opposites for ${id}`, () => {
+		const idMarshaller = new NonNegativeIntegerMarshaller();
+
+		const raw = id;
+		const extracted = idMarshaller.extract(raw);
+		const packed = idMarshaller.pack(extracted);
+
+		expect(packed).to.equal(raw);
+	    });
+	}
     });
 });
 
