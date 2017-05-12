@@ -76,17 +76,21 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
 		throw new Error('Should never happen');
 	    }
 	    
-	    if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(propName)) {
-		continue;
-	    }
-
-            if (schemaItem.hasOwnProperty('sourcePropName')) {
+	    if (schemaItem.hasOwnProperty('sourcePropName')) {
+                if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(schemaItem.sourcePropName as string)) {
+		    continue;
+	        }
+            
                 if (!raw.hasOwnProperty(schemaItem.sourcePropName as string)) {
                     throw new ExtractError(`Field ${schemaItem.sourcePropName} is missing`);
                 }
 
                 cooked[propName] = schemaItem.marshaller.extract(raw[schemaItem.sourcePropName as string]);
             } else {
+                if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(propName)) {
+		    continue;
+	        }
+                
                 if (!raw.hasOwnProperty(propName)) {
                     throw new ExtractError(`Field ${propName} is missing`);
                 }
