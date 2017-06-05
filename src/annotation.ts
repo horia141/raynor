@@ -4,6 +4,7 @@ import { MapMarshaller, MarshalMap } from './map'
 import { Constructor, MarshallerConstructor, MarshalSchema, ObjectMarshaller, ObjectMarshallerConstructor } from './object'
 import { OneOf2Marshaller, OneOf3Marshaller, OneOf4Marshaller } from './one-of'
 import { OptionalMarshaller } from './optional'
+import { TryInOrderMarshaller } from './try-in-order'
 
 
 export function OptionalOf<T>(marshallerCtor: MarshallerConstructor<T>): MarshallerConstructor<T|null> {
@@ -64,6 +65,15 @@ export function OneOf4<E1 extends Object, E2 extends Object, E3 extends Object, 
     return class extends OneOf4Marshaller<E1, E2, E3, E4> {
 	constructor() {
 	    super(new marshallerCtor1(), new marshallerCtor2(), new marshallerCtor3(), new marshallerCtor4());
+	}
+    }
+}
+
+
+export function TryInOrder<T>(marshallerCtor1: MarshallerConstructor<T>, ...args: MarshallerConstructor<T>[]): MarshallerConstructor<T> {
+    return class extends TryInOrderMarshaller<T> {
+	constructor() {
+	    super(new marshallerCtor1(), ...args.map(ctor => new ctor()));
 	}
     }
 }
