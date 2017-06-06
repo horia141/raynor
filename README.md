@@ -19,6 +19,6 @@ class User {
 }
 
 const um = new (MarshalFrom(User))();
-const u = new.extract(JSON.parse('{"name": "Raynor", "scoresByDay": [10, 20, 30]}'));
+const u = um.extract(JSON.parse('{"name": "Raynor", "scoresByDay": [10, 20, 30]}'));
 console.log(u.totalScore()); // Prints 60
 ```
