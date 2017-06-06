@@ -2,91 +2,23 @@
 
 A TypeScript marshalling library.
 
-A very simple example, in lieu of better docs.
+See [this article](http://horia141.com/raynor.html) for a tutorial and introduction to Raynor.
 
-```javascript
-import * as r from 'raynor'
-import { ArrayOf, ExtractError, Marshaller, MarshalEnum, MarshalFrom, MarshalWith, OptionalOf } from 'raynor'
+We'll add more docs with time, but here's a quick example:
 
-
-export enum Role {
-    Unknown = 0,
-    Regular = 1,
-    Admin = 2
-}
-
-
-export class Stats {
-    @MarshalWith(r.StringMarshaller)
+{% highlight js %}
+class User {
+    @MarshalWith(StringMarshaller)
     name: string;
-    
-    @MarshalWith(r.PositiveIntegerMarshaller)
-    zergKilled: number;
-}
+    @MarshalWith(ArrayOf(NumberMarshaller))
+    scoresByDay: number[];
 
-
-export class User {
-    @MarshalWith(r.IdMarshaller)
-    id: number;
-
-    @MarshalWith(MarshalEnum(Role))
-    role: Role;
-
-    @MarshalWith(r.StringMarshaller)
-    name: string;
-
-    @MarshalWith(r.UriMarshaller)
-    pictureUri: string;
-
-    @MarshalWith(ArrayOf(MarshalFrom(Stats)))
-    stats: Stats[];
-
-    @MarshalWith(OptionalOf(string))
-    nickname: string|null;
-
-    constructor(id: number, role: Role, name: string, pictureUri: string) {
-        this.id = id;
-        this.role = role;
-        this.name = name;
-        this.pictureUri = pictureUri;
-        this.stats = [];
-    }
-
-    isAdmin(): boolean {
-        return this.role == Role.Admin;
+    totalScore(): number {
+        return this.scoresByDay.reduce((a,b) => a + b, 0);
     }
 }
 
-
-const userMarshaller: Marshaller<User> = new (MarshalFrom(User))();
-
-try {
-    const user = userMarshaller.extract({
-        "id": 10,
-        "role": 2,
-        "name": "Jimmy",
-        "pictureUri": "https://example.com",
-        "stats": [{
-            "name": "Mission 1",
-        "zergKilled": 10
-        }]
-    });
-
-    assert user.id == 1;
-    assert user.role == Role.Admin;
-    assert user.isAdmin() == true;
-    assert user.name == "Jimmy";
-    assert user.stats.length == 1;
-    assert user.stats[0].name == "Mission 1";
-    assert user.stats[0].zerkKilled == 10;
-    assert user.nickname == null;
-
-    console.log(JSON.stringify(userMarshaller.pack(user)));
-} catch (e) {
-    if (e.name instanceof ExtractError) {
-        console.log('Could not extract');
-    }
-
-    throw e;
-}
-```
+const um = new (MarshalFrom(User))();
+const u = new.extract(JSON.parse('{"name": "Raynor", "scoresByDay": [10, 20, 30]}'));
+console.log(u.totalScore()); // Prints 60
+{% endhighlight %}
