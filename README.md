@@ -6,7 +6,7 @@ See [this article](http://horia141.com/raynor.html) for a tutorial and introduct
 
 We'll add more docs with time, but here's a quick example:
 
-{% highlight js %}
+```js
 class User {
     @MarshalWith(StringMarshaller)
     name: string;
@@ -21,4 +21,4 @@ class User {
 const um = new (MarshalFrom(User))();
 const u = new.extract(JSON.parse('{"name": "Raynor", "scoresByDay": [10, 20, 30]}'));
 console.log(u.totalScore()); // Prints 60
-{% endhighlight %}
+```
