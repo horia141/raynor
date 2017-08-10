@@ -6,19 +6,19 @@ import { NullMarshaller } from './null';
 
 describe('NullMarshaller', () => {
     const NonNulls = [
-	true,
+	      true,
         false,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         100,
-	'hello',
-	'100',
-	[],
-	[true],
-	{},
-	{hello: false}
+	      'hello',
+	      '100',
+	      [],
+	      [true],
+	      {},
+	      {hello: false}
     ];
 
     describe('extract', () => {

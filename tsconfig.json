@@ -10,12 +10,12 @@
         "sourceMap": true,
         "declaration": true,
         "outDir": "./out",
-	"experimentalDecorators": true
+	      "experimentalDecorators": true
     },
     "include": [
         "./src/**/*"
     ],
     "exclude": [
-	"./node_modules"
+	      "./node_modules"
     ]
 }

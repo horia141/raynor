@@ -18,17 +18,17 @@ describe('UntypedArrayMarshaller', () => {
     const NonArrays = [
         10,
         31.23,
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
-	'hello',
-	'100',
-	{},
-	{hello: 20.2}
+	      'hello',
+	      '100',
+	      {},
+	      {hello: 20.2}
     ];
     
     describe('extract', () => {
@@ -65,10 +65,10 @@ describe('UntypedArrayMarshaller', () => {
                 const arrayMarshaller = new UntypedArrayMarshaller();
 
                 const raw = array;
-		const extracted = arrayMarshaller.extract(raw);
-		const packed = arrayMarshaller.pack(extracted);
+		            const extracted = arrayMarshaller.extract(raw);
+		            const packed = arrayMarshaller.pack(extracted);
 
-		expect(packed).to.eql(raw);
+		            expect(packed).to.eql(raw);
             });
         }
     });
@@ -92,17 +92,17 @@ describe('ArrayMarshaller', () => {
     const NonArrays = [
         10,
         31.23,
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
-	'hello',
-	'100',
-	{},
-	{hello: 20.2}
+	      'hello',
+	      '100',
+	      {},
+	      {hello: 20.2}
     ];
 
     describe('extract', () => {
@@ -152,10 +152,10 @@ describe('ArrayMarshaller', () => {
                 const arrayMarshaller = new ArrayMarshaller(booleanMarshaller);
 
                 const raw = booleanArray;
-		const extracted = arrayMarshaller.extract(raw);
-		const packed = arrayMarshaller.pack(extracted);
+		            const extracted = arrayMarshaller.extract(raw);
+		            const packed = arrayMarshaller.pack(extracted);
 
-		expect(packed).to.eql(raw);
+		            expect(packed).to.eql(raw);
             });
         }
     });

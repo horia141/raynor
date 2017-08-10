@@ -13,19 +13,19 @@ describe('StringMarshaller', () => {
     ];
 
     const NonStrings = [
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
         100,
         3232.3,
-	[],
-	['hello'],
-	{},
-	{hello: 'world'}
+	      [],
+	      ['hello'],
+	      {},
+	      {hello: 'world'}
     ];
 
     describe('extract', () => {
@@ -62,10 +62,10 @@ describe('StringMarshaller', () => {
                 const stringMarshaller = new StringMarshaller();
 
                 const raw = string;
-		const extracted = stringMarshaller.extract(raw);
-		const packed = stringMarshaller.pack(extracted);
+		            const extracted = stringMarshaller.extract(raw);
+		            const packed = stringMarshaller.pack(extracted);
 
-		expect(packed).to.equal(raw);
+		            expect(packed).to.equal(raw);
             });
         }
     });
@@ -81,24 +81,24 @@ describe('MaxLengthStringMarshaller', () => {
     ];
 
     const TooLargeStrings = [
-	'this is a quite large str',
-	'this is a very large string'
+	      'this is a quite large str',
+	      'this is a very large string'
     ];
 
     const NonStrings = [
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
         100,
         3232.3,
-	[],
-	['hello'],
-	{},
-	{hello: 'world'}
+	      [],
+	      ['hello'],
+	      {},
+	      {hello: 'world'}
     ];
 
     describe('extract', () => {
@@ -116,7 +116,7 @@ describe('MaxLengthStringMarshaller', () => {
 
                 expect(() => maxLengthStringMarshaller.extract(string)).to.throw('Expected at most 24 characters');
             });
-        }	
+        }
 
         for (let nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
@@ -143,11 +143,11 @@ describe('MaxLengthStringMarshaller', () => {
                 const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
                 const raw = string;
-		const extracted = maxLengthStringMarshaller.extract(raw);
-		const packed = maxLengthStringMarshaller.pack(extracted);
+		            const extracted = maxLengthStringMarshaller.extract(raw);
+		            const packed = maxLengthStringMarshaller.pack(extracted);
 
-		expect(packed).to.equal(raw);
+		            expect(packed).to.equal(raw);
             });
         }
-    });    
+    });
 });

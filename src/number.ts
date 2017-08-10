@@ -4,31 +4,31 @@ import { BaseStringMarshaller } from './string'
 
 export abstract class BaseNumberMarshaller<T> extends RaiseBuildFilterMarshaller<number, T> {
     raise(raw: any): number {
-	if (typeof raw !== 'number') {
-	    throw new ExtractError('Expected a number');
-	}
+	      if (typeof raw !== 'number') {
+	          throw new ExtractError('Expected a number');
+	      }
 
         // isNaN exists in modern browsers.
-	if ((Number as any).isNaN(raw) || raw == Number.POSITIVE_INFINITY || raw == Number.NEGATIVE_INFINITY) {
-	    throw new ExtractError('Expected a number');
-	}
+	      if ((Number as any).isNaN(raw) || raw == Number.POSITIVE_INFINITY || raw == Number.NEGATIVE_INFINITY) {
+	          throw new ExtractError('Expected a number');
+	      }
 
-	return raw;
+	      return raw;
     }
 
     lower(a: number): any {
-	return a;
+	      return a;
     }
 }
 
 
 export class NumberMarshaller extends BaseNumberMarshaller<number> {
     build(a: number): number {
-	return a;
+	      return a;
     }
 
     unbuild(b: number): number {
-	return b;
+	      return b;
     }
 }
 
@@ -47,9 +47,9 @@ export class IntegerMarshaller extends NumberMarshaller {
 
 export class NonNegativeIntegerMarshaller extends IntegerMarshaller {
     filter(b: number): number {
-	if (b < 0) {
-	    throw new ExtractError('Expected a non-negative integer');
-	}
+	      if (b < 0) {
+	          throw new ExtractError('Expected a non-negative integer');
+	      }
 
         return b;
     }
@@ -58,9 +58,9 @@ export class NonNegativeIntegerMarshaller extends IntegerMarshaller {
 
 export class PositiveIntegerMarshaller extends IntegerMarshaller {
     filter(b: number): number {
-	if (b <= 0) {
-	    throw new ExtractError('Expected a positive integer');
-	}
+	      if (b <= 0) {
+	          throw new ExtractError('Expected a positive integer');
+	      }
 
         return b;
     }
@@ -69,17 +69,17 @@ export class PositiveIntegerMarshaller extends IntegerMarshaller {
 
 export class NumberFromStringMarshaller extends BaseStringMarshaller<number> {
     build(a: string): number {
-	let parsed = parseFloat(a);
+	      let parsed = parseFloat(a);
 
-	if ((Number as any).isNaN(parsed)) {
-	    throw new ExtractError('Expected a number coded as a string');
-	}
+	      if ((Number as any).isNaN(parsed)) {
+	          throw new ExtractError('Expected a number coded as a string');
+	      }
 
-	return parsed;
+	      return parsed;
     }
 
     unbuild(b: number): string {
-	return b.toString();
+	      return b.toString();
     }
 }
 
@@ -98,9 +98,9 @@ export class IntegerFromStringMarshaller extends NumberFromStringMarshaller {
 
 export class PositiveIntegerFromStringMarshaller extends IntegerFromStringMarshaller {
     filter(b: number): number {
-	if (b <= 0) {
-	    throw new ExtractError('Expected a positive integer');
-	}
+	      if (b <= 0) {
+	          throw new ExtractError('Expected a positive integer');
+	      }
 
         return b;
     }

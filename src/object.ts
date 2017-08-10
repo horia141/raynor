@@ -13,22 +13,22 @@ export abstract class BaseObjectMarshaller<T extends Object> extends RaiseBuildF
             throw new ExtractError('Expected an object');
         }
 
-	return raw;
+	      return raw;
     }
 
     lower(a: MarshalObject): any {
-	return a;
+	      return a;
     }
 }
 
 
 export class UntypedObjectMarshaller extends BaseObjectMarshaller<Object> {
     build(raw: MarshalObject): Object {
-	return raw;
+	      return raw;
     }
 
     unbuild(cooked: Object): MarshalObject {
-	return cooked;
+	      return cooked;
     }
 }
 
@@ -54,14 +54,14 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
     private readonly _schema: MarshalSchema<T>;
 
     constructor(constructor: Constructor<T>, schema: MarshalSchema<T>) {
-	for (let propName in schema) {
-	    if (typeof schema[propName] == 'undefined') {
-		throw new ExtractError(`Cannot accept undefined as a marshaller for ${propName}`);
-	    }
-	}
+	      for (let propName in schema) {
+	          if (typeof schema[propName] == 'undefined') {
+		            throw new ExtractError(`Cannot accept undefined as a marshaller for ${propName}`);
+	          }
+	      }
 
-	super();
-	this._constructor = constructor;
+	      super();
+	      this._constructor = constructor;
         this._schema = schema;
     }
 
@@ -70,17 +70,17 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
         const cooked = new this._constructor();
 
         for (let propName in this._schema) {
-	    const schemaItem = this._schema[propName];
+	          const schemaItem = this._schema[propName];
 
-	    if (typeof schemaItem == 'undefined') {
-		throw new Error('Should never happen');
-	    }
-	    
-	    if (schemaItem.hasOwnProperty('sourcePropName')) {
+	          if (typeof schemaItem == 'undefined') {
+		            throw new Error('Should never happen');
+	          }
+
+	          if (schemaItem.hasOwnProperty('sourcePropName')) {
                 if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(schemaItem.sourcePropName as string)) {
-		    continue;
-	        }
-            
+		                continue;
+	              }
+
                 if (!raw.hasOwnProperty(schemaItem.sourcePropName as string)) {
                     throw new ExtractError(`Field ${schemaItem.sourcePropName} is missing`);
                 }
@@ -88,14 +88,14 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
                 cooked[propName] = schemaItem.marshaller.extract(raw[schemaItem.sourcePropName as string]);
             } else {
                 if (schemaItem.marshaller instanceof OptionalMarshaller && !raw.hasOwnProperty(propName)) {
-		    continue;
-	        }
-                
+		                continue;
+	              }
+
                 if (!raw.hasOwnProperty(propName)) {
                     throw new ExtractError(`Field ${propName} is missing`);
                 }
 
-	        cooked[propName] = schemaItem.marshaller.extract(raw[propName]);
+	              cooked[propName] = schemaItem.marshaller.extract(raw[propName]);
             }
         }
 
@@ -103,26 +103,26 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
     }
 
     unbuild(cooked: T): MarshalObject {
-	const b: MarshalObject = {};
+	      const b: MarshalObject = {};
 
-	for (let propName in this._schema) {
-	    const schemaItem = this._schema[propName];
+	      for (let propName in this._schema) {
+	          const schemaItem = this._schema[propName];
 
-	    if (typeof schemaItem == 'undefined') {
-		throw new ExtractError('Should never happen');
-	    }
+	          if (typeof schemaItem == 'undefined') {
+		            throw new ExtractError('Should never happen');
+	          }
 
             if (schemaItem.hasOwnProperty('sourcePropName')) {
                 b[schemaItem.sourcePropName as string] = schemaItem.marshaller.pack(cooked[propName]);
             } else {
-	        b[propName] = schemaItem.marshaller.pack(cooked[propName]);
+	              b[propName] = schemaItem.marshaller.pack(cooked[propName]);
             }
-	}
+	      }
 
-	return b;
+	      return b;
     }
 
     getConstructor(): Constructor<T> {
-	return this._constructor;
+	      return this._constructor;
     }
 }

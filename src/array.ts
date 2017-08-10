@@ -3,26 +3,26 @@ import { ExtractError, Marshaller, RaiseBuildFilterMarshaller } from './core'
 
 export abstract class BaseArrayMarshaller<T> extends RaiseBuildFilterMarshaller<any[], T[]> {
     raise(raw: any): any[] {
-	if (!Array.isArray(raw)) {
-	    throw new ExtractError('Expected an array');
-	}
+	      if (!Array.isArray(raw)) {
+	          throw new ExtractError('Expected an array');
+	      }
 
-	return raw;
+	      return raw;
     }
 
     lower(a: any[]): any {
-	return a;
+	      return a;
     }
 }
 
 
 export class UntypedArrayMarshaller extends BaseArrayMarshaller<any> {
     build(a: any[]) {
-	return a;
+	      return a;
     }
 
     unbuild(b: any[]) {
-	return b;
+	      return b;
     }
 }
 
@@ -31,27 +31,27 @@ export class ArrayMarshaller<T> extends BaseArrayMarshaller<T> {
     private readonly _inner: Marshaller<T>;
 
     constructor(inner: Marshaller<T>) {
-	super();
-	this._inner = inner;
+	      super();
+	      this._inner = inner;
     }
 
     build(a: any[]): T[] {
-	const cooked: T[] = [];
+	      const cooked: T[] = [];
 
-	for (let elem of a) {
-	    cooked.push(this._inner.extract(elem));
-	}
+	      for (let elem of a) {
+	          cooked.push(this._inner.extract(elem));
+	      }
 
-	return cooked;
+	      return cooked;
     }
 
     unbuild(cooked: T[]): any[] {
-	const a: any[] = [];
+	      const a: any[] = [];
 
-	for (let elem of cooked) {
-	    a.push(this._inner.pack(elem));
-	}
+	      for (let elem of cooked) {
+	          a.push(this._inner.pack(elem));
+	      }
 
-	return a;
+	      return a;
     }
 }

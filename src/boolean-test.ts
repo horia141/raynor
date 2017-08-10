@@ -6,18 +6,18 @@ import { BooleanMarshaller } from './boolean';
 
 describe('BooleanMarshaller', () => {
     const NonBooleans = [
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         100,
-	'hello',
-	'100',
-	[],
-	[true],
-	{},
-	{hello: false}
+	      'hello',
+	      '100',
+	      [],
+	      [true],
+	      {},
+	      {hello: false}
     ];
 
     describe('extract', () => {

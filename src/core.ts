@@ -1,15 +1,15 @@
 export class MarshallError extends Error {
     constructor(message: string) {
-	super(message);
-	this.name = 'MarshallError';
+	      super(message);
+	      this.name = 'MarshallError';
     }
 }
 
 
 export class ExtractError extends MarshallError {
     constructor(message: string) {
-	super(message);
-	this.name = 'ExtractError';
+	      super(message);
+	      this.name = 'ExtractError';
     }
 }
 
@@ -25,10 +25,10 @@ export abstract class RaiseBuildFilterMarshaller<A, B> implements Marshaller<B> 
     private static _ProtoChain: any = new Array(RaiseBuildFilterMarshaller._MaxInheritanceDepth);
 
     extract(raw: any): B {
-	const a:A = this.raise(raw);
-	let b:B = this.build(a);
+	      const a:A = this.raise(raw);
+	      let b:B = this.build(a);
 
-	let proto = Object.getPrototypeOf(this);
+	      let proto = Object.getPrototypeOf(this);
         let protoChainSize = 0;
 
         while (proto != null && proto.hasOwnProperty('filter')) {
@@ -45,14 +45,14 @@ export abstract class RaiseBuildFilterMarshaller<A, B> implements Marshaller<B> 
             RaiseBuildFilterMarshaller._ProtoChain[protoIdx] = null;
         }
 
-	return b;
+	      return b;
     }
 
     pack(b: B): any {
-	const a:A = this.unbuild(b);
-	const raw:any = this.lower(a);
+	      const a:A = this.unbuild(b);
+	      const raw:any = this.lower(a);
 
-	return raw;
+	      return raw;
     }
 
     abstract raise(raw: any): A;

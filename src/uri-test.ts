@@ -6,9 +6,9 @@ import { SecureWebUriMarshaller, SlugMarshaller, UriMarshaller, WebUriMarshaller
 
 describe('UriMarshaller', () => {
     const Uris = [
-	'http://google.com',
-	'https://stackoverflow.com',
-	'http://example.com/test',
+	      'http://google.com',
+	      'https://stackoverflow.com',
+	      'http://example.com/test',
         'https://www.example.com/',
         'https://www.example.com',
         'https://www.example.com/foo/bar/test.html',
@@ -19,7 +19,7 @@ describe('UriMarshaller', () => {
         'http://www.example.com/foo/bar/test.html',
         'http://www.example.com/?foo=bar',
         'http://www.example.com/?foo=bar&space=trucks',
-        'http://www.example.com?foo=bar',        
+        'http://www.example.com?foo=bar',
         'http://www.example.com?foo=bar&space=trucks',
         'http://www.example.com:8080/test.html',
         'http://example.w3.org/path%20with%20spaces.html',
@@ -40,47 +40,47 @@ describe('UriMarshaller', () => {
         'http://example.w3.org/%illegal.html',
         'http://example.w3.org/%a',
         'http://example.w3.org/%a/foo',
-        'http://example.w3.org/%at'        
+        'http://example.w3.org/%at'
     ];
 
     const NonStrings = [
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
-	100,
-	-20,
-	[],
-	['hello'],
-	{},
-	{hello: 'hello'}        
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
+	      100,
+	          -20,
+	      [],
+	      ['hello'],
+	      {},
+	      {hello: 'hello'}
     ];
 
     describe('extract', () => {
-	for (let uri of Uris) {
-	    it(`should parse ${uri}`, () => {
-		const uriMarshaller = new UriMarshaller();
+	      for (let uri of Uris) {
+	          it(`should parse ${uri}`, () => {
+		            const uriMarshaller = new UriMarshaller();
 
-		expect(uriMarshaller.extract(uri)).to.equal(uri);
-	    });
-	}
+		            expect(uriMarshaller.extract(uri)).to.equal(uri);
+	          });
+	      }
 
         for (let nonUri of NonUris) {
-	    it(`should throw for invalid uri ${nonUri}`, () => {
-		const uriMarshaller = new UriMarshaller();
+	          it(`should throw for invalid uri ${nonUri}`, () => {
+		            const uriMarshaller = new UriMarshaller();
 
-		expect(() => uriMarshaller.extract(nonUri)).to.throw('Expected an URI');
-	    });
-	}
+		            expect(() => uriMarshaller.extract(nonUri)).to.throw('Expected an URI');
+	          });
+	      }
 
-	for (let nonString of NonStrings) {
-	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
-		const uriMarshaller = new UriMarshaller();
+	      for (let nonString of NonStrings) {
+	          it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		            const uriMarshaller = new UriMarshaller();
 
-		expect(() => uriMarshaller.extract(nonString)).to.throw('Expected a string');
-	    });
-	}
+		            expect(() => uriMarshaller.extract(nonString)).to.throw('Expected a string');
+	          });
+	      }
     });
 
     describe('pack', () => {
@@ -99,10 +99,10 @@ describe('UriMarshaller', () => {
                 const uriMarshaller = new UriMarshaller();
 
                 const raw = uri;
-		const extracted = uriMarshaller.extract(raw);
-		const packed = uriMarshaller.pack(extracted);
+		            const extracted = uriMarshaller.extract(raw);
+		            const packed = uriMarshaller.pack(extracted);
 
-		expect(packed).to.equal(raw);
+		            expect(packed).to.equal(raw);
             });
         }
     });
@@ -111,9 +111,9 @@ describe('UriMarshaller', () => {
 
 describe('WebUriMarshaller', () => {
     const WebUris = [
-	'http://google.com',
-	'https://stackoverflow.com',
-	'http://example.com/test',
+	      'http://google.com',
+	      'https://stackoverflow.com',
+	      'http://example.com/test',
         'https://www.example.com/',
         'https://www.example.com',
         'https://www.example.com/foo/bar/test.html',
@@ -124,7 +124,7 @@ describe('WebUriMarshaller', () => {
         'http://www.example.com/foo/bar/test.html',
         'http://www.example.com/?foo=bar',
         'http://www.example.com/?foo=bar&space=trucks',
-        'http://www.example.com?foo=bar',        
+        'http://www.example.com?foo=bar',
         'http://www.example.com?foo=bar&space=trucks',
         'http://www.example.com:8080/test.html',
         'http://example.w3.org/path%20with%20spaces.html',
@@ -152,48 +152,48 @@ describe('WebUriMarshaller', () => {
     ];
 
     const NonStrings = [
-	null,
-	undefined,
-	100,
-	-20,
-	[],
-	['hello'],
-	{},
-	{hello: 'hello'}
+	      null,
+	      undefined,
+	      100,
+	          -20,
+	      [],
+	      ['hello'],
+	      {},
+	      {hello: 'hello'}
     ];
 
     describe('extract', () => {
-	for (let uri of WebUris) {
-	    it(`should parse ${uri}`, () => {
-		const webUriMarshaller = new WebUriMarshaller();
+	      for (let uri of WebUris) {
+	          it(`should parse ${uri}`, () => {
+		            const webUriMarshaller = new WebUriMarshaller();
 
-		expect(webUriMarshaller.extract(uri)).to.equal(uri);
-	    });
-	}
+		            expect(webUriMarshaller.extract(uri)).to.equal(uri);
+	          });
+	      }
 
-	for (let nonWebUri of NonWebUris) {
-	    it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
-		const webUriMarshaller = new WebUriMarshaller();
+	      for (let nonWebUri of NonWebUris) {
+	          it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
+		            const webUriMarshaller = new WebUriMarshaller();
 
-		expect(() => webUriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
-	    });
-	}
+		            expect(() => webUriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
+	          });
+	      }
 
-	for (let nonUri of NonUris) {
-	    it(`should throw for ${JSON.stringify(nonUri)}`, () => {
-		const webUriMarshaller = new WebUriMarshaller();
+	      for (let nonUri of NonUris) {
+	          it(`should throw for ${JSON.stringify(nonUri)}`, () => {
+		            const webUriMarshaller = new WebUriMarshaller();
 
-		expect(() => webUriMarshaller.extract(nonUri)).to.throw('Expected an URI');
-	    });
-	}
+		            expect(() => webUriMarshaller.extract(nonUri)).to.throw('Expected an URI');
+	          });
+	      }
 
-	for (let nonString of NonStrings) {
-	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
-		const webUriMarshaller = new WebUriMarshaller();
+	      for (let nonString of NonStrings) {
+	          it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		            const webUriMarshaller = new WebUriMarshaller();
 
-		expect(() => webUriMarshaller.extract(nonString)).to.throw('Expected a string');
-	    });
-	}	
+		            expect(() => webUriMarshaller.extract(nonString)).to.throw('Expected a string');
+	          });
+	      }	
     });
 
     describe('pack', () => {
@@ -212,20 +212,20 @@ describe('WebUriMarshaller', () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
                 const raw = uri;
-		const extracted = webUriMarshaller.extract(raw);
-		const packed = webUriMarshaller.pack(extracted);
+		            const extracted = webUriMarshaller.extract(raw);
+		            const packed = webUriMarshaller.pack(extracted);
 
-		expect(packed).to.equal(raw);
+		            expect(packed).to.equal(raw);
             });
         }
-    });    
+    });
 });
 
 
 describe('SecureWebUriMarshaller', () => {
     const SecureWebUris = [
-	'https://google.com',	
-	'https://stackoverflow.com',
+	      'https://google.com',	
+	      'https://stackoverflow.com',
         'https://www.example.com/',
         'https://www.example.com',
         'https://www.example.com/foo/bar/test.html',
@@ -234,15 +234,15 @@ describe('SecureWebUriMarshaller', () => {
     ];
 
     const NonSecureWebUris = [
-	'http://google.com',
-	'http://stackoverflow.com',	
-	'http://example.com/test',
+	      'http://google.com',
+	      'http://stackoverflow.com',
+	      'http://example.com/test',
         'http://www.example.com/',
         'http://www.example.com',
         'http://www.example.com/foo/bar/test.html',
         'http://www.example.com/?foo=bar',
         'http://www.example.com/?foo=bar&space=trucks',
-        'http://www.example.com?foo=bar',        
+        'http://www.example.com?foo=bar',
         'http://www.example.com?foo=bar&space=trucks',
         'http://www.example.com:8080/test.html',
         'http://example.w3.org/path%20with%20spaces.html',
@@ -270,56 +270,56 @@ describe('SecureWebUriMarshaller', () => {
     ];
 
     const NonStrings = [
-	null,
-	undefined,
-	100,
-	-20,
-	[],
-	['hello'],
-	{},
-	{hello: 'hello'}
+	      null,
+	      undefined,
+	      100,
+	          -20,
+	      [],
+	      ['hello'],
+	      {},
+	      {hello: 'hello'}
     ];
 
     describe('extract', () => {
-	for (let uri of SecureWebUris) {
-	    it(`should parse ${uri}`, () => {
-		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+	      for (let uri of SecureWebUris) {
+	          it(`should parse ${uri}`, () => {
+		            const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
-		expect(secureWebUriMarshaller.extract(uri)).to.equal(uri);
-	    });
-	}
+		            expect(secureWebUriMarshaller.extract(uri)).to.equal(uri);
+	          });
+	      }
 
-	for (let nonSecureWebUri of NonSecureWebUris) {
-	    it(`should throw for ${JSON.stringify(nonSecureWebUri)}`, () => {
-		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+	      for (let nonSecureWebUri of NonSecureWebUris) {
+	          it(`should throw for ${JSON.stringify(nonSecureWebUri)}`, () => {
+		            const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
-		expect(() => secureWebUriMarshaller.extract(nonSecureWebUri)).to.throw('Expected an https URI');
-	    });
-	}
+		            expect(() => secureWebUriMarshaller.extract(nonSecureWebUri)).to.throw('Expected an https URI');
+	          });
+	      }
 
-	for (let nonWebUri of NonWebUris) {
-	    it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
-		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+	      for (let nonWebUri of NonWebUris) {
+	          it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
+		            const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
-		expect(() => secureWebUriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
-	    });
-	}	
+		            expect(() => secureWebUriMarshaller.extract(nonWebUri)).to.throw('Expected an http/https URI');
+	          });
+	      }	
 
-	for (let nonUri of NonUris) {
-	    it(`should throw for ${JSON.stringify(nonUri)}`, () => {
-		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+	      for (let nonUri of NonUris) {
+	          it(`should throw for ${JSON.stringify(nonUri)}`, () => {
+		            const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
-		expect(() => secureWebUriMarshaller.extract(nonUri)).to.throw('Expected an URI');
-	    });
-	}
+		            expect(() => secureWebUriMarshaller.extract(nonUri)).to.throw('Expected an URI');
+	          });
+	      }
 
-	for (let nonString of NonStrings) {
-	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
-		const secureWebUriMarshaller = new SecureWebUriMarshaller();
+	      for (let nonString of NonStrings) {
+	          it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		            const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
-		expect(() => secureWebUriMarshaller.extract(nonString)).to.throw('Expected a string');
-	    });
-	}
+		            expect(() => secureWebUriMarshaller.extract(nonString)).to.throw('Expected a string');
+	          });
+	      }
     });
 
     describe('pack', () => {
@@ -338,10 +338,10 @@ describe('SecureWebUriMarshaller', () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
                 const raw = uri;
-		const extracted = secureWebUriMarshaller.extract(raw);
-		const packed = secureWebUriMarshaller.pack(extracted);
+		            const extracted = secureWebUriMarshaller.extract(raw);
+		            const packed = secureWebUriMarshaller.pack(extracted);
 
-		expect(packed).to.equal(raw);
+		            expect(packed).to.equal(raw);
             });
         }
     });
@@ -350,66 +350,66 @@ describe('SecureWebUriMarshaller', () => {
 
 describe('SlugMarshaller', () => {
     const Slugs = [
-	'hello',
-	'is-it-me-youre-looking-for',
-	'a-special-slug'
+	      'hello',
+	      'is-it-me-youre-looking-for',
+	      'a-special-slug'
     ];
 
     const NonSlugs = [
         '',
-	'   ',
-	'-hello',
-	'hello-',
-	'-',
-	'  - ',
-	'--',
-	'is--it--me--youre--looking--for',
+	      '   ',
+	      '-hello',
+	      'hello-',
+	      '-',
+	      '  - ',
+	      '--',
+	      'is--it--me--youre--looking--for',
         'foo@bar',
-	'CApital-letters',
+	      'CApital-letters',
         'http://<foo>',
-	'str\'ange',
-	'c"haracters',
-	'evén-some-unicode'
+	      'str\'ange',
+	      'c"haracters',
+	      'evén-some-unicode'
     ];
 
     const NonStrings = [
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
-	100,
-	-20,
-	[],
-	['hello'],
-	{},
-	{hello: 'hello'}        
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
+	      100,
+	          -20,
+	      [],
+	      ['hello'],
+	      {},
+	      {hello: 'hello'}
     ];
 
     describe('extract', () => {
-	for (let slug of Slugs) {
-	    it(`should parse ${slug}`, () => {
-		const slugMarshaller = new SlugMarshaller();
+	      for (let slug of Slugs) {
+	          it(`should parse ${slug}`, () => {
+		            const slugMarshaller = new SlugMarshaller();
 
-		expect(slugMarshaller.extract(slug)).to.equal(slug);
-	    });
-	}
+		            expect(slugMarshaller.extract(slug)).to.equal(slug);
+	          });
+	      }
 
         for (let nonSlug of NonSlugs) {
-	    it(`should throw for invalid slug ${nonSlug}`, () => {
-		const slugMarshaller = new SlugMarshaller();
+	          it(`should throw for invalid slug ${nonSlug}`, () => {
+		            const slugMarshaller = new SlugMarshaller();
 
-		expect(() => slugMarshaller.extract(nonSlug)).to.throw('Expected a slug');
-	    });
-	}
+		            expect(() => slugMarshaller.extract(nonSlug)).to.throw('Expected a slug');
+	          });
+	      }
 
-	for (let nonString of NonStrings) {
-	    it(`should throw for ${JSON.stringify(nonString)}`, () => {
-		const slugMarshaller = new SlugMarshaller();
+	      for (let nonString of NonStrings) {
+	          it(`should throw for ${JSON.stringify(nonString)}`, () => {
+		            const slugMarshaller = new SlugMarshaller();
 
-		expect(() => slugMarshaller.extract(nonString)).to.throw('Expected a string');
-	    });
-	}
+		            expect(() => slugMarshaller.extract(nonString)).to.throw('Expected a string');
+	          });
+	      }
     });
 
     describe('pack', () => {
@@ -428,11 +428,11 @@ describe('SlugMarshaller', () => {
                 const slugMarshaller = new SlugMarshaller();
 
                 const raw = slug;
-		const extracted = slugMarshaller.extract(raw);
-		const packed = slugMarshaller.pack(extracted);
+		            const extracted = slugMarshaller.extract(raw);
+		            const packed = slugMarshaller.pack(extracted);
 
-		expect(packed).to.equal(raw);
+		            expect(packed).to.equal(raw);
             });
         }
-    });    
+    });
 });

@@ -10,84 +10,84 @@ import { StringMarshaller } from './string'
 
 describe('UntypedObjectMarshaller', () => {
     class Point {
-	x: number;
-	y: number;
+	      x: number;
+	      y: number;
 
-	constructor(x: number, y: number) {
-	    this.x = x;
-	    this.y = y;
-	}
+	      constructor(x: number, y: number) {
+	          this.x = x;
+	          this.y = y;
+	      }
 
-	sumCoords(): number {
-	    return this.x + this.y;
-	}
+	      sumCoords(): number {
+	          return this.x + this.y;
+	      }
     }
-    
+
     const Objects = [
-	{},
-	{a: 'hello', b: 'world'},
-	new Point(10, 20)
+	      {},
+	      {a: 'hello', b: 'world'},
+	      new Point(10, 20)
     ];
 
     const NonObjects = [
         10,
         31.23,
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
-	'hello',
-	'100',
-	[],
-	[true, true, false]
+	      'hello',
+	      '100',
+	      [],
+	      [true, true, false]
     ];
 
     describe('extract', () => {
-	for (let object of Objects) {
-	    it(`should extract ${JSON.stringify(object)}`, () => {
-		const objectMarshaller = new UntypedObjectMarshaller();
-		const extracted = objectMarshaller.extract(object);
+	      for (let object of Objects) {
+	          it(`should extract ${JSON.stringify(object)}`, () => {
+		            const objectMarshaller = new UntypedObjectMarshaller();
+		            const extracted = objectMarshaller.extract(object);
 
-		expect(extracted).to.eql(object);
-		expect(extracted).to.not.have.ownProperty('sumCoords');
-	    });
-	}
+		            expect(extracted).to.eql(object);
+		            expect(extracted).to.not.have.ownProperty('sumCoords');
+	          });
+	      }
 
-	for (let nonObject of NonObjects) {
-	    it(`should throw for ${JSON.stringify(nonObject)}`, () => {
-		const objectMarshaller = new UntypedObjectMarshaller();
+	      for (let nonObject of NonObjects) {
+	          it(`should throw for ${JSON.stringify(nonObject)}`, () => {
+		            const objectMarshaller = new UntypedObjectMarshaller();
 
-		expect(() => objectMarshaller.extract(nonObject)).to.throw('Expected an object');
-	    });
-	}
+		            expect(() => objectMarshaller.extract(nonObject)).to.throw('Expected an object');
+	          });
+	      }
     });
 
     describe('pack', () => {
-	for (let object of Objects) {
-	    it(`should produce the same input for ${JSON.stringify(object)}`, () => {
-		const objectMarshaller = new UntypedObjectMarshaller();
+	      for (let object of Objects) {
+	          it(`should produce the same input for ${JSON.stringify(object)}`, () => {
+		            const objectMarshaller = new UntypedObjectMarshaller();
 
-		expect(objectMarshaller.pack(object)).to.eql(object);
-	    });
-	}
+		            expect(objectMarshaller.pack(object)).to.eql(object);
+	          });
+	      }
     });
 
     describe('extract and pack', () => {
-	for (let object of Objects) {
-	    it(`should be opposites for ${JSON.stringify(object)}`, () => {
-		const objectMarshaller = new UntypedObjectMarshaller();
+	      for (let object of Objects) {
+	          it(`should be opposites for ${JSON.stringify(object)}`, () => {
+		            const objectMarshaller = new UntypedObjectMarshaller();
 
-		const raw = object;
-		const extracted = objectMarshaller.extract(raw);
-		const packed = objectMarshaller.pack(extracted);
+		            const raw = object;
+		            const extracted = objectMarshaller.extract(raw);
+		            const packed = objectMarshaller.pack(extracted);
 
-		expect(packed).to.eql(raw);
-	    });
-	}
-    });    
+		            expect(packed).to.eql(raw);
+	          });
+	      }
+    });
 });
 
 
@@ -151,41 +151,41 @@ describe('ObjectMarshaller', () => {
     ];
 
     class User {
-	id: number;
-	name: string;
-	age: number;
+	      id: number;
+	      name: string;
+	      age: number;
 
-	homePosition: Point;
-	officePosition: Point|null;
+	      homePosition: Point;
+	      officePosition: Point|null;
 
-	constructor(id: number, name: string, age: number, homePosition: Point, officePosition?: Point) {
-	    this.id = id;
-	    this.name = name;
-	    this.age = age;
-	    this.homePosition = homePosition;
-	    if (typeof officePosition == 'undefined') {
-		this.officePosition = null;
-	    } else {
-		this.officePosition = officePosition;
-	    }
-	}
+	      constructor(id: number, name: string, age: number, homePosition: Point, officePosition?: Point) {
+	          this.id = id;
+	          this.name = name;
+	          this.age = age;
+	          this.homePosition = homePosition;
+	          if (typeof officePosition == 'undefined') {
+		            this.officePosition = null;
+	          } else {
+		            this.officePosition = officePosition;
+	          }
+	      }
     }
 
     const UserSchema: MarshalSchema<User> = {
-	id: {marshaller: new IdMarshaller()},
-	name: {marshaller: new StringMarshaller()},
-	age: {marshaller: new IntegerMarshaller()},
-	homePosition: {marshaller: new ObjectMarshaller<Point>(Point, PointSchema)},
-	officePosition: {marshaller: new OptionalMarshaller<Point>(new ObjectMarshaller<Point>(Point, PointSchema))}
+	      id: {marshaller: new IdMarshaller()},
+	      name: {marshaller: new StringMarshaller()},
+	      age: {marshaller: new IntegerMarshaller()},
+	      homePosition: {marshaller: new ObjectMarshaller<Point>(Point, PointSchema)},
+	      officePosition: {marshaller: new OptionalMarshaller<Point>(new ObjectMarshaller<Point>(Point, PointSchema))}
     };
 
     const Users = [
-	[{id: 1, name: 'John', age: 21, homePosition: {x: 0, y: 20}, officePosition: {x: 10, y: 20}},
-	 new User(1, 'John', 21, new Point(0, 20), new Point(10, 20))],
-	[{id: 2, name: 'Jane', age: 22, homePosition: {x: 10, y: 30}},
-	 new User(2, 'Jane', 22, new Point(10, 30))],
-	[{id: 3, name: 'Harry', age: 24, homePosition: {x: 100, y: 300}, money: 1000},
-	 new User(3, 'Harry', 24, new Point(100, 300))],	
+	      [{id: 1, name: 'John', age: 21, homePosition: {x: 0, y: 20}, officePosition: {x: 10, y: 20}},
+	       new User(1, 'John', 21, new Point(0, 20), new Point(10, 20))],
+	      [{id: 2, name: 'Jane', age: 22, homePosition: {x: 10, y: 30}},
+	       new User(2, 'Jane', 22, new Point(10, 30))],
+	      [{id: 3, name: 'Harry', age: 24, homePosition: {x: 100, y: 300}, money: 1000},
+	       new User(3, 'Harry', 24, new Point(100, 300))],	
     ];
 
     const NonUsers = [
@@ -202,25 +202,25 @@ describe('ObjectMarshaller', () => {
     const NonObjects = [
         10,
         31.23,
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
-	'hello',
-	'100',
-	[],
-	[true, true, false]
+	      'hello',
+	      '100',
+	      [],
+	      [true, true, false]
     ];
 
     describe('constructor', () => {
-	it(`should throw for undefined marshaller`, () => {
-	    expect(() => new ObjectMarshaller<Point>(Point, {x: undefined})).to.throw('Cannot accept undefined as a marshaller for x');
-	});
+	      it(`should throw for undefined marshaller`, () => {
+	          expect(() => new ObjectMarshaller<Point>(Point, {x: undefined})).to.throw('Cannot accept undefined as a marshaller for x');
+	      });
     });
-    
+
     describe('extract', () => {
         for (let [raw, point, coordsSum] of Points) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
@@ -243,15 +243,15 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-	for (let [raw, user] of Users) {
-	    it(`should extract ${JSON.stringify(raw)}`, () => {
-		const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
-		const extracted: User = userMarshaller.extract(raw);
+	      for (let [raw, user] of Users) {
+	          it(`should extract ${JSON.stringify(raw)}`, () => {
+		            const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
+		            const extracted: User = userMarshaller.extract(raw);
 
                 expect(extracted).to.be.an.instanceof(User);
                 expect(extracted).to.eql(user);
-	    });
-	}
+	          });
+	      }
 
         for (let [raw, message] of NonPoints) {
             it(`should throw for non-point ${JSON.stringify(raw)}`, () => {
@@ -267,7 +267,7 @@ describe('ObjectMarshaller', () => {
 
                 expect(() => point3DMarshaller.extract(raw)).to.throw(message as string);
             });
-        }        
+        }
 
         for (let [raw, message] of NonUsers) {
             it(`should throw for non-user ${JSON.stringify(raw)}`, () => {
@@ -298,41 +298,41 @@ describe('ObjectMarshaller', () => {
     });
 
     describe('pack', () => {
-	for (let [raw, point, _] of Points) {
-	    it(`should pack ${JSON.stringify(point)}`, () => {
-		const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
-		const getAroundTypesRaw = raw as any;
+	      for (let [raw, point, _] of Points) {
+	          it(`should pack ${JSON.stringify(point)}`, () => {
+		            const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
+		            const getAroundTypesRaw = raw as any;
 
-		expect(pointMarshaller.pack(point as Point)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y});
-	    });
-	}
+		            expect(pointMarshaller.pack(point as Point)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y});
+	          });
+	      }
 
-	for (let [raw, point3D] of Points3D) {
-	    it(`should pack ${JSON.stringify(point3D)}`, () => {
-		const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
-		const getAroundTypesRaw = raw as any;
+	      for (let [raw, point3D] of Points3D) {
+	          it(`should pack ${JSON.stringify(point3D)}`, () => {
+		            const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
+		            const getAroundTypesRaw = raw as any;
 
-		expect(point3DMarshaller.pack(point3D as Point3D)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, the_z: getAroundTypesRaw.the_z});
-	    });
-	}        
+		            expect(point3DMarshaller.pack(point3D as Point3D)).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, the_z: getAroundTypesRaw.the_z});
+	          });
+	      }
 
-	for (let [raw, user] of Users) {
-	    it(`should pack ${JSON.stringify(user)}`, () => {
-		const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
-		const packed = userMarshaller.pack(user as User);
+	      for (let [raw, user] of Users) {
+	          it(`should pack ${JSON.stringify(user)}`, () => {
+		            const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
+		            const packed = userMarshaller.pack(user as User);
 
-		expect(packed.id).to.eql(raw.id);
-		expect(packed.name).to.eql(raw.name);
-		expect(packed.age).to.eql(raw.age);
-		expect(packed.homePosition).to.eql(raw.homePosition);
+		            expect(packed.id).to.eql(raw.id);
+		            expect(packed.name).to.eql(raw.name);
+		            expect(packed.age).to.eql(raw.age);
+		            expect(packed.homePosition).to.eql(raw.homePosition);
 
-		if ((user as User).officePosition != null) {
-		    expect(packed.officePosition).to.eql((raw as any).officePosition);
-		} else {
-		    expect(packed.officePosition).to.be.null;
-		}
-	    });
-	}
+		            if ((user as User).officePosition != null) {
+		                expect(packed.officePosition).to.eql((raw as any).officePosition);
+		            } else {
+		                expect(packed.officePosition).to.be.null;
+		            }
+	          });
+	      }
 
         it(`should throw when a marshaller becomes undefined`, () => {
             const newSchema = (Object as any).assign({}, PointSchema);
@@ -341,7 +341,7 @@ describe('ObjectMarshaller', () => {
             modifiableSchema.y = undefined;
 
             expect(() => pointMarshaller.pack(Points[0][1] as Point)).to.throw('Should never happen');
-        });        
+        });
     });
 
     describe('extract and pack', () => {
@@ -350,10 +350,10 @@ describe('ObjectMarshaller', () => {
                 const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
                 const getAroundTypesRaw = raw as any;
 
-		const extracted = pointMarshaller.extract(raw);
-		const packed = pointMarshaller.pack(extracted);
+		            const extracted = pointMarshaller.extract(raw);
+		            const packed = pointMarshaller.pack(extracted);
 
-		expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y});
+		            expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y});
             });
         }
 
@@ -362,30 +362,30 @@ describe('ObjectMarshaller', () => {
                 const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
                 const getAroundTypesRaw = raw as any;
 
-		const extracted = point3DMarshaller.extract(raw);
-		const packed = point3DMarshaller.pack(extracted);
+		            const extracted = point3DMarshaller.extract(raw);
+		            const packed = point3DMarshaller.pack(extracted);
 
-		expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, the_z: getAroundTypesRaw.the_z});
+		            expect(packed).to.eql({x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, the_z: getAroundTypesRaw.the_z});
             });
-        }        
+        }
 
         for (let [raw, user] of Users) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
 
-		const extracted = userMarshaller.extract(raw);
-		const packed = userMarshaller.pack(extracted);
+		            const extracted = userMarshaller.extract(raw);
+		            const packed = userMarshaller.pack(extracted);
 
                 expect(packed.id).to.eql(raw.id);
-		expect(packed.name).to.eql(raw.name);
-		expect(packed.age).to.eql(raw.age);
-		expect(packed.homePosition).to.eql(raw.homePosition);
+		            expect(packed.name).to.eql(raw.name);
+		            expect(packed.age).to.eql(raw.age);
+		            expect(packed.homePosition).to.eql(raw.homePosition);
 
-		if ((user as User).officePosition != null) {
-		    expect(packed.officePosition).to.eql((raw as any).officePosition);
-		} else {
-		    expect(packed.officePosition).to.be.null;
-		}
+		            if ((user as User).officePosition != null) {
+		                expect(packed.officePosition).to.eql((raw as any).officePosition);
+		            } else {
+		                expect(packed.officePosition).to.be.null;
+		            }
             });
         }
     });

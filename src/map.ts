@@ -9,11 +9,11 @@ export type UntypedMarshalMap = {
 
 export class UntypedMapMarshaller extends BaseObjectMarshaller<UntypedMarshalMap> {
     build(a: MarshalObject): UntypedMarshalMap {
-	return a;
+	      return a;
     }
 
     unbuild(cooked: UntypedMarshalMap): MarshalObject {
-	return cooked;
+	      return cooked;
     }
 }
 
@@ -27,28 +27,28 @@ export class MapMarshaller<K> extends BaseObjectMarshaller<MarshalMap<K>> {
     private readonly _inner: Marshaller<K>;
 
     constructor(inner: Marshaller<K>) {
-	super();
-	this._inner = inner;
+	      super();
+	      this._inner = inner;
     }
 
 
     build(a: MarshalObject): MarshalMap<K> {
-	const cooked: MarshalMap<K> = {};
+	      const cooked: MarshalMap<K> = {};
 
-	for (let key in a) {
-	    cooked[key] = this._inner.extract(a[key]);
-	}
+	      for (let key in a) {
+	          cooked[key] = this._inner.extract(a[key]);
+	      }
 
-	return cooked;
+	      return cooked;
     }
 
     unbuild(cooked: MarshalMap<K>): MarshalObject {
-	const a: MarshalObject = {};
+	      const a: MarshalObject = {};
 
-	for (let key in cooked) {
-	    a[key] = this._inner.pack(cooked[key]);
-	}
+	      for (let key in cooked) {
+	          a[key] = this._inner.pack(cooked[key]);
+	      }
 
-	return a;
+	      return a;
     }
 }

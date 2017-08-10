@@ -18,17 +18,17 @@ describe('UntypedMapMarshaller', () => {
     const NonMaps = [
         10,
         31.23,
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
-	'hello',
-	'100',
-	[],
-	[true, true, false]
+	      'hello',
+	      '100',
+	      [],
+	      [true, true, false]
     ];
 
     describe('extract', () => {
@@ -50,27 +50,27 @@ describe('UntypedMapMarshaller', () => {
     });
 
     describe('pack', () => {
-	for (let map of Maps) {
-	    it(`should produce the same input for ${JSON.stringify(map)}`, () => {
-		const mapMarshaller = new UntypedMapMarshaller();
+	      for (let map of Maps) {
+	          it(`should produce the same input for ${JSON.stringify(map)}`, () => {
+		            const mapMarshaller = new UntypedMapMarshaller();
 
-		expect(mapMarshaller.pack(map)).to.eql(map);
-	    });
-	}
+		            expect(mapMarshaller.pack(map)).to.eql(map);
+	          });
+	      }
     });
 
     describe('extract and pack', () => {
-	for (let map of Maps) {
-	    it(`should be opposites ${JSON.stringify(map)}`, () => {
-		const mapMarshaller = new UntypedMapMarshaller();
+	      for (let map of Maps) {
+	          it(`should be opposites ${JSON.stringify(map)}`, () => {
+		            const mapMarshaller = new UntypedMapMarshaller();
 
                 const raw = map;
-		const extracted = mapMarshaller.extract(raw);
-		const packed = mapMarshaller.pack(extracted);
+		            const extracted = mapMarshaller.extract(raw);
+		            const packed = mapMarshaller.pack(extracted);
 
-		expect(packed).to.eql(raw);
-	    });
-	}
+		            expect(packed).to.eql(raw);
+	          });
+	      }
     });
 });
 
@@ -91,17 +91,17 @@ describe('MapMarshaller', () => {
     const NonMaps = [
         10,
         31.23,
-	null,
-	undefined,
-	NaN,
-	Number.POSITIVE_INFINITY,
-	Number.NEGATIVE_INFINITY,
+	      null,
+	      undefined,
+	      NaN,
+	      Number.POSITIVE_INFINITY,
+	      Number.NEGATIVE_INFINITY,
         true,
         false,
-	'hello',
-	'100',
-	[],
-	[true, true, false]      
+	      'hello',
+	      '100',
+	      [],
+	      [true, true, false]
     ];
 
     describe('extract', () => {
@@ -134,28 +134,28 @@ describe('MapMarshaller', () => {
     });
 
     describe('pack', () => {
-	for (let map of Maps) {
-	    it(`should produce the same input for ${JSON.stringify(map)}`, () => {
+	      for (let map of Maps) {
+	          it(`should produce the same input for ${JSON.stringify(map)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const mapMarshaller = new MapMarshaller(booleanMarshaller);
 
-		expect(mapMarshaller.pack(map)).to.eql(map);
-	    });
-	}
+		            expect(mapMarshaller.pack(map)).to.eql(map);
+	          });
+	      }
     });
 
     describe('extract and pack', () => {
-	for (let map of Maps) {
-	    it(`should be opposites ${JSON.stringify(map)}`, () => {
+	      for (let map of Maps) {
+	          it(`should be opposites ${JSON.stringify(map)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const mapMarshaller = new MapMarshaller(booleanMarshaller);
 
                 const raw = map;
-		const extracted = mapMarshaller.extract(raw);
-		const packed = mapMarshaller.pack(extracted);
+		            const extracted = mapMarshaller.extract(raw);
+		            const packed = mapMarshaller.pack(extracted);
 
-		expect(packed).to.eql(raw);
-	    });
-	}
+		            expect(packed).to.eql(raw);
+	          });
+	      }
     });
 });
