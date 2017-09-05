@@ -25,3 +25,5 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: $(npm bin)/prepack-publish
+  on:
+    tags: true
