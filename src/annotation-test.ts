@@ -8,8 +8,9 @@ import { IdMarshaller } from './id'
 import { MapMarshaller} from './map'
 import { IntegerMarshaller, NumberMarshaller } from './number'
 import { OptionalMarshaller } from './optional'
-import { ArrayOf, MapOf, MarshalFrom, MarshalEnum, MarshalWith, OptionalOf } from './annotation'
+import { ArrayOf, MapOf, MarshalFrom, MarshalEnum, MarshalWith, OptionalOf, TryInOrder } from './annotation'
 import { StringMarshaller } from './string'
+import { TryInOrderMarshaller } from './try-in-order'
 
 
 describe('OptionalOf', () => {
@@ -35,6 +36,14 @@ describe('MapOf', () => {
         const marshaller = new (MapOf(NumberMarshaller))();
         expect(marshaller).to.be.an.instanceof(MapMarshaller);
     });
+});
+
+
+describe('TryInOrder', () => {
+    it('should create a TryInOrderMarshaller', () => {
+        const marshaller = new (TryInOrder(NumberMarshaller, IdMarshaller))();
+        expect(marshaller).to.be.an.instanceof(TryInOrderMarshaller);
+    })
 });
 
 

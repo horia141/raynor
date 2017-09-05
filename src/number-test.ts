@@ -14,7 +14,7 @@ describe('NumberMarshaller', () => {
     const Numbers = [
         1,
         10,
-            -54,
+        -54,
         4.3,
         893.2
     ];
