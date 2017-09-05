@@ -15,7 +15,7 @@
     "marshal",
     "typescript"
   ],
-  "": {
+  "repository": {
     "type": "git",
     "url": "git+https://github.com/horia141/raynor.git"
   },
