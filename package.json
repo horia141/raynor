@@ -15,7 +15,7 @@
     "marshal",
     "typescript"
   ],
-  "respository": {
+  "": {
     "type": "git",
     "url": "git+https://github.com/horia141/raynor.git"
   },
@@ -46,6 +46,6 @@
     "mocha": "=3.2.0",
     "npm-prepack-publish": "=0.1.4",
     "remap-istanbul": "=0.8.4",
-    "typescript": "=2.1.5"
+    "typescript": "=2.4.2"
   }
 }
