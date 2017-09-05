@@ -1,4 +1,4 @@
-# Raynor [![npm version](https://badge.fury.io/js/raynor.svg)](https://badge.fury.io/js/raynor) [![Build Status](https://travis-ci.org/horia141/raynor.svg?branch=master)](https://travis-ci.org/horia141/raynor) [![Coverage](https://codecov.io/gh/horia141/raynor/branch/master/graph/badge.svg)](https://codecov.io/gh/horia141/raynor) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://img.shields.io/badge/license-MIT-blue.svg)
+# Raynor [![npm version](https://badge.fury.io/js/raynor.svg)](https://badge.fury.io/js/raynor) [![Build Status](https://travis-ci.org/horia141/raynor.svg?branch=master)](https://travis-ci.org/horia141/raynor) [![Coverage](https://codecov.io/gh/horia141/raynor/branch/master/graph/badge.svg)](https://codecov.io/gh/horia141/raynor) [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://img.shields.io/badge/license-MIT-blue.svg) [![Dependencies](https://david-dm.org/horia141/raynor.svg)](https://david-dm.org/horia141/raynor.svg)
 
 A TypeScript marshalling and data validation library.
 
