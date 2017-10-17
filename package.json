@@ -8,7 +8,8 @@
     "pretest": "tsc",
     "test-dev": "tsc --watch & mocha --watch $(find out -name '*-test.js')",
     "test": "tsc && istanbul cover --config ./.istanbul.yml ./node_modules/mocha/bin/_mocha --  $(find out -name '*-test.js') && remap-istanbul -i ./build/coverage/coverage-final.json -o ./build/coverage/coverage-remapped.json && coverage-filter -i ./build/coverage/coverage-remapped.json -o ./build/coverage/coverage-filtered.json",
-    "push-coverage-to-codecov": "codecov -f ./build/coverage/coverage-filtered.json"
+    "push-coverage-to-codecov": "codecov -f ./build/coverage/coverage-filtered.json",
+    "docs": "typedoc src/"
   },
   "keywords": [
     "raynor",
@@ -28,6 +29,9 @@
     "package.json": "f:package.json",
     "tsconfig.json": "f:tsconfig.json"
   },
+  "pre-commit": [
+    "docs"
+  ],
   "license": "MIT",
   "dependencies": {
     "slugify": "=1.1.0",
@@ -45,7 +49,9 @@
     "istanbul": "=0.4.5",
     "mocha": "=3.2.0",
     "npm-prepack-publish": "=0.1.4",
+    "pre-commit": "^1.2.2",
     "remap-istanbul": "=0.8.4",
+    "typedoc": "^0.9.0",
     "typescript": "=2.4.2"
   }
 }
