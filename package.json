@@ -29,9 +29,6 @@
     "package.json": "f:package.json",
     "tsconfig.json": "f:tsconfig.json"
   },
-  "pre-commit": [
-    "docs"
-  ],
   "license": "MIT",
   "dependencies": {
     "slugify": "=1.1.0",
