@@ -112,7 +112,11 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
 		            throw new ExtractError('Should never happen');
 	          }
 
-            if (schemaItem.hasOwnProperty('sourcePropName')) {
+            if (cooked[propName] == null && schemaItem.marshaller instanceof OptionalMarshaller)
+            {
+                // Do nothing. The field will be left undefined.
+            }
+            else if (schemaItem.hasOwnProperty('sourcePropName')) {
                 b[schemaItem.sourcePropName as string] = schemaItem.marshaller.pack(cooked[propName]);
             } else {
 	              b[propName] = schemaItem.marshaller.pack(cooked[propName]);

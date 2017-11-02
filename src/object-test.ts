@@ -325,12 +325,7 @@ describe('ObjectMarshaller', () => {
 		            expect(packed.name).to.eql(raw.name);
 		            expect(packed.age).to.eql(raw.age);
 		            expect(packed.homePosition).to.eql(raw.homePosition);
-
-		            if ((user as User).officePosition != null) {
-		                expect(packed.officePosition).to.eql((raw as any).officePosition);
-		            } else {
-		                expect(packed.officePosition).to.be.null;
-		            }
+                expect(packed.officePosition).to.eql((raw as any).officePosition);
 	          });
 	      }
 
@@ -369,7 +364,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, user] of Users) {
+        for (let [raw, _] of Users) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
 
@@ -380,12 +375,7 @@ describe('ObjectMarshaller', () => {
 		            expect(packed.name).to.eql(raw.name);
 		            expect(packed.age).to.eql(raw.age);
 		            expect(packed.homePosition).to.eql(raw.homePosition);
-
-		            if ((user as User).officePosition != null) {
-		                expect(packed.officePosition).to.eql((raw as any).officePosition);
-		            } else {
-		                expect(packed.officePosition).to.be.null;
-		            }
+                expect(packed.officePosition).to.eql((raw as any).officePosition);
             });
         }
     });

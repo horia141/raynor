@@ -278,12 +278,7 @@ describe('Annotations', () => {
 		            expect(packed.name).to.eql(raw.name);
 		            expect(packed.age).to.eql(raw.age);
 		            expect(packed.homePosition).to.eql(raw.homePosition);
-
-		            if ((user as User).officePosition != null) {
-		                expect(packed.officePosition).to.eql((raw as any).officePosition);
-		            } else {
-		                expect(packed.officePosition).to.be.null;
-		            }
+                expect(packed.officePosition).to.eql((raw as any).officePosition);
 	          });
 	      }
     });
@@ -313,7 +308,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, user] of Users) {
+        for (let [raw, _] of Users) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new (MarshalFrom<User>(User))();
 
@@ -324,12 +319,7 @@ describe('Annotations', () => {
 		            expect(packed.name).to.eql(raw.name);
 		            expect(packed.age).to.eql(raw.age);
 		            expect(packed.homePosition).to.eql(raw.homePosition);
-
-		            if ((user as User).officePosition != null) {
-		                expect(packed.officePosition).to.eql((raw as any).officePosition);
-		            } else {
-		                expect(packed.officePosition).to.be.null;
-		            }
+                expect(packed.officePosition).to.eql((raw as any).officePosition);
             });
         }
     });
