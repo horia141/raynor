@@ -7,88 +7,88 @@ import { OptionalMarshaller } from './optional'
 import { TryInOrderMarshaller } from './try-in-order'
 
 
-export function OptionalOf<T>(marshallerCtor: MarshallerConstructor<T>): MarshallerConstructor<T|null> {
+export function OptionalOf<T>(marshallerCtor: MarshallerConstructor<T>): MarshallerConstructor<T | null> {
     return class extends OptionalMarshaller<T> {
-	      constructor() {
-	          super(new marshallerCtor());
-	      }
+        constructor() {
+            super(new marshallerCtor());
+        }
     };
 }
 
 
 export function ArrayOf<T>(marshallerCtor: MarshallerConstructor<T>): MarshallerConstructor<T[]> {
     return class extends ArrayMarshaller<T> {
-	      constructor() {
-	          super(new marshallerCtor());
-	      }
+        constructor() {
+            super(new marshallerCtor());
+        }
     };
 }
 
 
 export function MapOf<T>(marshallerCtor: MarshallerConstructor<T>): MarshallerConstructor<MarshalMap<T>> {
     return class extends MapMarshaller<T> {
-	      constructor() {
-	          super(new marshallerCtor());
-	      }
+        constructor() {
+            super(new marshallerCtor());
+        }
     };
 }
 
 
-export function MarshalEnum<E>(constructor: any): MarshallerConstructor<E> {
+export function MarshalEnum<E>(constructor: any, default_?: E): MarshallerConstructor<E> {
     return class extends EnumMarshaller<E> {
         constructor() {
-	          super(constructor);
-	      }
+            super(constructor, default_);
+        }
     }
 }
 
 
-export function OneOf2<E1 extends Object, E2 extends Object>(marshallerCtor1: ObjectMarshallerConstructor<E1>, marshallerCtor2: ObjectMarshallerConstructor<E2>): MarshallerConstructor<E1|E2> {
+export function OneOf2<E1 extends Object, E2 extends Object>(marshallerCtor1: ObjectMarshallerConstructor<E1>, marshallerCtor2: ObjectMarshallerConstructor<E2>): MarshallerConstructor<E1 | E2> {
     return class extends OneOf2Marshaller<E1, E2> {
-	      constructor() {
-	          super(new marshallerCtor1(), new marshallerCtor2());
-	      }
+        constructor() {
+            super(new marshallerCtor1(), new marshallerCtor2());
+        }
     }
 }
 
 
-export function OneOf3<E1 extends Object, E2 extends Object, E3 extends Object>(marshallerCtor1: ObjectMarshallerConstructor<E1>, marshallerCtor2: ObjectMarshallerConstructor<E2>, marshallerCtor3: ObjectMarshallerConstructor<E3>): MarshallerConstructor<E1|E2|E3> {
+export function OneOf3<E1 extends Object, E2 extends Object, E3 extends Object>(marshallerCtor1: ObjectMarshallerConstructor<E1>, marshallerCtor2: ObjectMarshallerConstructor<E2>, marshallerCtor3: ObjectMarshallerConstructor<E3>): MarshallerConstructor<E1 | E2 | E3> {
     return class extends OneOf3Marshaller<E1, E2, E3> {
-	      constructor() {
-	          super(new marshallerCtor1(), new marshallerCtor2(), new marshallerCtor3());
-	      }
+        constructor() {
+            super(new marshallerCtor1(), new marshallerCtor2(), new marshallerCtor3());
+        }
     }
 }
 
 
-export function OneOf4<E1 extends Object, E2 extends Object, E3 extends Object, E4 extends Object>(marshallerCtor1: ObjectMarshallerConstructor<E1>, marshallerCtor2: ObjectMarshallerConstructor<E2>, marshallerCtor3: ObjectMarshallerConstructor<E3>, marshallerCtor4: ObjectMarshallerConstructor<E4>): MarshallerConstructor<E1|E2|E3|E4> {
+export function OneOf4<E1 extends Object, E2 extends Object, E3 extends Object, E4 extends Object>(marshallerCtor1: ObjectMarshallerConstructor<E1>, marshallerCtor2: ObjectMarshallerConstructor<E2>, marshallerCtor3: ObjectMarshallerConstructor<E3>, marshallerCtor4: ObjectMarshallerConstructor<E4>): MarshallerConstructor<E1 | E2 | E3 | E4> {
     return class extends OneOf4Marshaller<E1, E2, E3, E4> {
-	      constructor() {
-	          super(new marshallerCtor1(), new marshallerCtor2(), new marshallerCtor3(), new marshallerCtor4());
-	      }
+        constructor() {
+            super(new marshallerCtor1(), new marshallerCtor2(), new marshallerCtor3(), new marshallerCtor4());
+        }
     }
 }
 
 
 export function TryInOrder<T>(marshallerCtor1: MarshallerConstructor<T>, ...args: MarshallerConstructor<T>[]): MarshallerConstructor<T> {
     return class extends TryInOrderMarshaller<T> {
-	      constructor() {
-	          super(new marshallerCtor1(), ...args.map(ctor => new ctor()));
-	      }
+        constructor() {
+            super(new marshallerCtor1(), ...args.map(ctor => new ctor()));
+        }
     }
 }
 
 
-export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>, sourcePropName: string|null = null) {
+export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>, sourcePropName: string | null = null) {
     return function(target: any, propName: string) {
-	      if (!(target.hasOwnProperty('__schema'))) {
-	          target.__schema = {};
-	      }
+        if (!(target.hasOwnProperty('__schema'))) {
+            target.__schema = {};
+        }
 
         if (sourcePropName != null) {
-            target.__schema[propName] = {marshaller: new marshallerCtor(), sourcePropName};
+            target.__schema[propName] = { marshaller: new marshallerCtor(), sourcePropName };
         } else {
-	          target.__schema[propName] = {marshaller: new marshallerCtor()};
+            target.__schema[propName] = { marshaller: new marshallerCtor() };
         }
     }
 }
@@ -98,13 +98,13 @@ export function MarshalFrom<T>(constructor: Constructor<T>): ObjectMarshallerCon
     let schema = _extractSchema(constructor);
 
     if (schema === undefined) {
-	      schema = {} as MarshalSchema<T>;
+        schema = {} as MarshalSchema<T>;
     }
 
     return class extends ObjectMarshaller<T> {
-	      constructor() {
-	          super(constructor, schema as MarshalSchema<T>);
-	      }
+        constructor() {
+            super(constructor, schema as MarshalSchema<T>);
+        }
     };
 }
 
@@ -118,23 +118,23 @@ function _extractSchema<T>(constructor: Constructor<T>): MarshalSchema<T> {
     let protoChainSize = 0;
 
     while (proto != null) {
-	      if (protoChainSize >= _maxInheritenceDepth) {
-	          throw new Error('Inheritence depth exceeded');
-	      }
+        if (protoChainSize >= _maxInheritenceDepth) {
+            throw new Error('Inheritence depth exceeded');
+        }
 
-	      _protoChain[protoChainSize++] = proto;
-	      proto = Object.getPrototypeOf(proto);
+        _protoChain[protoChainSize++] = proto;
+        proto = Object.getPrototypeOf(proto);
     }
 
     let schema = {} as MarshalSchema<T>;
 
     for (let protoIdx = protoChainSize - 1; protoIdx >= 0; protoIdx--) {
-	      if (_protoChain[protoIdx].__schema === undefined) {
-	          continue;
-	      }
+        if (_protoChain[protoIdx].__schema === undefined) {
+            continue;
+        }
 
-	      schema = (Object as any).assign(schema, _protoChain[protoIdx].__schema);
-	      _protoChain[protoIdx] = null;
+        schema = (Object as any).assign(schema, _protoChain[protoIdx].__schema);
+        _protoChain[protoIdx] = null;
     }
 
     return schema;
