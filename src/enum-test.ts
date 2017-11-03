@@ -7,57 +7,64 @@ import { EnumMarshaller } from './enum'
 describe('EnumMarshaller', () => {
     enum Role {
         Unknown = 0,
-	      Regular = 1,
-	      Admin = 2
+        Regular = 1,
+        Admin = 2
     }
 
     const Roles = [
-	      [0, Role.Unknown],
-	      [1, Role.Regular],
-	      [2, Role.Admin]
+        [0, Role.Unknown],
+        [1, Role.Regular],
+        [2, Role.Admin]
     ];
 
     const NonRoles = [
-            -1,
-	      2.3,
-	      3,
-	      40
+        -1,
+        2.3,
+        3,
+        40
     ];
 
     const NonNumbers = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
-	      'hello',
-	      '100',
-	      [],
-	      [100],
-	      {},
-	      {hello: 20.2}
+        'hello',
+        '100',
+        [],
+        [100],
+        {},
+        { hello: 20.2 }
     ];
 
     describe('extract', () => {
-	      for (let [roleId, role] of Roles) {
-	          it(`should parse Role.${Role[roleId]}`, () => {
-		            const roleMarshaller = new EnumMarshaller<Role>(Role);
+        for (let [roleId, role] of Roles) {
+            it(`should parse Role.${Role[roleId]}`, () => {
+                const roleMarshaller = new EnumMarshaller<Role>(Role);
 
-		            expect(roleMarshaller.extract(roleId)).to.equal(role);
-	          });
-	      }
+                expect(roleMarshaller.extract(roleId)).to.equal(role);
+            });
+        }
 
-	      for (let roleId of NonRoles) {
-	          it(`should throw for non-role ${roleId}`, () => {
-		            const roleMarshaller = new EnumMarshaller<Role>(Role);
+        it(`should throw for default ${Role.Unknown} if not allowed`, () => {
+            const roleMarshaller = new EnumMarshaller<Role>(Role, Role.Unknown);
 
-		            expect(() => roleMarshaller.extract(roleId)).to.throw('Unknown enum value');
-	          });
-	      }
+            expect(() => roleMarshaller.extract(0)).to.throw('Default value not allowed');
+            expect(roleMarshaller.extract(1)).to.eql(Role.Regular);
+        });
 
-	      for (let nonNumber of NonNumbers) {
+        for (let roleId of NonRoles) {
+            it(`should throw for non-role ${roleId}`, () => {
+                const roleMarshaller = new EnumMarshaller<Role>(Role);
+
+                expect(() => roleMarshaller.extract(roleId)).to.throw('Unknown enum value');
+            });
+        }
+
+        for (let nonNumber of NonNumbers) {
             it(`should throw for ${JSON.stringify(nonNumber)}`, () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 
@@ -67,13 +74,13 @@ describe('EnumMarshaller', () => {
     });
 
     describe('pack', () => {
-	      for (let [roleId, role] of Roles) {
-	          it(`should produce the same input for ${Role[roleId]}`, () => {
-		            const roleMarshaller = new EnumMarshaller<Role>(Role);
+        for (let [roleId, role] of Roles) {
+            it(`should produce the same input for ${Role[roleId]}`, () => {
+                const roleMarshaller = new EnumMarshaller<Role>(Role);
 
-		            expect(roleMarshaller.pack(role)).to.equal(roleId);
-	          });
-	      }
+                expect(roleMarshaller.pack(role)).to.equal(roleId);
+            });
+        }
     });
 
     describe('extract and pack', () => {
@@ -82,11 +89,11 @@ describe('EnumMarshaller', () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 
                 const raw = roleId;
-		            const extracted = roleMarshaller.extract(raw);
-		            const packed = roleMarshaller.pack(extracted);
+                const extracted = roleMarshaller.extract(raw);
+                const packed = roleMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
-        }	
+        }
     });
 });
