@@ -1,6 +1,6 @@
 {
   "name": "raynor",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "description": "A TypeScript marshalling library",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
@@ -35,20 +35,19 @@
     "valid-url": "=1.0.9"
   },
   "devDependencies": {
-    "@types/chai": "=3.4.34",
+    "@types/chai": "=4.0.4",
     "@types/istanbul": "=0.4.29",
     "@types/mocha": "=2.2.38",
-    "@types/node": "=7.0.0",
+    "@types/node": "=8.0.34",
     "@types/valid-url": "=1.0.2",
-    "chai": "=3.5.0",
-    "codecov": "=1.0.1",
-    "coverage-filter": "=0.1.0",
+    "chai": "=4.1.2",
+    "codecov": "=2.3.0",
+    "coverage-filter": "=1.0.0",
     "istanbul": "=0.4.5",
-    "mocha": "=3.2.0",
+    "mocha": "=4.0.1",
     "npm-prepack-publish": "=0.1.4",
-    "pre-commit": "^1.2.2",
-    "remap-istanbul": "=0.8.4",
-    "typedoc": "^0.9.0",
-    "typescript": "=2.4.2"
+    "remap-istanbul": "=0.9.5",
+    "typedoc": "=0.9.0",
+    "typescript": "=2.5.3"
   }
 }
