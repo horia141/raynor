@@ -1,6 +1,6 @@
 {
   "name": "raynor",
-  "version": "0.11.1",
+  "version": "0.12.0",
   "description": "A TypeScript marshalling library",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {
@@ -32,13 +32,15 @@
   "license": "MIT",
   "dependencies": {
     "slugify": "=1.1.0",
+    "uuid": "=3.1.0",
     "valid-url": "=1.0.9"
   },
   "devDependencies": {
     "@types/chai": "=4.0.4",
     "@types/istanbul": "=0.4.29",
     "@types/mocha": "=2.2.38",
-    "@types/node": "=8.0.34",
+    "@types/node": "=8.0.53",
+    "@types/uuid": "=3.4.3",
     "@types/valid-url": "=1.0.2",
     "chai": "=4.1.2",
     "codecov": "=2.3.0",
