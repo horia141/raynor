@@ -1,6 +1,6 @@
 import { ArrayMarshaller } from './array'
 import { EnumMarshaller } from './enum'
-import { MapMarshaller, MarshalMap } from './map'
+import { MapMarshaller } from './map'
 import { Constructor, MarshallerConstructor, MarshalSchema, ObjectMarshaller, ObjectMarshallerConstructor } from './object'
 import { OneOf2Marshaller, OneOf3Marshaller, OneOf4Marshaller } from './one-of'
 import { OptionalMarshaller } from './optional'
@@ -25,10 +25,10 @@ export function ArrayOf<T>(marshallerCtor: MarshallerConstructor<T>): Marshaller
 }
 
 
-export function MapOf<T>(marshallerCtor: MarshallerConstructor<T>): MarshallerConstructor<MarshalMap<T>> {
-    return class extends MapMarshaller<T> {
+export function MapOf<K, V>(keyMarshallerCtor: MarshallerConstructor<K>, valueMarshallerCtor: MarshallerConstructor<V>): MarshallerConstructor<Map<K, V>> {
+    return class extends MapMarshaller<K, V> {
         constructor() {
-            super(new marshallerCtor());
+            super(new keyMarshallerCtor(), new valueMarshallerCtor());
         }
     };
 }

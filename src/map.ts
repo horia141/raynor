@@ -1,54 +1,42 @@
-import { Marshaller } from './core'
-import { BaseObjectMarshaller, MarshalObject } from './object'
+import { Marshaller, ExtractError } from './core'
 
 
-export type UntypedMarshalMap = {
-    [key: string]: any
-}
+export class MapMarshaller<K, V> implements Marshaller<Map<K, V>> {
+    private readonly _keyMarshaller: Marshaller<K>;
+    private readonly _valueMarshaller: Marshaller<V>;
 
-
-export class UntypedMapMarshaller extends BaseObjectMarshaller<UntypedMarshalMap> {
-    build(a: MarshalObject): UntypedMarshalMap {
-	      return a;
+    constructor(keyMarshaller: Marshaller<K>, valueMarshaller: Marshaller<V>) {
+        this._keyMarshaller = keyMarshaller;
+        this._valueMarshaller = valueMarshaller;
     }
 
-    unbuild(cooked: UntypedMarshalMap): MarshalObject {
-	      return cooked;
-    }
-}
+    extract(raw: any): Map<K, V> {
+        const result = new Map<K, V>();
 
+        if (!Array.isArray(raw)) {
+            throw new ExtractError('Expected an array');
+        }
 
-export type MarshalMap<K> = {
-    [key: string]: K
-}
+        for (let elem of raw) {
+            if (!Array.isArray(elem)) {
+                throw new ExtractError('Expected element to be an array');
+            }
 
+            if (elem.length != 2) {
+                throw new ExtractError('Expected array element to be a pair');
+            }
 
-export class MapMarshaller<K> extends BaseObjectMarshaller<MarshalMap<K>> {
-    private readonly _inner: Marshaller<K>;
+            result.set(this._keyMarshaller.extract(elem[0]), this._valueMarshaller.extract(elem[1]));
+        }
 
-    constructor(inner: Marshaller<K>) {
-	      super();
-	      this._inner = inner;
-    }
-
-
-    build(a: MarshalObject): MarshalMap<K> {
-	      const cooked: MarshalMap<K> = {};
-
-	      for (let key in a) {
-	          cooked[key] = this._inner.extract(a[key]);
-	      }
-
-	      return cooked;
+        return result;
     }
 
-    unbuild(cooked: MarshalMap<K>): MarshalObject {
-	      const a: MarshalObject = {};
-
-	      for (let key in cooked) {
-	          a[key] = this._inner.pack(cooked[key]);
-	      }
-
-	      return a;
+    pack(map: Map<K, V>): any {
+        const res = [];
+        for (let [k, v] of map) {
+            res.push([this._keyMarshaller.pack(k), this._valueMarshaller.pack(v)]);
+        }
+        return res;
     }
 }
