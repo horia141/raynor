@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "target": "es2017",
         "module": "commonjs",
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -10,12 +11,12 @@
         "sourceMap": true,
         "declaration": true,
         "outDir": "./out",
-	      "experimentalDecorators": true
+        "experimentalDecorators": true
     },
     "include": [
         "./src/**/*"
     ],
     "exclude": [
-	      "./node_modules"
+        "./node_modules"
     ]
 }
