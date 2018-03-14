@@ -1,14 +1,16 @@
 import { expect } from 'chai'
 import 'mocha'
 
+import { ArrayOf, MapOf, MarshalFrom, MarshalEnum, MarshalWith, OptionalOf, TryInOrder, OneOf2, OneOf3, OneOf4 } from './annotation'
 import { ArrayMarshaller } from './array'
 import { ExtractError } from './core'
 import { EnumMarshaller } from './enum'
 import { IdMarshaller } from './id'
 import { MapMarshaller } from './map'
 import { IntegerMarshaller, NumberMarshaller } from './number'
+import { OneOf2Marshaller, OneOf3Marshaller, OneOf4Marshaller } from './one-of';
 import { OptionalMarshaller } from './optional'
-import { ArrayOf, MapOf, MarshalFrom, MarshalEnum, MarshalWith, OptionalOf, TryInOrder } from './annotation'
+import { Point2, Point3, Point4, Point5 } from './points';
 import { StringMarshaller } from './string'
 import { TryInOrderMarshaller } from './try-in-order'
 
@@ -58,6 +60,27 @@ describe('MarshalEnum', () => {
         const marshaller = new (MarshalEnum(Role))();
 
         expect(marshaller).to.be.an.instanceof(EnumMarshaller);
+    });
+});
+
+describe('OneOf2', () => {
+    it('should create a OneOf2Marshaller', () => {
+        const marshaller = new (OneOf2(MarshalFrom(Point2), MarshalFrom(Point3)))();
+        expect(marshaller).to.be.an.instanceof(OneOf2Marshaller);
+    });
+});
+
+describe('OneOf3', () => {
+    it('should create a OneOf3Marshaller', () => {
+        const marshaller = new (OneOf3(MarshalFrom(Point2), MarshalFrom(Point3), MarshalFrom(Point4)))();
+        expect(marshaller).to.be.an.instanceof(OneOf3Marshaller);
+    });
+});
+
+describe('OneOf4', () => {
+    it('should create a OneOf4Marshaller', () => {
+        const marshaller = new (OneOf4(MarshalFrom(Point2), MarshalFrom(Point3), MarshalFrom(Point4), MarshalFrom(Point5)))();
+        expect(marshaller).to.be.an.instanceof(OneOf4Marshaller);
     });
 });
 
