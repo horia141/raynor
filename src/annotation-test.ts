@@ -214,16 +214,6 @@ describe('Annotations', () => {
         [true, true, false]
     ];
 
-    class EmptyObject {
-        x: number;
-        y: number;
-    }
-
-    const EmptyObjects = [
-        [{ x: 10, y: 20 }, new EmptyObject()],
-        [{ x: 100, y: 200 }, new EmptyObject()]
-    ]
-
     describe('extract', () => {
         for (let [raw, point, coordsSum] of Points) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
@@ -254,16 +244,6 @@ describe('Annotations', () => {
                 expect(extracted).to.be.an.instanceof(User);
                 expect(extracted).to.eql(user);
             });
-        }
-
-        for (let [raw, emptyObject] of EmptyObjects) {
-            it(`should extract empty object ${JSON.stringify(raw)} but nothing else`, () => {
-                const emptyObjectMarshaller = new (MarshalFrom(EmptyObject))();
-                const extracted: EmptyObject = emptyObjectMarshaller.extract(raw);
-
-                expect(extracted).to.be.an.instanceof(EmptyObject);
-                expect(extracted).to.eql(emptyObject);
-            })
         }
 
         for (let [raw, message] of NonPoints) {
@@ -495,6 +475,44 @@ describe('Annotations', () => {
                     expect(packed).to.eql({ x: getAroundTypesRaw.x, y: getAroundTypesRaw.y, z: getAroundTypesRaw.z });
                 });
             }
+        });
+    });
+
+    describe('Over the max inheritance depth', () => {
+        class F1 extends StringMarshaller { }
+        class F2 extends F1 { }
+        class F3 extends F2 { }
+        class F4 extends F3 { }
+        class F5 extends F4 { }
+        class F6 extends F5 { }
+        class F7 extends F6 { }
+        class F8 extends F7 { }
+        class F9 extends F8 { }
+        class F10 extends F9 { }
+        class F11 extends F10 { }
+        class F12 extends F11 { }
+        class F13 extends F12 { }
+        class F14 extends F13 { }
+        class F15 extends F14 { }
+        class F16 extends F15 { }
+        class F17 extends F16 { }
+        class F18 extends F17 { }
+        class F19 extends F18 { }
+        class F20 extends F19 { }
+        class F21 extends F20 { }
+        class F22 extends F21 { }
+        class F23 extends F22 { }
+        class F24 extends F23 { }
+        class F25 extends F24 { }
+        class F26 extends F25 { }
+        class F27 extends F26 { }
+        class F28 extends F27 { }
+        class F29 extends F28 { }
+        class F30 extends F29 { }
+        class F31 extends F30 { }
+
+        it('Should throw for a very deep class hierarchy', () => {
+            expect(() => new (MarshalFrom(F31))()).to.throw('Inheritance depth exceeded');
         });
     });
 });

@@ -1,6 +1,6 @@
 {
   "name": "raynor",
-  "version": "0.14.3",
+  "version": "0.14.5",
   "description": "A TypeScript marshalling library",
   "author": "Horia Coman <horia141@gmail.com>",
   "scripts": {

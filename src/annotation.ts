@@ -115,7 +115,7 @@ function _extractSchema<T>(constructor: Constructor<T>): MarshalSchema<T> {
 
     while (proto != null) {
         if (protoChainSize >= _maxInheritenceDepth) {
-            throw new Error('Inheritence depth exceeded');
+            throw new Error('Inheritance depth exceeded');
         }
 
         _protoChain[protoChainSize++] = proto;
