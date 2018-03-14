@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;map&quot; | raynor</title>
+	<title>DateMarshaller | raynor</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,27 +56,95 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_map_.html">&quot;map&quot;</a>
+					<a href="../modules/_time_.html">&quot;time&quot;</a>
+				</li>
+				<li>
+					<a href="_time_.datemarshaller.html">DateMarshaller</a>
 				</li>
 			</ul>
-			<h1>External module &quot;map&quot;</h1>
+			<h1>Class DateMarshaller</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">DateMarshaller</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel">
+				<h3>Implements</h3>
+				<ul class="tsd-hierarchy">
+					<li><a href="../interfaces/_core_.marshaller.html" class="tsd-signature-type">Marshaller</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span></li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Classes</h3>
+							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter"><a href="../classes/_map_.mapmarshaller.html" class="tsd-kind-icon">Map<wbr>Marshaller</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_time_.datemarshaller.html#extract" class="tsd-kind-icon">extract</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_time_.datemarshaller.html#pack" class="tsd-kind-icon">pack</a></li>
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="extract" class="tsd-anchor"></a>
+					<h3>extract</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">extract<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_core_.marshaller.html">Marshaller</a>.<a href="../interfaces/_core_.marshaller.html#extract">extract</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/time.ts#L26">time.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>raw: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="pack" class="tsd-anchor"></a>
+					<h3>pack</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">pack<span class="tsd-signature-symbol">(</span>cooked<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/time.ts#L34">time.ts:34</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cooked: <span class="tsd-signature-type">Date</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -87,69 +155,84 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_annotation_.html">"annotation"</a>
+						<a href="../modules/_annotation_.html">"annotation"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_array_.html">"array"</a>
+						<a href="../modules/_array_.html">"array"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_boolean_.html">"boolean"</a>
+						<a href="../modules/_boolean_.html">"boolean"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_core_.html">"core"</a>
+						<a href="../modules/_core_.html">"core"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_enum_.html">"enum"</a>
+						<a href="../modules/_enum_.html">"enum"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_id_.html">"id"</a>
+						<a href="../modules/_id_.html">"id"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">"index"</a>
+						<a href="../modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_map_.html">"map"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_null_.html">"null"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_number_.html">"number"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_object_.html">"object"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_one_of_.html">"one-<wbr>of"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_optional_.html">"optional"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_path_.html">"path"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_string_.html">"string"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_map_.html">"map"</a>
+						<a href="../modules/_time_.html">"time"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_null_.html">"null"</a>
+						<a href="../modules/_try_in_order_.html">"try-<wbr>in-<wbr>order"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_number_.html">"number"</a>
+						<a href="../modules/_uri_.html">"uri"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_object_.html">"object"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_one_of_.html">"one-<wbr>of"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_optional_.html">"optional"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_path_.html">"path"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_string_.html">"string"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_time_.html">"time"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_try_in_order_.html">"try-<wbr>in-<wbr>order"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_uri_.html">"uri"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_uuid_.html">"uuid"</a>
+						<a href="../modules/_uuid_.html">"uuid"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../classes/_map_.mapmarshaller.html" class="tsd-kind-icon">Map<wbr>Marshaller</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_time_.datefromtsmarshaller.html" class="tsd-kind-icon">Date<wbr>From<wbr>TsMarshaller</a>
 					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_time_.datemarshaller.html" class="tsd-kind-icon">Date<wbr>Marshaller</a>
+						<ul>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_time_.datemarshaller.html#extract" class="tsd-kind-icon">extract</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_time_.datemarshaller.html#pack" class="tsd-kind-icon">pack</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 				</ul>
 			</nav>
 		</div>

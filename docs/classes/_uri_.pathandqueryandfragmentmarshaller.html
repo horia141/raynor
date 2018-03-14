@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>TimeMarshaller | raynor</title>
+	<title>PathAndQueryAndFragmentMarshaller | raynor</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_time_.html">&quot;time&quot;</a>
+					<a href="../modules/_uri_.html">&quot;uri&quot;</a>
 				</li>
 				<li>
-					<a href="_time_.timemarshaller.html">TimeMarshaller</a>
+					<a href="_uri_.pathandqueryandfragmentmarshaller.html">PathAndQueryAndFragmentMarshaller</a>
 				</li>
 			</ul>
-			<h1>Class TimeMarshaller</h1>
+			<h1>Class PathAndQueryAndFragmentMarshaller</h1>
 		</div>
 	</div>
 </header>
@@ -73,10 +73,10 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="_number_.basenumbermarshaller.html" class="tsd-signature-type">BaseNumberMarshaller</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span>
+						<a href="_string_.stringmarshaller.html" class="tsd-signature-type">StringMarshaller</a>
 						<ul class="tsd-hierarchy">
 							<li>
-								<span class="target">TimeMarshaller</span>
+								<span class="target">PathAndQueryAndFragmentMarshaller</span>
 							</li>
 						</ul>
 					</li>
@@ -85,7 +85,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/_core_.marshaller.html" class="tsd-signature-type">Marshaller</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li><a href="../interfaces/_core_.marshaller.html" class="tsd-signature-type">Marshaller</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -93,42 +93,63 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><a href="_uri_.pathandqueryandfragmentmarshaller.html#check_hostname" class="tsd-kind-icon">CHECK_<wbr>HOSTNAME</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_time_.timemarshaller.html#build" class="tsd-kind-icon">build</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_time_.timemarshaller.html#extract" class="tsd-kind-icon">extract</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_time_.timemarshaller.html#lower" class="tsd-kind-icon">lower</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_time_.timemarshaller.html#pack" class="tsd-kind-icon">pack</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_time_.timemarshaller.html#raise" class="tsd-kind-icon">raise</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_time_.timemarshaller.html#unbuild" class="tsd-kind-icon">unbuild</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_uri_.pathandqueryandfragmentmarshaller.html#build" class="tsd-kind-icon">build</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_uri_.pathandqueryandfragmentmarshaller.html#extract" class="tsd-kind-icon">extract</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_uri_.pathandqueryandfragmentmarshaller.html#filter" class="tsd-kind-icon">filter</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_uri_.pathandqueryandfragmentmarshaller.html#lower" class="tsd-kind-icon">lower</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_uri_.pathandqueryandfragmentmarshaller.html#pack" class="tsd-kind-icon">pack</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_uri_.pathandqueryandfragmentmarshaller.html#raise" class="tsd-kind-icon">raise</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited"><a href="_uri_.pathandqueryandfragmentmarshaller.html#unbuild" class="tsd-kind-icon">unbuild</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
+					<a name="check_hostname" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> CHECK_<wbr>HOSTNAME</h3>
+					<div class="tsd-signature tsd-kind-icon">CHECK_<wbr>HOSTNAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&#x60;https://${uuid()}.com&#x60;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/uri.ts#L48">uri.ts:48</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 					<a name="build" class="tsd-anchor"></a>
 					<h3>build</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">build<span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">build<span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_string_.stringmarshaller.html">StringMarshaller</a>.<a href="_string_.stringmarshaller.html#build">build</a></p>
 								<p>Overrides <a href="_core_.raisebuildfiltermarshaller.html">RaiseBuildFilterMarshaller</a>.<a href="_core_.raisebuildfiltermarshaller.html#build">build</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/horia141/raynor/blob/40b22b8/src/time.ts#L6">time.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/string.ts#L20">string.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>a: <span class="tsd-signature-type">number</span></h5>
+									<h5>a: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -136,7 +157,7 @@
 					<a name="extract" class="tsd-anchor"></a>
 					<h3>extract</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">extract<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+						<li class="tsd-signature tsd-kind-icon">extract<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -144,7 +165,7 @@
 								<p>Implementation of <a href="../interfaces/_core_.marshaller.html">Marshaller</a>.<a href="../interfaces/_core_.marshaller.html#extract">extract</a></p>
 								<p>Inherited from <a href="_core_.raisebuildfiltermarshaller.html">RaiseBuildFilterMarshaller</a>.<a href="_core_.raisebuildfiltermarshaller.html#extract">extract</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/horia141/raynor/blob/40b22b8/src/core.ts#L27">core.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/core.ts#L27">core.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -153,7 +174,30 @@
 									<h5>raw: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="filter" class="tsd-anchor"></a>
+					<h3>filter</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">filter<span class="tsd-signature-symbol">(</span>inStr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/uri.ts#L50">uri.ts:50</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>inStr: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -161,21 +205,21 @@
 					<a name="lower" class="tsd-anchor"></a>
 					<h3>lower</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">lower<span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">lower<span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_number_.basenumbermarshaller.html">BaseNumberMarshaller</a>.<a href="_number_.basenumbermarshaller.html#lower">lower</a></p>
+								<p>Inherited from <a href="_string_.basestringmarshaller.html">BaseStringMarshaller</a>.<a href="_string_.basestringmarshaller.html#lower">lower</a></p>
 								<p>Overrides <a href="_core_.raisebuildfiltermarshaller.html">RaiseBuildFilterMarshaller</a>.<a href="_core_.raisebuildfiltermarshaller.html#lower">lower</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/horia141/raynor/blob/40b22b8/src/number.ts#L19">number.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/string.ts#L13">string.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>a: <span class="tsd-signature-type">number</span></h5>
+									<h5>a: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -186,20 +230,20 @@
 					<a name="pack" class="tsd-anchor"></a>
 					<h3>pack</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">pack<span class="tsd-signature-symbol">(</span>b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
+						<li class="tsd-signature tsd-kind-icon">pack<span class="tsd-signature-symbol">(</span>b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_core_.raisebuildfiltermarshaller.html">RaiseBuildFilterMarshaller</a>.<a href="_core_.raisebuildfiltermarshaller.html#pack">pack</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/horia141/raynor/blob/40b22b8/src/core.ts#L51">core.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/core.ts#L51">core.ts:51</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>b: <span class="tsd-signature-type">Date</span></h5>
+									<h5>b: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
@@ -210,15 +254,15 @@
 					<a name="raise" class="tsd-anchor"></a>
 					<h3>raise</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">raise<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">raise<span class="tsd-signature-symbol">(</span>raw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Inherited from <a href="_number_.basenumbermarshaller.html">BaseNumberMarshaller</a>.<a href="_number_.basenumbermarshaller.html#raise">raise</a></p>
+								<p>Inherited from <a href="_string_.basestringmarshaller.html">BaseStringMarshaller</a>.<a href="_string_.basestringmarshaller.html#raise">raise</a></p>
 								<p>Overrides <a href="_core_.raisebuildfiltermarshaller.html">RaiseBuildFilterMarshaller</a>.<a href="_core_.raisebuildfiltermarshaller.html#raise">raise</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/horia141/raynor/blob/40b22b8/src/number.ts#L6">number.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/string.ts#L5">string.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -227,31 +271,32 @@
 									<h5>raw: <span class="tsd-signature-type">any</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
 					<a name="unbuild" class="tsd-anchor"></a>
 					<h3>unbuild</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">unbuild<span class="tsd-signature-symbol">(</span>date<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">unbuild<span class="tsd-signature-symbol">(</span>b<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
+								<p>Inherited from <a href="_string_.stringmarshaller.html">StringMarshaller</a>.<a href="_string_.stringmarshaller.html#unbuild">unbuild</a></p>
 								<p>Overrides <a href="_core_.raisebuildfiltermarshaller.html">RaiseBuildFilterMarshaller</a>.<a href="_core_.raisebuildfiltermarshaller.html#unbuild">unbuild</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/horia141/raynor/blob/40b22b8/src/time.ts#L19">time.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/horia141/raynor/blob/53e5084/src/string.ts#L24">string.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>date: <span class="tsd-signature-type">Date</span></h5>
+									<h5>b: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -308,13 +353,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_string_.html">"string"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_time_.html">"time"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_try_in_order_.html">"try-<wbr>in-<wbr>order"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_uri_.html">"uri"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -327,30 +372,51 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_time_.timemarshaller.html" class="tsd-kind-icon">Time<wbr>Marshaller</a>
+						<a href="_uri_.pathandqueryandfragmentmarshaller.html" class="tsd-kind-icon">Path<wbr>And<wbr>Query<wbr>And<wbr>Fragment<wbr>Marshaller</a>
 						<ul>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="_time_.timemarshaller.html#build" class="tsd-kind-icon">build</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_time_.timemarshaller.html#extract" class="tsd-kind-icon">extract</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-static">
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#check_hostname" class="tsd-kind-icon">CHECK_<wbr>HOSTNAME</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-								<a href="_time_.timemarshaller.html#lower" class="tsd-kind-icon">lower</a>
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#build" class="tsd-kind-icon">build</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
-								<a href="_time_.timemarshaller.html#pack" class="tsd-kind-icon">pack</a>
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#extract" class="tsd-kind-icon">extract</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#filter" class="tsd-kind-icon">filter</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
-								<a href="_time_.timemarshaller.html#raise" class="tsd-kind-icon">raise</a>
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#lower" class="tsd-kind-icon">lower</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
-								<a href="_time_.timemarshaller.html#unbuild" class="tsd-kind-icon">unbuild</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#pack" class="tsd-kind-icon">pack</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#raise" class="tsd-kind-icon">raise</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-inherited">
+								<a href="_uri_.pathandqueryandfragmentmarshaller.html#unbuild" class="tsd-kind-icon">unbuild</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_uri_.secureweburimarshaller.html" class="tsd-kind-icon">Secure<wbr>Web<wbr>Uri<wbr>Marshaller</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_uri_.slugmarshaller.html" class="tsd-kind-icon">Slug<wbr>Marshaller</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_uri_.urimarshaller.html" class="tsd-kind-icon">Uri<wbr>Marshaller</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_uri_.weburimarshaller.html" class="tsd-kind-icon">Web<wbr>Uri<wbr>Marshaller</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_uri_.html#slugify" class="tsd-kind-icon">slugify</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
