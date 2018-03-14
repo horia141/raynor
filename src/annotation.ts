@@ -95,11 +95,7 @@ export function MarshalWith<T>(marshallerCtor: MarshallerConstructor<T>, sourceP
 
 
 export function MarshalFrom<T>(constructor: Constructor<T>): ObjectMarshallerConstructor<T> {
-    let schema = _extractSchema(constructor);
-
-    if (schema === undefined) {
-        schema = {} as MarshalSchema<T>;
-    }
+    const schema = _extractSchema(constructor);
 
     return class extends ObjectMarshaller<T> {
         constructor() {
