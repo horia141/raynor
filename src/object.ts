@@ -128,8 +128,4 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
     getConstructor(): Constructor<T> {
         return this._constructor;
     }
-
-    getSchema(): MarshalSchema<T> {
-        return this._schema;
-    }
 }

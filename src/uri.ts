@@ -48,13 +48,7 @@ export class PathAndQueryAndFragmentMarshaller extends StringMarshaller {
     static readonly CHECK_HOSTNAME: string = `https://${uuid()}.com`;
 
     filter(inStr: string): string {
-        let url: URL|null;
-        try {
-            url = new URL(inStr, PathAndQueryAndFragmentMarshaller.CHECK_HOSTNAME);
-        } catch (e) {
-            throw new ExtractError(`Expected a valid path for "${inStr}"`);
-        }
-
+        const url = new URL(inStr, PathAndQueryAndFragmentMarshaller.CHECK_HOSTNAME);
         const urlStr = url.toString();
 
         if (urlStr.indexOf(PathAndQueryAndFragmentMarshaller.CHECK_HOSTNAME) != 0) {

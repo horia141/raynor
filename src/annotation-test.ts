@@ -157,7 +157,10 @@ describe('Annotations', () => {
         @MarshalWith(OptionalOf(MarshalFrom(Point)))
         officePosition: Point | null;
 
-        constructor(id: number, name: string, age: number, homePosition: Point, officePosition?: Point) {
+        @MarshalWith(OptionalOf(StringMarshaller), 'lang')
+        language: string | null
+
+        constructor(id: number, name: string, age: number, homePosition: Point, officePosition?: Point, language?: string) {
             this.id = id;
             this.name = name;
             this.age = age;
@@ -167,12 +170,17 @@ describe('Annotations', () => {
             } else {
                 this.officePosition = officePosition;
             }
+            if (typeof language == 'undefined') {
+                this.language = null;
+            } else {
+                this.language = language;
+            }
         }
     }
 
     const Users = [
-        [{ id: 1, name: 'John', age: 21, homePosition: { x: 0, y: 20 }, officePosition: { x: 10, y: 20 } },
-        new User(1, 'John', 21, new Point(0, 20), new Point(10, 20))],
+        [{ id: 1, name: 'John', age: 21, homePosition: { x: 0, y: 20 }, officePosition: { x: 10, y: 20 }, lang: 'en-US' },
+        new User(1, 'John', 21, new Point(0, 20), new Point(10, 20), 'en-US')],
         [{ id: 2, name: 'Jane', age: 22, homePosition: { x: 10, y: 30 } },
         new User(2, 'Jane', 22, new Point(10, 30))],
         [{ id: 3, name: 'Harry', age: 24, homePosition: { x: 100, y: 300 }, money: 1000 },
@@ -206,6 +214,16 @@ describe('Annotations', () => {
         [true, true, false]
     ];
 
+    class EmptyObject {
+        x: number;
+        y: number;
+    }
+
+    const EmptyObjects = [
+        [{ x: 10, y: 20 }, new EmptyObject()],
+        [{ x: 100, y: 200 }, new EmptyObject()]
+    ]
+
     describe('extract', () => {
         for (let [raw, point, coordsSum] of Points) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
@@ -236,6 +254,16 @@ describe('Annotations', () => {
                 expect(extracted).to.be.an.instanceof(User);
                 expect(extracted).to.eql(user);
             });
+        }
+
+        for (let [raw, emptyObject] of EmptyObjects) {
+            it(`should extract empty object ${JSON.stringify(raw)} but nothing else`, () => {
+                const emptyObjectMarshaller = new (MarshalFrom(EmptyObject))();
+                const extracted: EmptyObject = emptyObjectMarshaller.extract(raw);
+
+                expect(extracted).to.be.an.instanceof(EmptyObject);
+                expect(extracted).to.eql(emptyObject);
+            })
         }
 
         for (let [raw, message] of NonPoints) {

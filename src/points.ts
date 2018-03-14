@@ -13,10 +13,6 @@ export class Point2 {
         this.x = x;
         this.y = y;
     }
-
-    coordsSum(): number {
-        return this.x + this.y;
-    }
 }
 
 export const APoint2Marshaller = new ObjectMarshaller<Point2>(Point2, {
