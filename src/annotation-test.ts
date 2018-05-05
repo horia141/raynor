@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import 'mocha'
 
-import { ArrayOf, MapOf, MarshalFrom, MarshalEnum, MarshalWith, OptionalOf, TryInOrder, OneOf2, OneOf3, OneOf4 } from './annotation'
+import { ArrayOf, MapOf, MarshalFrom, MarshalEnum, MarshalWith, OptionalOf, TryInOrder, OneOf2, OneOf3, OneOf4, SetOf } from './annotation'
 import { ArrayMarshaller } from './array'
 import { ExtractError } from './core'
 import { EnumMarshaller } from './enum'
@@ -13,6 +13,7 @@ import { OptionalMarshaller } from './optional'
 import { Point2, Point3, Point4, Point5 } from './points';
 import { StringMarshaller } from './string'
 import { TryInOrderMarshaller } from './try-in-order'
+import { SetMarshaller } from '.';
 
 
 describe('OptionalOf', () => {
@@ -37,6 +38,13 @@ describe('MapOf', () => {
     it('should create an MapMarshaller', () => {
         const marshaller = new (MapOf(NumberMarshaller, StringMarshaller))();
         expect(marshaller).to.be.an.instanceof(MapMarshaller);
+    });
+});
+
+describe('SetOf', () => {
+    it('should create a SetMarshaller', () => {
+        const marshaller = new (SetOf(NumberMarshaller))();
+        expect(marshaller).to.be.an.instanceof(SetMarshaller);
     });
 });
 

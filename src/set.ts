@@ -16,6 +16,10 @@ export class SetMarshaller<V> implements Marshaller<Set<V>> {
         }
 
         for (const elem of raw) {
+            if (result.has(elem)) {
+                throw new ExtractError('Duplicate element encountered');
+            }
+
             result.add(this._valueMarshaller.extract(elem));
         }
 

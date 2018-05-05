@@ -4,6 +4,7 @@ import { MapMarshaller } from './map'
 import { Constructor, MarshallerConstructor, MarshalSchema, ObjectMarshaller, ObjectMarshallerConstructor } from './object'
 import { OneOf2Marshaller, OneOf3Marshaller, OneOf4Marshaller } from './one-of'
 import { OptionalMarshaller } from './optional'
+import { SetMarshaller } from './set'
 import { TryInOrderMarshaller } from './try-in-order'
 
 
@@ -29,6 +30,14 @@ export function MapOf<K, V>(keyMarshallerCtor: MarshallerConstructor<K>, valueMa
     return class extends MapMarshaller<K, V> {
         constructor() {
             super(new keyMarshallerCtor(), new valueMarshallerCtor());
+        }
+    };
+}
+
+export function SetOf<V>(marshallerCtor: MarshallerConstructor<V>): MarshallerConstructor<Set<V>> {
+    return class extends SetMarshaller<V> {
+        constructor() {
+            super(new marshallerCtor());
         }
     };
 }

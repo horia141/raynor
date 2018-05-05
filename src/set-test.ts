@@ -19,15 +19,14 @@ describe('SetMarshaller', () => {
         }
     ];
 
+    const DuplicateSets = [
+        [1, 2, 3, 2],
+        [1, 1]
+    ];
+
     const BadSets = [
-        {
-            raw: [10.2, 20.3],
-            built: new Set<number>([10.2, 20.3])
-        },
-        {
-            raw: ['hello', 'world'],
-            built: new Set<string>(['hello', 'world'])
-        }
+        [10.2, 20.3],
+        ['hello', 'world']
     ];
 
     const NonSets = [
@@ -50,6 +49,14 @@ describe('SetMarshaller', () => {
                 const setMarshaller = new SetMarshaller(integerMarshaller);
                 expect(setMarshaller.extract(raw)).to.eql(built);
             })
+        }
+
+        for (const duplicateCase of DuplicateSets) {
+            it(`should throw for ${JSON.stringify(duplicateCase)}`, () => {
+                const setMarshaller = new SetMarshaller(integerMarshaller);
+
+                expect(() => setMarshaller.extract(duplicateCase)).to.throw('Duplicate element encountered');
+            });
         }
 
         for (const badCase of BadSets) {
