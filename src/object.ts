@@ -33,7 +33,7 @@ export class UntypedObjectMarshaller extends BaseObjectMarshaller<Object> {
 }
 
 
-export class MarshalSchemaItem<T> {
+export interface MarshalSchemaItem<T> {
     readonly marshaller: Marshaller<T>;
     readonly sourcePropName?: string;
 }

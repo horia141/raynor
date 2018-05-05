@@ -375,9 +375,9 @@ describe('Annotations', () => {
     });
 
     class Color {
-        red: number;
-        green: number;
-        blue: number;
+        red: number = 0;
+        green: number = 0;
+        blue: number = 0;
     }
 
     describe('No schema', () => {
