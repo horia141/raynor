@@ -50,6 +50,6 @@
     "npm-prepack-publish": "=0.1.4",
     "remap-istanbul": "=0.10.1",
     "typedoc": "=0.11.0",
-    "typescript": "=2.7.2"
+    "typescript": "=2.8.3"
   }
 }
