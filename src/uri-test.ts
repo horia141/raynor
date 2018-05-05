@@ -64,7 +64,7 @@ describe('UriMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let uri of Uris) {
+        for (const uri of Uris) {
             it(`should parse ${uri}`, () => {
                 const uriMarshaller = new UriMarshaller();
 
@@ -72,7 +72,7 @@ describe('UriMarshaller', () => {
             });
         }
 
-        for (let nonUri of NonUris) {
+        for (const nonUri of NonUris) {
             it(`should throw for invalid uri ${nonUri}`, () => {
                 const uriMarshaller = new UriMarshaller();
 
@@ -80,7 +80,7 @@ describe('UriMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const uriMarshaller = new UriMarshaller();
 
@@ -90,7 +90,7 @@ describe('UriMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let uri of Uris) {
+        for (const uri of Uris) {
             it(`should produce the same input for ${uri}`, () => {
                 const uriMarshaller = new UriMarshaller();
 
@@ -100,7 +100,7 @@ describe('UriMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let uri of Uris) {
+        for (const uri of Uris) {
             it(`should be opposites for ${uri}`, () => {
                 const uriMarshaller = new UriMarshaller();
 
@@ -169,7 +169,7 @@ describe('WebUriMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let uri of WebUris) {
+        for (const uri of WebUris) {
             it(`should parse ${uri}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
@@ -177,7 +177,7 @@ describe('WebUriMarshaller', () => {
             });
         }
 
-        for (let nonWebUri of NonWebUris) {
+        for (const nonWebUri of NonWebUris) {
             it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
@@ -185,7 +185,7 @@ describe('WebUriMarshaller', () => {
             });
         }
 
-        for (let nonUri of NonUris) {
+        for (const nonUri of NonUris) {
             it(`should throw for ${JSON.stringify(nonUri)}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
@@ -193,7 +193,7 @@ describe('WebUriMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
@@ -203,7 +203,7 @@ describe('WebUriMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let uri of WebUris) {
+        for (const uri of WebUris) {
             it(`should produce the same input for ${uri}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
@@ -213,7 +213,7 @@ describe('WebUriMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let uri of WebUris) {
+        for (const uri of WebUris) {
             it(`should be opposites for ${uri}`, () => {
                 const webUriMarshaller = new WebUriMarshaller();
 
@@ -287,7 +287,7 @@ describe('SecureWebUriMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let uri of SecureWebUris) {
+        for (const uri of SecureWebUris) {
             it(`should parse ${uri}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -295,7 +295,7 @@ describe('SecureWebUriMarshaller', () => {
             });
         }
 
-        for (let nonSecureWebUri of NonSecureWebUris) {
+        for (const nonSecureWebUri of NonSecureWebUris) {
             it(`should throw for ${JSON.stringify(nonSecureWebUri)}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -303,7 +303,7 @@ describe('SecureWebUriMarshaller', () => {
             });
         }
 
-        for (let nonWebUri of NonWebUris) {
+        for (const nonWebUri of NonWebUris) {
             it(`should throw for ${JSON.stringify(nonWebUri)}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -311,7 +311,7 @@ describe('SecureWebUriMarshaller', () => {
             });
         }
 
-        for (let nonUri of NonUris) {
+        for (const nonUri of NonUris) {
             it(`should throw for ${JSON.stringify(nonUri)}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -319,7 +319,7 @@ describe('SecureWebUriMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -329,7 +329,7 @@ describe('SecureWebUriMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let uri of SecureWebUris) {
+        for (const uri of SecureWebUris) {
             it(`should produce the same input for ${uri}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -339,7 +339,7 @@ describe('SecureWebUriMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let uri of SecureWebUris) {
+        for (const uri of SecureWebUris) {
             it(`should be opposites for ${uri}`, () => {
                 const secureWebUriMarshaller = new SecureWebUriMarshaller();
 
@@ -397,7 +397,7 @@ describe('QueryParamsAndFragmentMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let example of PathAndQueryAndFragments) {
+        for (const example of PathAndQueryAndFragments) {
             it(`should parse "${example}"`, () => {
                 const marshaller = new PathAndQueryAndFragmentMarshaller();
 
@@ -405,7 +405,7 @@ describe('QueryParamsAndFragmentMarshaller', () => {
             });
         }
 
-        for (let badExample of PathAndQueryAndFragmentsWithAHostname) {
+        for (const badExample of PathAndQueryAndFragmentsWithAHostname) {
             it(`should throw when hostname is present "${badExample}"`, () => {
                 const marshaller = new PathAndQueryAndFragmentMarshaller();
 
@@ -413,7 +413,7 @@ describe('QueryParamsAndFragmentMarshaller', () => {
             });
         }
 
-        for (let badExample of RelativePathAndQueryAndFragments) {
+        for (const badExample of RelativePathAndQueryAndFragments) {
             it(`should throw when a relative path is present "${badExample}"`, () => {
                 const marshaller = new PathAndQueryAndFragmentMarshaller();
 
@@ -421,7 +421,7 @@ describe('QueryParamsAndFragmentMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const marshaller = new PathAndQueryAndFragmentMarshaller();
 
@@ -431,7 +431,7 @@ describe('QueryParamsAndFragmentMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let example of PathAndQueryAndFragments) {
+        for (const example of PathAndQueryAndFragments) {
             it(`should produce the same input for "${example}"`, () => {
                 const marshaller = new PathAndQueryAndFragmentMarshaller();
 
@@ -441,7 +441,7 @@ describe('QueryParamsAndFragmentMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let example of PathAndQueryAndFragments) {
+        for (const example of PathAndQueryAndFragments) {
             it(`should be opposites for "${example}"`, () => {
                 const marshaller = new PathAndQueryAndFragmentMarshaller();
 
@@ -495,7 +495,7 @@ describe('SlugMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let slug of Slugs) {
+        for (const slug of Slugs) {
             it(`should parse ${slug}`, () => {
                 const slugMarshaller = new SlugMarshaller();
 
@@ -503,7 +503,7 @@ describe('SlugMarshaller', () => {
             });
         }
 
-        for (let nonSlug of NonSlugs) {
+        for (const nonSlug of NonSlugs) {
             it(`should throw for invalid slug ${nonSlug}`, () => {
                 const slugMarshaller = new SlugMarshaller();
 
@@ -511,7 +511,7 @@ describe('SlugMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const slugMarshaller = new SlugMarshaller();
 
@@ -521,7 +521,7 @@ describe('SlugMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let slug of Slugs) {
+        for (const slug of Slugs) {
             it(`should produce the same input for ${slug}`, () => {
                 const slugMarshaller = new SlugMarshaller();
 
@@ -531,7 +531,7 @@ describe('SlugMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let slug of Slugs) {
+        for (const slug of Slugs) {
             it(`should be opposites for ${slug}`, () => {
                 const slugMarshaller = new SlugMarshaller();
 

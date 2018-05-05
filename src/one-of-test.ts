@@ -51,7 +51,7 @@ describe('OneOf2Marshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let [coded, expected] of Points) {
+        for (const [coded, expected] of Points) {
             it(`should parse ${coded}`, () => {
                 const pointMarshaller = new OneOf2Marshaller(APoint2Marshaller, APoint3Marshaller);
 
@@ -59,7 +59,7 @@ describe('OneOf2Marshaller', () => {
             });
         }
 
-        for (let nonPoint of NonPoints) {
+        for (const nonPoint of NonPoints) {
             it(`should throw for ${JSON.stringify(nonPoint)}`, () => {
                 const pointMarshaller = new OneOf2Marshaller(APoint2Marshaller, APoint3Marshaller);
 
@@ -67,7 +67,7 @@ describe('OneOf2Marshaller', () => {
             });
         }
 
-        for (let nonOneOf2 of NonOneOf2s) {
+        for (const nonOneOf2 of NonOneOf2s) {
             it(`should throw for ${JSON.stringify(nonOneOf2)}`, () => {
                 const pointMarshaller = new OneOf2Marshaller(APoint2Marshaller, APoint3Marshaller);
 
@@ -75,7 +75,7 @@ describe('OneOf2Marshaller', () => {
             });
         }
 
-        for (let nonObject of NonObjects) {
+        for (const nonObject of NonObjects) {
             it(`should throw for ${JSON.stringify(nonObject)}`, () => {
                 const pointMarshaller = new OneOf2Marshaller(APoint2Marshaller, APoint3Marshaller);
 
@@ -85,7 +85,7 @@ describe('OneOf2Marshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [point, cooked] of Points) {
+        for (const [point, cooked] of Points) {
             it(`should produce the same input for ${point}`, () => {
                 const pointMarshaller = new OneOf2Marshaller(APoint2Marshaller, APoint3Marshaller);
 
@@ -95,7 +95,7 @@ describe('OneOf2Marshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [point, _] of Points) {
+        for (const [point, _] of Points) {
             it(`should be opposites for ${point}`, () => {
                 const pointMarshaller = new OneOf2Marshaller(APoint2Marshaller, APoint3Marshaller);
 
@@ -149,7 +149,7 @@ describe('OneOf3Marshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let [coded, expected] of Points) {
+        for (const [coded, expected] of Points) {
             it(`should parse ${coded}`, () => {
                 const pointMarshaller = new OneOf3Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller);
 
@@ -157,7 +157,7 @@ describe('OneOf3Marshaller', () => {
             });
         }
 
-        for (let nonPoint of NonPoints) {
+        for (const nonPoint of NonPoints) {
             it(`should throw for ${JSON.stringify(nonPoint)}`, () => {
                 const pointMarshaller = new OneOf3Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller);
 
@@ -165,7 +165,7 @@ describe('OneOf3Marshaller', () => {
             });
         }
 
-        for (let nonOneOf3 of NonOneOf3s) {
+        for (const nonOneOf3 of NonOneOf3s) {
             it(`should throw for ${JSON.stringify(nonOneOf3)}`, () => {
                 const pointMarshaller = new OneOf3Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller);
 
@@ -173,7 +173,7 @@ describe('OneOf3Marshaller', () => {
             });
         }
 
-        for (let nonObject of NonObjects) {
+        for (const nonObject of NonObjects) {
             it(`should throw for ${JSON.stringify(nonObject)}`, () => {
                 const pointMarshaller = new OneOf3Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller);
 
@@ -183,7 +183,7 @@ describe('OneOf3Marshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [point, cooked] of Points) {
+        for (const [point, cooked] of Points) {
             it(`should produce the same input for ${point}`, () => {
                 const pointMarshaller = new OneOf3Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller);
 
@@ -193,7 +193,7 @@ describe('OneOf3Marshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [point, _] of Points) {
+        for (const [point, _] of Points) {
             it(`should be opposites for ${point}`, () => {
                 const pointMarshaller = new OneOf3Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller);
 
@@ -249,7 +249,7 @@ describe('OneOf4Marshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let [coded, expected] of Points) {
+        for (const [coded, expected] of Points) {
             it(`should parse ${coded}`, () => {
                 const pointMarshaller = new OneOf4Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller, Point5Marshaller);
 
@@ -257,7 +257,7 @@ describe('OneOf4Marshaller', () => {
             });
         }
 
-        for (let nonPoint of NonPoints) {
+        for (const nonPoint of NonPoints) {
             it(`should throw for ${JSON.stringify(nonPoint)}`, () => {
                 const pointMarshaller = new OneOf4Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller, Point5Marshaller);
 
@@ -265,7 +265,7 @@ describe('OneOf4Marshaller', () => {
             });
         }
 
-        for (let nonOneOf4 of NonOneOf4s) {
+        for (const nonOneOf4 of NonOneOf4s) {
             it(`should throw for ${JSON.stringify(nonOneOf4)}`, () => {
                 const pointMarshaller = new OneOf4Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller, Point5Marshaller);
 
@@ -273,7 +273,7 @@ describe('OneOf4Marshaller', () => {
             });
         }
 
-        for (let nonObject of NonObjects) {
+        for (const nonObject of NonObjects) {
             it(`should throw for ${JSON.stringify(nonObject)}`, () => {
                 const pointMarshaller = new OneOf4Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller, Point5Marshaller);
 
@@ -283,7 +283,7 @@ describe('OneOf4Marshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [point, cooked] of Points) {
+        for (const [point, cooked] of Points) {
             it(`should produce the same input for ${point}`, () => {
                 const pointMarshaller = new OneOf4Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller, Point5Marshaller);
 
@@ -293,7 +293,7 @@ describe('OneOf4Marshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [point, _] of Points) {
+        for (const [point, _] of Points) {
             it(`should be opposites for ${point}`, () => {
                 const pointMarshaller = new OneOf4Marshaller(APoint2Marshaller, APoint3Marshaller, APoint4Marshaller, Point5Marshaller);
 

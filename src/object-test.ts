@@ -46,7 +46,7 @@ describe('UntypedObjectMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let object of Objects) {
+        for (const object of Objects) {
             it(`should extract ${JSON.stringify(object)}`, () => {
                 const objectMarshaller = new UntypedObjectMarshaller();
                 const extracted = objectMarshaller.extract(object);
@@ -56,7 +56,7 @@ describe('UntypedObjectMarshaller', () => {
             });
         }
 
-        for (let nonObject of NonObjects) {
+        for (const nonObject of NonObjects) {
             it(`should throw for ${JSON.stringify(nonObject)}`, () => {
                 const objectMarshaller = new UntypedObjectMarshaller();
 
@@ -66,7 +66,7 @@ describe('UntypedObjectMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let object of Objects) {
+        for (const object of Objects) {
             it(`should produce the same input for ${JSON.stringify(object)}`, () => {
                 const objectMarshaller = new UntypedObjectMarshaller();
 
@@ -76,7 +76,7 @@ describe('UntypedObjectMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let object of Objects) {
+        for (const object of Objects) {
             it(`should be opposites for ${JSON.stringify(object)}`, () => {
                 const objectMarshaller = new UntypedObjectMarshaller();
 
@@ -229,7 +229,7 @@ describe('ObjectMarshaller', () => {
     });
 
     describe('extract', () => {
-        for (let [raw, point, coordsSum] of Points) {
+        for (const [raw, point, coordsSum] of Points) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
                 const extracted: Point = pointMarshaller.extract(raw);
@@ -240,7 +240,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, point3D] of Points3D) {
+        for (const [raw, point3D] of Points3D) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
                 const extracted: Point3D = point3DMarshaller.extract(raw);
@@ -250,7 +250,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, user] of Users) {
+        for (const [raw, user] of Users) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
                 const extracted: User = userMarshaller.extract(raw);
@@ -260,7 +260,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, message] of NonPoints) {
+        for (const [raw, message] of NonPoints) {
             it(`should throw for non-point ${JSON.stringify(raw)}`, () => {
                 const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
 
@@ -268,7 +268,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, message] of NonPoint3Ds) {
+        for (const [raw, message] of NonPoint3Ds) {
             it(`should throw for non-point3D ${JSON.stringify(raw)}`, () => {
                 const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
 
@@ -276,7 +276,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, message] of NonUsers) {
+        for (const [raw, message] of NonUsers) {
             it(`should throw for non-user ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
 
@@ -284,7 +284,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let nonObject of NonObjects) {
+        for (const nonObject of NonObjects) {
             it(`should throw for ${JSON.stringify(nonObject)}`, () => {
                 const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
@@ -305,7 +305,7 @@ describe('ObjectMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [raw, point, _] of Points) {
+        for (const [raw, point, _] of Points) {
             it(`should pack ${JSON.stringify(point)}`, () => {
                 const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
                 const getAroundTypesRaw = raw as any;
@@ -314,7 +314,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, point3D] of Points3D) {
+        for (const [raw, point3D] of Points3D) {
             it(`should pack ${JSON.stringify(point3D)}`, () => {
                 const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
                 const getAroundTypesRaw = raw as any;
@@ -323,7 +323,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, user] of Users) {
+        for (const [raw, user] of Users) {
             it(`should pack ${JSON.stringify(user)}`, () => {
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
                 const packed = userMarshaller.pack(user as User);
@@ -347,7 +347,7 @@ describe('ObjectMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [raw, _, __] of Points) {
+        for (const [raw, _, __] of Points) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const pointMarshaller = new ObjectMarshaller<Point>(Point, PointSchema);
                 const getAroundTypesRaw = raw as any;
@@ -359,7 +359,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, _] of Points3D) {
+        for (const [raw, _] of Points3D) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const point3DMarshaller = new ObjectMarshaller<Point3D>(Point3D, Point3DSchema);
                 const getAroundTypesRaw = raw as any;
@@ -371,7 +371,7 @@ describe('ObjectMarshaller', () => {
             });
         }
 
-        for (let [raw, _] of Users) {
+        for (const [raw, _] of Users) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new ObjectMarshaller<User>(User, UserSchema);
 

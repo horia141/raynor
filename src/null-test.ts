@@ -6,19 +6,19 @@ import { NullMarshaller } from './null';
 
 describe('NullMarshaller', () => {
     const NonNulls = [
-	      true,
+        true,
         false,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         100,
-	      'hello',
-	      '100',
-	      [],
-	      [true],
-	      {},
-	      {hello: false}
+        'hello',
+        '100',
+        [],
+        [true],
+        {},
+        {hello: false}
     ];
 
     describe('extract', () => {
@@ -28,7 +28,7 @@ describe('NullMarshaller', () => {
             expect(nullMarshaller.extract(null)).to.be.null;
         });
 
-        for (let nonNull of NonNulls) {
+        for (const nonNull of NonNulls) {
             it(`should throw for ${JSON.stringify(nonNull)}`, () => {
                 const nullMarshaller = new NullMarshaller();
 

@@ -41,7 +41,7 @@ describe('EnumMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let [roleId, role] of Roles) {
+        for (const [roleId, role] of Roles) {
             it(`should parse Role.${Role[roleId]}`, () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 
@@ -56,7 +56,7 @@ describe('EnumMarshaller', () => {
             expect(roleMarshaller.extract(1)).to.eql(Role.Regular);
         });
 
-        for (let roleId of NonRoles) {
+        for (const roleId of NonRoles) {
             it(`should throw for non-role ${roleId}`, () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 
@@ -64,7 +64,7 @@ describe('EnumMarshaller', () => {
             });
         }
 
-        for (let nonNumber of NonNumbers) {
+        for (const nonNumber of NonNumbers) {
             it(`should throw for ${JSON.stringify(nonNumber)}`, () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 
@@ -74,7 +74,7 @@ describe('EnumMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [roleId, role] of Roles) {
+        for (const [roleId, role] of Roles) {
             it(`should produce the same input for ${Role[roleId]}`, () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 
@@ -84,7 +84,7 @@ describe('EnumMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [roleId, _] of Roles) {
+        for (const [roleId, _] of Roles) {
             it(`should be opposites for ${roleId}`, () => {
                 const roleMarshaller = new EnumMarshaller<Role>(Role);
 

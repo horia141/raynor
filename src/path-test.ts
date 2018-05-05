@@ -49,7 +49,7 @@ describe('AbsolutePathMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let path of AbsolutePaths) {
+        for (const path of AbsolutePaths) {
             it(`should parse ${path}`, () => {
                 const absolutePathMarshaller = new AbsolutePathMarshaller();
 
@@ -57,7 +57,7 @@ describe('AbsolutePathMarshaller', () => {
             });
         }
 
-        for (let path of NonAbsolutePaths) {
+        for (const path of NonAbsolutePaths) {
             it(`should throw for non-absolute ${path}`, () => {
                 const absolutePathMarshaller = new AbsolutePathMarshaller();
 
@@ -65,7 +65,7 @@ describe('AbsolutePathMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const absolutePathMarshaller = new AbsolutePathMarshaller();
 
@@ -75,7 +75,7 @@ describe('AbsolutePathMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let path of AbsolutePaths) {
+        for (const path of AbsolutePaths) {
             it(`should produce the same input for ${path}`, () => {
                 const absolutePathMarshaller = new AbsolutePathMarshaller();
 
@@ -85,7 +85,7 @@ describe('AbsolutePathMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let path of AbsolutePaths) {
+        for (const path of AbsolutePaths) {
             it(`should be opposites for ${path}`, () => {
                 const absolutePathMarshaller = new AbsolutePathMarshaller();
 

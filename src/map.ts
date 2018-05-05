@@ -17,7 +17,7 @@ export class MapMarshaller<K, V> implements Marshaller<Map<K, V>> {
             throw new ExtractError('Expected an array');
         }
 
-        for (let elem of raw) {
+        for (const elem of raw) {
             if (!Array.isArray(elem)) {
                 throw new ExtractError('Expected element to be an array');
             }
@@ -34,7 +34,7 @@ export class MapMarshaller<K, V> implements Marshaller<Map<K, V>> {
 
     pack(map: Map<K, V>): any {
         const res = [];
-        for (let [k, v] of map) {
+        for (const [k, v] of map) {
             res.push([this._keyMarshaller.pack(k), this._valueMarshaller.pack(v)]);
         }
         return res;

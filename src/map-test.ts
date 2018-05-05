@@ -57,7 +57,7 @@ describe('MapMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let { raw, built } of Maps) {
+        for (const { raw, built } of Maps) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
                 expect(mapMarshaller.extract(raw)).to.eql(built);
@@ -65,7 +65,7 @@ describe('MapMarshaller', () => {
         }
 
 
-        for (let nonMap of NonMaps) {
+        for (const nonMap of NonMaps) {
             it(`should throw for ${JSON.stringify(nonMap)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
 
@@ -73,7 +73,7 @@ describe('MapMarshaller', () => {
             });
         }
 
-        for (let badCase of NoSubarrays) {
+        for (const badCase of NoSubarrays) {
             it(`should throw for ${JSON.stringify(badCase)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
 
@@ -81,7 +81,7 @@ describe('MapMarshaller', () => {
             });
         }
 
-        for (let badCase of BadLengthSubarrays) {
+        for (const badCase of BadLengthSubarrays) {
             it(`should throw for ${JSON.stringify(badCase)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
 
@@ -89,7 +89,7 @@ describe('MapMarshaller', () => {
             });
         }
 
-        for (let badCase of BadKeysBadValues) {
+        for (const badCase of BadKeysBadValues) {
             it(`should throw for ${JSON.stringify(badCase)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
 
@@ -99,7 +99,7 @@ describe('MapMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let { raw, built } of Maps) {
+        for (const { raw, built } of Maps) {
             it(`should produce the same input for ${JSON.stringify(raw)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
                 expect(mapMarshaller.pack(built)).to.eql(raw);
@@ -108,7 +108,7 @@ describe('MapMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let { raw } of Maps) {
+        for (const { raw } of Maps) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const mapMarshaller = new MapMarshaller(integerMarshaller, booleanMarshaller);
 
@@ -152,7 +152,7 @@ describe('MapMarshaller', () => {
 //     ];
 
 //     describe('extract', () => {
-//         for (let map of Maps) {
+//         for (const map of Maps) {
 //             it(`should extract ${JSON.stringify(map)}`, () => {
 //                 const booleanMarshaller = new BooleanMarshaller();
 //                 const mapMarshaller = new MapMarshaller(booleanMarshaller);
@@ -161,7 +161,7 @@ describe('MapMarshaller', () => {
 //             });
 //         }
 
-//         for (let heterogenousMap of HeterogenousMaps) {
+//         for (const heterogenousMap of HeterogenousMaps) {
 //             it(`should throw for heterogenous map ${JSON.stringify(heterogenousMap)}`, () => {
 //                 const booleanMarshaller = new BooleanMarshaller();
 //                 const mapMarshaller = new MapMarshaller(booleanMarshaller);
@@ -170,7 +170,7 @@ describe('MapMarshaller', () => {
 //             });
 //         }
 
-//         for (let nonMap of NonMaps) {
+//         for (const nonMap of NonMaps) {
 //             it(`should throw for ${JSON.stringify(nonMap)}`, () => {
 //                 const booleanMarshaller = new BooleanMarshaller();
 //                 const mapMarshaller = new MapMarshaller(booleanMarshaller);
@@ -181,7 +181,7 @@ describe('MapMarshaller', () => {
 //     });
 
 //     describe('pack', () => {
-//         for (let map of Maps) {
+//         for (const map of Maps) {
 //             it(`should produce the same input for ${JSON.stringify(map)}`, () => {
 //                 const booleanMarshaller = new BooleanMarshaller();
 //                 const mapMarshaller = new MapMarshaller(booleanMarshaller);
@@ -192,7 +192,7 @@ describe('MapMarshaller', () => {
 //     });
 
 //     describe('extract and pack', () => {
-//         for (let map of Maps) {
+//         for (const map of Maps) {
 //             it(`should be opposites ${JSON.stringify(map)}`, () => {
 //                 const booleanMarshaller = new BooleanMarshaller();
 //                 const mapMarshaller = new MapMarshaller(booleanMarshaller);

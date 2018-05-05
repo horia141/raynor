@@ -215,7 +215,7 @@ describe('Annotations', () => {
     ];
 
     describe('extract', () => {
-        for (let [raw, point, coordsSum] of Points) {
+        for (const [raw, point, coordsSum] of Points) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const pointMarshaller = new (MarshalFrom(Point))();
                 const extracted: Point = pointMarshaller.extract(raw);
@@ -226,7 +226,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, point3DAlt] of Points3DAlt) {
+        for (const [raw, point3DAlt] of Points3DAlt) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const point3DAltMarshaller = new (MarshalFrom(Point3DAlt))();
                 const extracted: Point3DAlt = point3DAltMarshaller.extract(raw);
@@ -236,7 +236,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, user] of Users) {
+        for (const [raw, user] of Users) {
             it(`should extract ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new (MarshalFrom(User))();
                 const extracted: User = userMarshaller.extract(raw);
@@ -246,7 +246,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, message] of NonPoints) {
+        for (const [raw, message] of NonPoints) {
             it(`should throw for non-point ${JSON.stringify(raw)}`, () => {
                 const pointMarshaller = new (MarshalFrom(Point))();
 
@@ -254,7 +254,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, message] of NonPoint3DAlts) {
+        for (const [raw, message] of NonPoint3DAlts) {
             it(`should throw for non-point3DAlt ${JSON.stringify(raw)}`, () => {
                 const point3DAltMarshaller = new (MarshalFrom(Point3DAlt))();
 
@@ -262,7 +262,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, message] of NonUsers) {
+        for (const [raw, message] of NonUsers) {
             it(`should throw for non-user ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new (MarshalFrom(User))();
 
@@ -270,7 +270,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let nonObject of NonObjects) {
+        for (const nonObject of NonObjects) {
             it(`should throw for ${JSON.stringify(nonObject)}`, () => {
                 const pointMarshaller = new (MarshalFrom(Point))();
                 const userMarshaller = new (MarshalFrom(User))();
@@ -282,7 +282,7 @@ describe('Annotations', () => {
     });
 
     describe('pack', () => {
-        for (let [raw, point, _] of Points) {
+        for (const [raw, point, _] of Points) {
             it(`should pack ${JSON.stringify(point)}`, () => {
                 const pointMarshaller = new (MarshalFrom(Point))();
                 const getAroundTypesRaw = raw as any;
@@ -291,7 +291,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, point3DAlt] of Points3DAlt) {
+        for (const [raw, point3DAlt] of Points3DAlt) {
             it(`should pack ${JSON.stringify(point3DAlt)}`, () => {
                 const point3DAltMarshaller = new (MarshalFrom(Point3DAlt))();
                 const getAroundTypesRaw = raw as any;
@@ -300,7 +300,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, user] of Users) {
+        for (const [raw, user] of Users) {
             it(`should pack ${JSON.stringify(user)}`, () => {
                 const userMarshaller = new (MarshalFrom(User))();
                 const packed = userMarshaller.pack(user as User);
@@ -315,7 +315,7 @@ describe('Annotations', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [raw, _, __] of Points) {
+        for (const [raw, _, __] of Points) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const pointMarshaller = new (MarshalFrom(Point))();
                 const getAroundTypesRaw = raw as any;
@@ -327,7 +327,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, _] of Points3DAlt) {
+        for (const [raw, _] of Points3DAlt) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const point3DAltMarshaller = new (MarshalFrom(Point3DAlt))();
                 const getAroundTypesRaw = raw as any;
@@ -339,7 +339,7 @@ describe('Annotations', () => {
             });
         }
 
-        for (let [raw, _] of Users) {
+        for (const [raw, _] of Users) {
             it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                 const userMarshaller = new (MarshalFrom<User>(User))();
 
@@ -427,7 +427,7 @@ describe('Annotations', () => {
         ];
 
         describe('extract', () => {
-            for (let [raw, point, coordsSum] of Points) {
+            for (const [raw, point, coordsSum] of Points) {
                 it(`should extract ${JSON.stringify(raw)}`, () => {
                     const pointMarshaller = new (MarshalFrom(Point3D))();
                     const extracted: Point3D = pointMarshaller.extract(raw);
@@ -438,7 +438,7 @@ describe('Annotations', () => {
                 });
             }
 
-            for (let [raw, point, coordsSum] of Points4D) {
+            for (const [raw, point, coordsSum] of Points4D) {
                 it(`should extract ${JSON.stringify(raw)}`, () => {
                     const pointMarshaller = new (MarshalFrom(Point4D))();
                     const extracted: Point4D = pointMarshaller.extract(raw);
@@ -451,7 +451,7 @@ describe('Annotations', () => {
         });
 
         describe('pack', () => {
-            for (let [raw, point, _] of Points) {
+            for (const [raw, point, _] of Points) {
                 it(`should pack ${JSON.stringify(point)}`, () => {
                     const pointMarshaller = new (MarshalFrom(Point3D))();
                     const getAroundTypesRaw = raw as any;
@@ -462,7 +462,7 @@ describe('Annotations', () => {
         });
 
         describe('extract and pack', () => {
-            for (let [raw, _, __] of Points) {
+            for (const [raw, _, __] of Points) {
                 it(`should be opposites for ${JSON.stringify(raw)}`, () => {
                     const pointMarshaller = new (MarshalFrom(Point3D))();
                     const getAroundTypesRaw = raw as any;

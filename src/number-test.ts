@@ -2,12 +2,12 @@ import { expect } from 'chai'
 import 'mocha'
 
 import { IntegerFromStringMarshaller,
-	       IntegerMarshaller,
+         IntegerMarshaller,
          NonNegativeIntegerMarshaller,
-	       NumberFromStringMarshaller,
-	       NumberMarshaller,
-	       PositiveIntegerFromStringMarshaller,
-	       PositiveIntegerMarshaller } from './number'
+         NumberFromStringMarshaller,
+         NumberMarshaller,
+         PositiveIntegerFromStringMarshaller,
+         PositiveIntegerMarshaller } from './number'
 
 
 describe('NumberMarshaller', () => {
@@ -20,23 +20,23 @@ describe('NumberMarshaller', () => {
     ];
 
     const NonNumbers = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
-	      'hello',
-	      '100',
-	      [],
-	      [100],
-	      {},
-	      {hello: 20.2}
+        'hello',
+        '100',
+        [],
+        [100],
+        {},
+        {hello: 20.2}
     ];
 
     describe('extract', () => {
-        for (let number of Numbers) {
+        for (const number of Numbers) {
             it(`should parse ${number}`, () => {
                 const numberMarshaller = new NumberMarshaller();
 
@@ -44,7 +44,7 @@ describe('NumberMarshaller', () => {
             });
         }
 
-        for (let nonNumber of NonNumbers) {
+        for (const nonNumber of NonNumbers) {
             it(`should throw for ${JSON.stringify(nonNumber)}`, () => {
                 const numberMarshaller = new NumberMarshaller();
 
@@ -54,7 +54,7 @@ describe('NumberMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let number of Numbers) {
+        for (const number of Numbers) {
             it(`should produce the same input for ${number}`, () => {
                 const numberMarshaller = new NumberMarshaller();
 
@@ -64,15 +64,15 @@ describe('NumberMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let number of Numbers) {
+        for (const number of Numbers) {
             it(`should be opposites for ${number}`, () => {
                 const numberMarshaller = new NumberMarshaller();
 
                 const raw = number;
-		            const extracted = numberMarshaller.extract(raw);
-		            const packed = numberMarshaller.pack(extracted);
+                const extracted = numberMarshaller.extract(raw);
+                const packed = numberMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
         }
     });
@@ -94,21 +94,21 @@ describe('IntegerMarshaller', () => {
     ];
 
     const NonNumerics = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
-	      'hello',
-	      '100',
-	      [],
-	      [100],
-	      {},
-	      {hello: 100}
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
+        'hello',
+        '100',
+        [],
+        [100],
+        {},
+        {hello: 100}
     ];
 
     describe('extract', () => {
-        for (let integer of Integers) {
+        for (const integer of Integers) {
             it(`should parse ${integer}`, () => {
                 const integerMarshaller = new IntegerMarshaller();
 
@@ -116,7 +116,7 @@ describe('IntegerMarshaller', () => {
             });
         }
 
-        for (let nonInteger of NonIntegers) {
+        for (const nonInteger of NonIntegers) {
             it(`should throw for float ${nonInteger}`, () => {
                 const integerMarshaller = new IntegerMarshaller();
 
@@ -124,7 +124,7 @@ describe('IntegerMarshaller', () => {
             });
         }
 
-        for (let nonNumeric of NonNumerics) {
+        for (const nonNumeric of NonNumerics) {
             it(`should throw for ${nonNumeric}`, () => {
                 const integerMarshaller = new IntegerMarshaller();
 
@@ -134,7 +134,7 @@ describe('IntegerMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let integer of Integers) {
+        for (const integer of Integers) {
             it(`should produce the same input for ${integer}`, () => {
                 const integerMarshaller = new IntegerMarshaller();
 
@@ -144,15 +144,15 @@ describe('IntegerMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let integer of Integers) {
+        for (const integer of Integers) {
             it(`should be opposites for ${integer}`, () => {
                 const integerMarshaller = new IntegerMarshaller();
 
                 const raw = integer;
-		            const extracted = integerMarshaller.extract(raw);
-		            const packed = integerMarshaller.pack(extracted);
+                const extracted = integerMarshaller.extract(raw);
+                const packed = integerMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
         }
     });
@@ -161,9 +161,9 @@ describe('IntegerMarshaller', () => {
 describe('NonNegativeIntegerMarshaller', () => {
     const NonNegativeIntegers = [
         0,
-	      1,
-	      103,
-	      23213131
+        1,
+        103,
+        23213131
     ];
 
     const NegativeIntegers = [
@@ -177,84 +177,84 @@ describe('NonNegativeIntegerMarshaller', () => {
     ];
 
     const NonNumerics = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
-	      'hello',
-	      '100',
-	      [],
-	      [100],
-	      {},
-	      {hello: 100}
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
+        'hello',
+        '100',
+        [],
+        [100],
+        {},
+        {hello: 100}
     ];
 
     describe('extract', () => {
-	      for (let id of NonNegativeIntegers) {
+        for (const id of NonNegativeIntegers) {
             it(`should parse ${id} `, () => {
-		            const idMarshaller = new NonNegativeIntegerMarshaller();
+                const idMarshaller = new NonNegativeIntegerMarshaller();
 
-		            expect(idMarshaller.extract(id)).to.equal(id);
+                expect(idMarshaller.extract(id)).to.equal(id);
             });
-	      }
+        }
 
-	      for (let negativeInteger of NegativeIntegers) {
-    	      it(`should throw for negative id ${negativeInteger}`, () => {
-    		        const idMarshaller = new NonNegativeIntegerMarshaller();
+        for (const negativeInteger of NegativeIntegers) {
+            it(`should throw for negative id ${negativeInteger}`, () => {
+                const idMarshaller = new NonNegativeIntegerMarshaller();
 
-    		        expect(() => idMarshaller.extract(negativeInteger)).to.throw('Expected a non-negative integer');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(negativeInteger)).to.throw('Expected a non-negative integer');
+            });
+        }
 
-	      for (let nonInteger of NonIntegers) {
-    	      it(`should throw for float id ${nonInteger}`, () => {
-    		        const idMarshaller = new NonNegativeIntegerMarshaller();
+        for (const nonInteger of NonIntegers) {
+            it(`should throw for float id ${nonInteger}`, () => {
+                const idMarshaller = new NonNegativeIntegerMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
+            });
+        }
 
-	      for (let nonNumeric of NonNumerics) {
-    	      it(`should throw for ${JSON.stringify(nonNumeric)}`, () => {
-    		        const idMarshaller = new NonNegativeIntegerMarshaller();
+        for (const nonNumeric of NonNumerics) {
+            it(`should throw for ${JSON.stringify(nonNumeric)}`, () => {
+                const idMarshaller = new NonNegativeIntegerMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonNumeric)).to.throw('Expected a number');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonNumeric)).to.throw('Expected a number');
+            });
+        }
     });
 
     describe('pack', () => {
-	      for (let id of NonNegativeIntegers) {
-	          it(`should produce the same input for ${id}`, () => {
-		            const idMarshaller = new NonNegativeIntegerMarshaller();
+        for (const id of NonNegativeIntegers) {
+            it(`should produce the same input for ${id}`, () => {
+                const idMarshaller = new NonNegativeIntegerMarshaller();
 
-		            expect(idMarshaller.pack(id)).to.equal(id);
-	          });
-	      }
+                expect(idMarshaller.pack(id)).to.equal(id);
+            });
+        }
     });
 
     describe('extract and pack', () => {
-	      for (let id of NonNegativeIntegers) {
-	          it(`should be opposites for ${id}`, () => {
-		            const idMarshaller = new NonNegativeIntegerMarshaller();
+        for (const id of NonNegativeIntegers) {
+            it(`should be opposites for ${id}`, () => {
+                const idMarshaller = new NonNegativeIntegerMarshaller();
 
-		            const raw = id;
-		            const extracted = idMarshaller.extract(raw);
-		            const packed = idMarshaller.pack(extracted);
+                const raw = id;
+                const extracted = idMarshaller.extract(raw);
+                const packed = idMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
-	          });
-	      }
+                expect(packed).to.equal(raw);
+            });
+        }
     });
 });
 
 
 describe('PositiveIntegerMarshaller', () => {
     const PositiveIntegers = [
-	      1,
-	      103,
-	      23213131
+        1,
+        103,
+        23213131
     ];
 
     const NonPositiveIntegers = [
@@ -269,75 +269,75 @@ describe('PositiveIntegerMarshaller', () => {
     ];
 
     const NonNumerics = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
-	      'hello',
-	      '100',
-	      [],
-	      [100],
-	      {},
-	      {hello: 100}
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
+        'hello',
+        '100',
+        [],
+        [100],
+        {},
+        {hello: 100}
     ];
 
     describe('extract', () => {
-	      for (let id of PositiveIntegers) {
+        for (const id of PositiveIntegers) {
             it(`should parse ${id} `, () => {
-		            const idMarshaller = new PositiveIntegerMarshaller();
+                const idMarshaller = new PositiveIntegerMarshaller();
 
-		            expect(idMarshaller.extract(id)).to.equal(id);
+                expect(idMarshaller.extract(id)).to.equal(id);
             });
-	      }
+        }
 
-	      for (let nonPositiveInteger of NonPositiveIntegers) {
-    	      it(`should throw for negative id ${nonPositiveInteger}`, () => {
-    		        const idMarshaller = new PositiveIntegerMarshaller();
+        for (const nonPositiveInteger of NonPositiveIntegers) {
+            it(`should throw for negative id ${nonPositiveInteger}`, () => {
+                const idMarshaller = new PositiveIntegerMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonPositiveInteger)).to.throw('Expected a positive integer');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonPositiveInteger)).to.throw('Expected a positive integer');
+            });
+        }
 
-	      for (let nonInteger of NonIntegers) {
-    	      it(`should throw for float id ${nonInteger}`, () => {
-    		        const idMarshaller = new PositiveIntegerMarshaller();
+        for (const nonInteger of NonIntegers) {
+            it(`should throw for float id ${nonInteger}`, () => {
+                const idMarshaller = new PositiveIntegerMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
+            });
+        }
 
-	      for (let nonNumeric of NonNumerics) {
-    	      it(`should throw for ${JSON.stringify(nonNumeric)}`, () => {
-    		        const idMarshaller = new PositiveIntegerMarshaller();
+        for (const nonNumeric of NonNumerics) {
+            it(`should throw for ${JSON.stringify(nonNumeric)}`, () => {
+                const idMarshaller = new PositiveIntegerMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonNumeric)).to.throw('Expected a number');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonNumeric)).to.throw('Expected a number');
+            });
+        }
     });
 
     describe('pack', () => {
-	      for (let id of PositiveIntegers) {
-	          it(`should produce the same input for ${id}`, () => {
-		            const idMarshaller = new PositiveIntegerMarshaller();
+        for (const id of PositiveIntegers) {
+            it(`should produce the same input for ${id}`, () => {
+                const idMarshaller = new PositiveIntegerMarshaller();
 
-		            expect(idMarshaller.pack(id)).to.equal(id);
-	          });
-	      }
+                expect(idMarshaller.pack(id)).to.equal(id);
+            });
+        }
     });
 
     describe('extract and pack', () => {
-	      for (let id of PositiveIntegers) {
-	          it(`should be opposites for ${id}`, () => {
-		            const idMarshaller = new PositiveIntegerMarshaller();
+        for (const id of PositiveIntegers) {
+            it(`should be opposites for ${id}`, () => {
+                const idMarshaller = new PositiveIntegerMarshaller();
 
-		            const raw = id;
-		            const extracted = idMarshaller.extract(raw);
-		            const packed = idMarshaller.pack(extracted);
+                const raw = id;
+                const extracted = idMarshaller.extract(raw);
+                const packed = idMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
-	          });
-	      }
+                expect(packed).to.equal(raw);
+            });
+        }
     });
 });
 
@@ -352,29 +352,29 @@ describe('NumberFromStringMarshaller', () => {
     ];
 
     const NonNumbers = [
-	      '',
-	      'hello',
-	      '-'
+        '',
+        'hello',
+        '-'
     ];
 
     const NonStrings = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
         100,
         3232.3,
-	      [],
-	      [100],
-	      {},
-	      {hello: 20.2}
+        [],
+        [100],
+        {},
+        {hello: 20.2}
     ];
 
     describe('extract', () => {
-        for (let [numberString, numberParsed] of Numbers) {
+        for (const [numberString, numberParsed] of Numbers) {
             it(`should parse ${numberString}`, () => {
                 const numberMarshaller = new NumberFromStringMarshaller();
 
@@ -382,7 +382,7 @@ describe('NumberFromStringMarshaller', () => {
             });
         }
 
-        for (let nonNumber of NonNumbers) {
+        for (const nonNumber of NonNumbers) {
             it(`should throw for ${JSON.stringify(nonNumber)}`, () => {
                 const numberMarshaller = new NumberFromStringMarshaller();
 
@@ -390,7 +390,7 @@ describe('NumberFromStringMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const numberMarshaller = new NumberFromStringMarshaller();
 
@@ -400,7 +400,7 @@ describe('NumberFromStringMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [numberString, numberParsed] of Numbers) {
+        for (const [numberString, numberParsed] of Numbers) {
             it(`should produce the same input for ${numberString}`, () => {
                 const numberMarshaller = new NumberFromStringMarshaller();
 
@@ -410,15 +410,15 @@ describe('NumberFromStringMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [numberString, _] of Numbers) {
+        for (const [numberString, _] of Numbers) {
             it(`should be opposites for ${numberString}`, () => {
                 const numberMarshaller = new NumberFromStringMarshaller();
 
                 const raw = numberString;
-		            const extracted = numberMarshaller.extract(raw);
-		            const packed = numberMarshaller.pack(extracted);
+                const extracted = numberMarshaller.extract(raw);
+                const packed = numberMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
         }
     });
@@ -440,27 +440,27 @@ describe('IntegerFromStringMarshaller', () => {
     ];
 
     const NonNumbers = [
-	      '',
-	      'hello',
-	      '-'
+        '',
+        'hello',
+        '-'
     ];
 
     const NonStrings = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         100,
         3232.3,
-	      [],
-	      [100],
-	      {},
-	      {hello: 100}
+        [],
+        [100],
+        {},
+        {hello: 100}
     ];
 
     describe('extract', () => {
-        for (let [integerString, integerParsed] of Integers) {
+        for (const [integerString, integerParsed] of Integers) {
             it(`should parse ${integerString}`, () => {
                 const integerMarshaller = new IntegerFromStringMarshaller();
 
@@ -468,7 +468,7 @@ describe('IntegerFromStringMarshaller', () => {
             });
         }
 
-        for (let nonInteger of NonIntegers) {
+        for (const nonInteger of NonIntegers) {
             it(`should throw for float ${JSON.stringify(nonInteger)}`, () => {
                 const integerMarshaller = new IntegerFromStringMarshaller();
 
@@ -476,15 +476,15 @@ describe('IntegerFromStringMarshaller', () => {
             });
         }
 
-        for (let nonNumber of NonNumbers) {
+        for (const nonNumber of NonNumbers) {
             it(`should throw for ${JSON.stringify(nonNumber)}`, () => {
                 const numberMarshaller = new IntegerFromStringMarshaller();
 
                 expect(() => numberMarshaller.extract(nonNumber)).to.throw('Expected a number coded as a string');
             });
-        }	
+        }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const integerMarshaller = new IntegerFromStringMarshaller();
 
@@ -494,7 +494,7 @@ describe('IntegerFromStringMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let [integerString, integerParsed] of Integers) {
+        for (const [integerString, integerParsed] of Integers) {
             it(`should produce the same input for ${integerString}`, () => {
                 const integerMarshaller = new IntegerFromStringMarshaller();
 
@@ -504,15 +504,15 @@ describe('IntegerFromStringMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let [integerString, _] of Integers) {
+        for (const [integerString, _] of Integers) {
             it(`should be opposites for ${integerString}`, () => {
                 const integerMarshaller = new IntegerFromStringMarshaller();
 
                 const raw = integerString;
-		            const extracted = integerMarshaller.extract(raw);
-		            const packed = integerMarshaller.pack(extracted);
+                const extracted = integerMarshaller.extract(raw);
+                const packed = integerMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
         }
     });
@@ -521,9 +521,9 @@ describe('IntegerFromStringMarshaller', () => {
 
 describe('PositiveIntegerFromStringMarshaller', () => {
     const PositiveIntegers = [
-	      ['1', 1],
-	      ['103', 103],
-	      ['23213131', 23213131]
+        ['1', 1],
+        ['103', 103],
+        ['23213131', 23213131]
     ];
 
     const NonPositiveIntegers = [
@@ -538,51 +538,51 @@ describe('PositiveIntegerFromStringMarshaller', () => {
     ];
 
     const NonNumbers = [
-	      '',
-	      'hello',
-	      '-'
+        '',
+        'hello',
+        '-'
     ];
 
     const NonStrings = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         100,
         3232.3,
-	      [],
-	      [100],
-	      {},
-	      {hello: 100}
+        [],
+        [100],
+        {},
+        {hello: 100}
     ];
 
     describe('extract', () => {
-	      for (let [positiveIntegerString, positiveIntegerParsed] of PositiveIntegers) {
+        for (const [positiveIntegerString, positiveIntegerParsed] of PositiveIntegers) {
             it(`should parse ${positiveIntegerString} `, () => {
-		            const idMarshaller = new PositiveIntegerFromStringMarshaller();
+                const idMarshaller = new PositiveIntegerFromStringMarshaller();
 
-		            expect(idMarshaller.extract(positiveIntegerString)).to.equal(positiveIntegerParsed);
+                expect(idMarshaller.extract(positiveIntegerString)).to.equal(positiveIntegerParsed);
             });
-	      }
+        }
 
-	      for (let nonPositiveInteger of NonPositiveIntegers) {
-    	      it(`should throw for negative ${nonPositiveInteger}`, () => {
-    		        const idMarshaller = new PositiveIntegerFromStringMarshaller();
+        for (const nonPositiveInteger of NonPositiveIntegers) {
+            it(`should throw for negative ${nonPositiveInteger}`, () => {
+                const idMarshaller = new PositiveIntegerFromStringMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonPositiveInteger)).to.throw('Expected a positive integer');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonPositiveInteger)).to.throw('Expected a positive integer');
+            });
+        }
 
-	      for (let nonInteger of NonIntegers) {
-    	      it(`should throw for float ${nonInteger}`, () => {
-    		        const idMarshaller = new PositiveIntegerFromStringMarshaller();
+        for (const nonInteger of NonIntegers) {
+            it(`should throw for float ${nonInteger}`, () => {
+                const idMarshaller = new PositiveIntegerFromStringMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonInteger)).to.throw('Expected an integer');
+            });
+        }
 
-        for (let nonNumber of NonNumbers) {
+        for (const nonNumber of NonNumbers) {
             it(`should throw for ${JSON.stringify(nonNumber)}`, () => {
                 const numberMarshaller = new PositiveIntegerFromStringMarshaller();
 
@@ -590,36 +590,36 @@ describe('PositiveIntegerFromStringMarshaller', () => {
             });
         }
 
-	      for (let nonString of NonStrings) {
-    	      it(`should throw for ${JSON.stringify(nonString)}`, () => {
-    		        const idMarshaller = new PositiveIntegerFromStringMarshaller();
+        for (const nonString of NonStrings) {
+            it(`should throw for ${JSON.stringify(nonString)}`, () => {
+                const idMarshaller = new PositiveIntegerFromStringMarshaller();
 
-    		        expect(() => idMarshaller.extract(nonString)).to.throw('Expected a string');
-    	      });
-	      }
+                expect(() => idMarshaller.extract(nonString)).to.throw('Expected a string');
+            });
+        }
     });
 
     describe('pack', () => {
-	      for (let [positiveIntegerString, positiveIntegerParsed] of PositiveIntegers) {
-	          it(`should produce the same input for ${positiveIntegerString}`, () => {
-		            const idMarshaller = new PositiveIntegerFromStringMarshaller();
+        for (const [positiveIntegerString, positiveIntegerParsed] of PositiveIntegers) {
+            it(`should produce the same input for ${positiveIntegerString}`, () => {
+                const idMarshaller = new PositiveIntegerFromStringMarshaller();
 
-		            expect(idMarshaller.pack(positiveIntegerParsed as number)).to.equal(positiveIntegerString as string);
-	          });
-	      }
+                expect(idMarshaller.pack(positiveIntegerParsed as number)).to.equal(positiveIntegerString as string);
+            });
+        }
     });
 
     describe('extract and pack', () => {
-	      for (let [positiveIntegerString, _] of PositiveIntegers) {
-	          it(`should be opposites for ${positiveIntegerString}`, () => {
-		            const idMarshaller = new PositiveIntegerFromStringMarshaller();
+        for (const [positiveIntegerString, _] of PositiveIntegers) {
+            it(`should be opposites for ${positiveIntegerString}`, () => {
+                const idMarshaller = new PositiveIntegerFromStringMarshaller();
 
-		            const raw = positiveIntegerString;
-		            const extracted = idMarshaller.extract(raw);
-		            const packed = idMarshaller.pack(extracted);
+                const raw = positiveIntegerString;
+                const extracted = idMarshaller.extract(raw);
+                const packed = idMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
-	          });
-	      }
+                expect(packed).to.equal(raw);
+            });
+        }
     });
 });

@@ -41,7 +41,7 @@ describe('UuidMarshaller', () => {
     ];
 
     describe('extract', () => {
-        for (let uuid of Uuids) {
+        for (const uuid of Uuids) {
             it(`should parse ${uuid}`, () => {
                 const uuidMarshaller = new UuidMarshaller();
 
@@ -49,7 +49,7 @@ describe('UuidMarshaller', () => {
             });
         }
 
-        for (let nonUuid of NonUuids) {
+        for (const nonUuid of NonUuids) {
             it(`should throw for invalid uuid ${nonUuid}`, () => {
                 const uuidMarshaller = new UuidMarshaller();
 
@@ -57,7 +57,7 @@ describe('UuidMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const uuidMarshaller = new UuidMarshaller();
 
@@ -67,7 +67,7 @@ describe('UuidMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let uuid of Uuids) {
+        for (const uuid of Uuids) {
             it(`should produce the same input for ${uuid}`, () => {
                 const uuidMarshaller = new UuidMarshaller();
 
@@ -77,7 +77,7 @@ describe('UuidMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let uuid of Uuids) {
+        for (const uuid of Uuids) {
             it(`should be opposites for ${uuid}`, () => {
                 const uuidMarshaller = new UuidMarshaller();
 

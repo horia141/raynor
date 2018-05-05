@@ -13,23 +13,23 @@ describe('StringMarshaller', () => {
     ];
 
     const NonStrings = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
         100,
         3232.3,
-	      [],
-	      ['hello'],
-	      {},
-	      {hello: 'world'}
+        [],
+        ['hello'],
+        {},
+        {hello: 'world'}
     ];
 
     describe('extract', () => {
-        for (let string of Strings) {
+        for (const string of Strings) {
             it(`should parse ${string}`, () => {
                 const stringMarshaller = new StringMarshaller();
 
@@ -37,7 +37,7 @@ describe('StringMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const stringMarshaller = new StringMarshaller();
 
@@ -47,7 +47,7 @@ describe('StringMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let string of Strings) {
+        for (const string of Strings) {
             it(`should produce the same input for ${string}`, () => {
                 const stringMarshaller = new StringMarshaller();
 
@@ -57,15 +57,15 @@ describe('StringMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let string of Strings) {
+        for (const string of Strings) {
             it(`should be opposites for ${string}`, () => {
                 const stringMarshaller = new StringMarshaller();
 
                 const raw = string;
-		            const extracted = stringMarshaller.extract(raw);
-		            const packed = stringMarshaller.pack(extracted);
+                const extracted = stringMarshaller.extract(raw);
+                const packed = stringMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
         }
     });
@@ -81,28 +81,28 @@ describe('MaxLengthStringMarshaller', () => {
     ];
 
     const TooLargeStrings = [
-	      'this is a quite large str',
-	      'this is a very large string'
+        'this is a quite large str',
+        'this is a very large string'
     ];
 
     const NonStrings = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
         100,
         3232.3,
-	      [],
-	      ['hello'],
-	      {},
-	      {hello: 'world'}
+        [],
+        ['hello'],
+        {},
+        {hello: 'world'}
     ];
 
     describe('extract', () => {
-        for (let string of Strings) {
+        for (const string of Strings) {
             it(`should parse "${string}"`, () => {
                 const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
@@ -110,7 +110,7 @@ describe('MaxLengthStringMarshaller', () => {
             });
         }
 
-        for (let string of TooLargeStrings) {
+        for (const string of TooLargeStrings) {
             it(`should throw for large string "${string}"`, () => {
                 const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
@@ -118,7 +118,7 @@ describe('MaxLengthStringMarshaller', () => {
             });
         }
 
-        for (let nonString of NonStrings) {
+        for (const nonString of NonStrings) {
             it(`should throw for ${JSON.stringify(nonString)}`, () => {
                 const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
@@ -128,7 +128,7 @@ describe('MaxLengthStringMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let string of Strings) {
+        for (const string of Strings) {
             it(`should produce the same input for ${string}`, () => {
                 const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
@@ -138,15 +138,15 @@ describe('MaxLengthStringMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let string of Strings) {
+        for (const string of Strings) {
             it(`should be opposites for ${string}`, () => {
                 const maxLengthStringMarshaller = new MaxLengthStringMarshaller(24);
 
                 const raw = string;
-		            const extracted = maxLengthStringMarshaller.extract(raw);
-		            const packed = maxLengthStringMarshaller.pack(extracted);
+                const extracted = maxLengthStringMarshaller.extract(raw);
+                const packed = maxLengthStringMarshaller.pack(extracted);
 
-		            expect(packed).to.equal(raw);
+                expect(packed).to.equal(raw);
             });
         }
     });

@@ -54,7 +54,7 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
     private readonly _schema: MarshalSchema<T>;
 
     constructor(constructor: Constructor<T>, schema: MarshalSchema<T>) {
-        for (let propName in schema) {
+        for (const propName in schema) {
             if (typeof schema[propName] == 'undefined') {
                 throw new ExtractError(`Cannot accept undefined as a marshaller for ${propName}`);
             }
@@ -69,7 +69,7 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
         // We're gonna build it to it's final form in a typesafe way here.
         const cooked = new this._constructor();
 
-        for (let propName in this._schema) {
+        for (const propName in this._schema) {
             const schemaItem = this._schema[propName];
 
             if (typeof schemaItem == 'undefined') {
@@ -105,7 +105,7 @@ export class ObjectMarshaller<T extends Object> extends BaseObjectMarshaller<T> 
     unbuild(cooked: T): MarshalObject {
         const b: MarshalObject = {};
 
-        for (let propName in this._schema) {
+        for (const propName in this._schema) {
             const schemaItem = this._schema[propName];
 
             if (typeof schemaItem == 'undefined') {

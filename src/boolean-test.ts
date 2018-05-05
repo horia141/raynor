@@ -6,18 +6,18 @@ import { BooleanMarshaller } from './boolean';
 
 describe('BooleanMarshaller', () => {
     const NonBooleans = [
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         100,
-	      'hello',
-	      '100',
-	      [],
-	      [true],
-	      {},
-	      {hello: false}
+        'hello',
+        '100',
+        [],
+        [true],
+        {},
+        {hello: false}
     ];
 
     describe('extract', () => {
@@ -33,7 +33,7 @@ describe('BooleanMarshaller', () => {
             expect(booleanMarshaller.extract(false)).to.be.false;
         });
 
-        for (let nonBoolean of NonBooleans) {
+        for (const nonBoolean of NonBooleans) {
             it(`should throw for ${JSON.stringify(nonBoolean)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
 
@@ -57,7 +57,7 @@ describe('BooleanMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let bool of [true, false]) {
+        for (const bool of [true, false]) {
             it(`should be opposites for ${bool}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
 

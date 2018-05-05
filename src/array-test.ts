@@ -14,25 +14,25 @@ describe('UntypedArrayMarshaller', () => {
         [null, null],
         [{a: 'more'}, {complicated: 'array'}, true]
     ];
-    
+
     const NonArrays = [
         10,
         31.23,
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
-	      'hello',
-	      '100',
-	      {},
-	      {hello: 20.2}
+        'hello',
+        '100',
+        {},
+        {hello: 20.2}
     ];
-    
+
     describe('extract', () => {
-        for (let array of Arrays) {
+        for (const array of Arrays) {
             it(`should extract ${JSON.stringify(array)}`, () => {
                 const arrayMarshaller = new UntypedArrayMarshaller();
 
@@ -40,7 +40,7 @@ describe('UntypedArrayMarshaller', () => {
             });
         }
 
-        for (let nonArray of NonArrays) {
+        for (const nonArray of NonArrays) {
             it(`should throw for non-array ${JSON.stringify(nonArray)}`, () => {
                 const arrayMarshaller = new UntypedArrayMarshaller();
 
@@ -50,7 +50,7 @@ describe('UntypedArrayMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let array of Arrays) {
+        for (const array of Arrays) {
             it(`should produce the same input for ${JSON.stringify(array)}`, () => {
                 const arrayMarshaller = new UntypedArrayMarshaller();
 
@@ -60,15 +60,15 @@ describe('UntypedArrayMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let array of Arrays) {
+        for (const array of Arrays) {
             it(`should be opposites for ${JSON.stringify(array)}`, () => {
                 const arrayMarshaller = new UntypedArrayMarshaller();
 
                 const raw = array;
-		            const extracted = arrayMarshaller.extract(raw);
-		            const packed = arrayMarshaller.pack(extracted);
+                const extracted = arrayMarshaller.extract(raw);
+                const packed = arrayMarshaller.pack(extracted);
 
-		            expect(packed).to.eql(raw);
+                expect(packed).to.eql(raw);
             });
         }
     });
@@ -92,21 +92,21 @@ describe('ArrayMarshaller', () => {
     const NonArrays = [
         10,
         31.23,
-	      null,
-	      undefined,
-	      NaN,
-	      Number.POSITIVE_INFINITY,
-	      Number.NEGATIVE_INFINITY,
+        null,
+        undefined,
+        NaN,
+        Number.POSITIVE_INFINITY,
+        Number.NEGATIVE_INFINITY,
         true,
         false,
-	      'hello',
-	      '100',
-	      {},
-	      {hello: 20.2}
+        'hello',
+        '100',
+        {},
+        {hello: 20.2}
     ];
 
     describe('extract', () => {
-        for (let booleanArray of BooleanArrays) {
+        for (const booleanArray of BooleanArrays) {
             it(`should parse ${JSON.stringify(booleanArray)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const arrayMarshaller = new ArrayMarshaller(booleanMarshaller);
@@ -115,7 +115,7 @@ describe('ArrayMarshaller', () => {
             });
         }
 
-        for (let heterogenousArray of HeterogenousArrays) {
+        for (const heterogenousArray of HeterogenousArrays) {
             it(`should throw for heterogenous array ${JSON.stringify(heterogenousArray)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const arrayMarshaller = new ArrayMarshaller(booleanMarshaller);
@@ -124,7 +124,7 @@ describe('ArrayMarshaller', () => {
             });
         }
 
-        for (let nonArray of NonArrays) {
+        for (const nonArray of NonArrays) {
             it(`should throw for non-array ${JSON.stringify(nonArray)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const arrayMarshaller = new ArrayMarshaller(booleanMarshaller);
@@ -135,7 +135,7 @@ describe('ArrayMarshaller', () => {
     });
 
     describe('pack', () => {
-        for (let booleanArray of BooleanArrays) {
+        for (const booleanArray of BooleanArrays) {
             it(`should produce the same input for ${JSON.stringify(booleanArray)}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const arrayMarshaller = new ArrayMarshaller(booleanMarshaller);
@@ -146,16 +146,16 @@ describe('ArrayMarshaller', () => {
     });
 
     describe('extract and pack', () => {
-        for (let booleanArray of BooleanArrays) {
+        for (const booleanArray of BooleanArrays) {
             it(`should be opposites for ${booleanArray}`, () => {
                 const booleanMarshaller = new BooleanMarshaller();
                 const arrayMarshaller = new ArrayMarshaller(booleanMarshaller);
 
                 const raw = booleanArray;
-		            const extracted = arrayMarshaller.extract(raw);
-		            const packed = arrayMarshaller.pack(extracted);
+                const extracted = arrayMarshaller.extract(raw);
+                const packed = arrayMarshaller.pack(extracted);
 
-		            expect(packed).to.eql(raw);
+                expect(packed).to.eql(raw);
             });
         }
     });
