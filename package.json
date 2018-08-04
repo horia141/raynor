@@ -35,6 +35,9 @@
     "uuid": "=3.2.1",
     "valid-url": "=1.0.9"
   },
+  "peerDependency": {
+    "moment": "^2.22.2"
+  },
   "devDependencies": {
     "@types/chai": "=4.0.4",
     "@types/istanbul": "=0.4.29",
